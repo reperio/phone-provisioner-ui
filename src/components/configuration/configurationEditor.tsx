@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/testActions';
 
-export class ConfigurationEditor extends React.Component {
+class ConfigurationEditor extends React.Component {
     props: any;
     static propTypes: any;
 
@@ -20,11 +20,7 @@ export class ConfigurationEditor extends React.Component {
     render() {
         return (
             <div>
-                <h1>Global Configuration</h1>
-                <br/>
-                <br/>
-                <div className="col-md-4"><p>hey</p></div>
-                <div className="col-md-8"><p>woo</p></div>
+                <h2>Edit config</h2>
             </div>
         );
     }
@@ -48,7 +44,7 @@ function mapDispatchToProps(dispatch:any) {
     };
 }
 
-export default connect(
+export const ConfigurationEditorContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ConfigurationEditor);

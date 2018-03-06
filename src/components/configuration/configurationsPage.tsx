@@ -2,20 +2,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/testActions';
-import ConfigurationGroupContainer from './configurationGroupContainer';
-import ConfigurationEditor from './configurationEditor';
+import * as actions from '../../actions/configActions';
+import {ConfigurationGroupListContainer} from './configurationGroupList';
+import {ConfigurationEditorContainer} from './configurationEditor';
 
-export class ConfigurationsPage extends React.Component {
+class ConfigurationsPage extends React.Component {
+    props: any;
+    static propTypes: any;
+
+    constructor(props: any) {
+        super(props);
+        this.props.actions.getManufacturers();
+    }
+
     render() {
         return (
             <div>
                 <h1>Global Configuration</h1>
                 <br/>
                 <br/>
-                <div className="col-md-4"><ConfigurationGroupContainer/></div>
-                <div className="col-md-8"><ConfigurationEditor/></div>
+                <div className="col-md-4">
+                    <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}/>
+                </div>
+                <div className="col-md-8"><ConfigurationEditorContainer/></div>
             </div>
         );
     }
 }
+
+ConfigurationsPage.propTypes = {
+    actions: PropTypes.object,
+    test: PropTypes.object
+};
+
+
+function mapStateToProps(state: any) {
+    return {
+        configurationSettings: state.configurationSettings
+    };
+}
+
+function mapDispatchToProps(dispatch: any) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    };
+}
+
+export const ConfigurationsPageContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ConfigurationsPage);

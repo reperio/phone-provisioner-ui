@@ -10,10 +10,15 @@ export default {
         message8: '',
         testMessage: '',
         testAsyncMessage: '',
-    }, note: {
+    },
+    note: {
         test: '',
         noteToAdd: '',
         noteList: ['first note', 'second note']
+    },
+    configurationSettings: {
+        currentlyEditing: null,
+        allConfigs: []
     }
   };
   

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/testActions';
+import * as actions from '../../actions/configActions';
+import {ConfigurationGroupContainer} from "./configurationGroup";
 
-export class ConfigurationGroupContainer extends React.Component {
+class ConfigurationGroupList extends React.Component {
     props: any;
     static propTypes: any;
-
 
     handleChange = (e: any) => {
         this.props.actions.test(e.target.name, e.target.value);
@@ -20,27 +20,17 @@ export class ConfigurationGroupContainer extends React.Component {
     render() {
         return (
             <div>
-                <h1>Global Configuration</h1>
-                <br/>
-                <br/>
-                <div className="col-md-4"><p>hey</p></div>
-                <div className="col-md-8"><p>woo</p></div>
+                {this.props.configs.map((c: any) =>
+                    <ConfigurationGroupContainer name={c.name} key={c.id} isExpanded={c.expanded} children={c.children}/>)}
             </div>
         );
     }
 }
 
-ConfigurationGroupContainer.propTypes = {
+ConfigurationGroupList.propTypes = {
     actions: PropTypes.object,
-    test: PropTypes.object
+    configs: PropTypes.arrayOf(PropTypes.object)
 };
-
-
-function mapStateToProps(state:any) {
-    return {
-        test: state.test
-    };
-}
 
 function mapDispatchToProps(dispatch:any) {
     return {
@@ -48,7 +38,7 @@ function mapDispatchToProps(dispatch:any) {
     };
 }
 
-export default connect(
-    mapStateToProps,
+export const ConfigurationGroupListContainer = connect(
+    null,
     mapDispatchToProps
-)(ConfigurationGroupContainer);
+)(ConfigurationGroupList);

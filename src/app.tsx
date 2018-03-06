@@ -7,7 +7,7 @@ import TestPage from './components/testPage';
 import {TestPageReact} from './components/testPageReact';
 import NotFoundPage from './components/notFoundPage';
 import {HelloWorld} from './components/HelloWorld';
-import {ConfigurationsPage} from './components/configuration/configurationsPage';
+import {ConfigurationsPageContainer} from './components/configuration/configurationsPage';
 
 class App extends React.Component {
   render() {
@@ -28,7 +28,7 @@ class App extends React.Component {
               <Route exact path="/testRedux" component={TestPage} />
               <Route exact path="/testReact" component={TestPageReact} />
               <Route exact path="/hello" component={HelloWorld} />
-              <Route exact path="/configurations" component={ConfigurationsPage} />
+              <Route exact path="/configurations" component={ConfigurationsPageContainer} />
               <Route component={NotFoundPage} />
             </Switch>
         </div>

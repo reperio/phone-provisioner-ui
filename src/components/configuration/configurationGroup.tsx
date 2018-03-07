@@ -10,7 +10,7 @@ class ConfigurationGroup extends React.Component {
     props: any;
     static propTypes: any;
 
-    expandGroup = (e:any) => {
+    expandGroup = (e: any) => {
         if(this.props.configLevel === ConfigLevel.MODEL) {
             return;
         }
@@ -24,12 +24,16 @@ class ConfigurationGroup extends React.Component {
     }
 
     render() {
+        const children = (
+            <div className={'indented'}>
+                <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} parent={this.props.id}/>
+            </div>
+        );
+
         return (
             <div>
                 <p onClick={this.expandGroup}>{this.props.name}</p>
-                <div className={'indented'}>
-                    {this.props.isExpanded && <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1}/>}
-                </div>
+                {this.props.isExpanded && children}
             </div>
         );
     }

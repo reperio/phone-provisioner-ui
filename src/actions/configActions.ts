@@ -16,7 +16,7 @@ export const expandConfigGroupInitialLoad = (configLevel: ConfigLevel, elementId
 
     dispatch({
         type: ActionTypes.EXPAND_CONFIG_GROUP,
-        children: children,
+        children,
         id: elementId
     });
 };
@@ -26,5 +26,15 @@ export const expandConfigGroup = (elementId: string) => async (dispatch:any) => 
         type: ActionTypes.EXPAND_CONFIG_GROUP,
         children: null,
         id: elementId
+    });
+};
+
+export const addConfigGroup = (configLevel: ConfigLevel, name: string, parentId: string) => async (dispatch:any) => {
+    const newGroup = ConfigService.createConfigGroup(configLevel, name, parentId);
+
+    dispatch({
+        type: ActionTypes.ADD_CONFIG_GROUP,
+        parentId,
+        newGroup
     });
 };

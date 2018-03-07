@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigurationGroupListContainer} from './configurationGroupList';
 import {ConfigurationEditorContainer} from './configurationEditor';
+import {ConfigLevel} from "../../constants/configLevel";
 
 class ConfigurationsPage extends React.Component {
     props: any;
@@ -12,7 +13,7 @@ class ConfigurationsPage extends React.Component {
 
     constructor(props: any) {
         super(props);
-        this.props.actions.getManufacturers();
+        this.props.actions.fetchManufacturers();
     }
 
     render() {
@@ -22,7 +23,7 @@ class ConfigurationsPage extends React.Component {
                 <br/>
                 <br/>
                 <div className="col-md-4">
-                    <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}/>
+                    <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs} configLevel={ConfigLevel.MANUFACTURER}/>
                 </div>
                 <div className="col-md-8"><ConfigurationEditorContainer/></div>
             </div>
@@ -48,7 +49,7 @@ function mapDispatchToProps(dispatch: any) {
     };
 }
 
-export const ConfigurationsPageContainer = connect(
+export const ConfigurationsPageContainer = connect<any, any, any>(
     mapStateToProps,
     mapDispatchToProps
 )(ConfigurationsPage);

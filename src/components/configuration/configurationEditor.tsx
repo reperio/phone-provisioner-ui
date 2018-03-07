@@ -44,7 +44,7 @@ function mapDispatchToProps(dispatch:any) {
     };
 }
 
-export const ConfigurationEditorContainer = connect(
+export const ConfigurationEditorContainer = connect<any, any, any>(
     mapStateToProps,
     mapDispatchToProps
 )(ConfigurationEditor);

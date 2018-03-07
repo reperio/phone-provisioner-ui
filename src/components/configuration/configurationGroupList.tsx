@@ -9,19 +9,11 @@ class ConfigurationGroupList extends React.Component {
     props: any;
     static propTypes: any;
 
-    handleChange = (e: any) => {
-        this.props.actions.test(e.target.name, e.target.value);
-    }
-
-    handleClick = (e:any) => {
-        this.props.actions.test2('test', 123);
-    }
-
     render() {
         return (
             <div>
                 {this.props.configs.map((c: any) =>
-                    <ConfigurationGroupContainer name={c.name} key={c.id} isExpanded={c.expanded} children={c.children}/>)}
+                    <ConfigurationGroupContainer name={c.name} key={c.id} id={c.id} isExpanded={c.expanded} children={c.children} configLevel={this.props.configLevel}/>)}
             </div>
         );
     }
@@ -29,7 +21,8 @@ class ConfigurationGroupList extends React.Component {
 
 ConfigurationGroupList.propTypes = {
     actions: PropTypes.object,
-    configs: PropTypes.arrayOf(PropTypes.object)
+    configs: PropTypes.arrayOf(PropTypes.object),
+    configLevel: PropTypes.number
 };
 
 function mapDispatchToProps(dispatch:any) {
@@ -38,7 +31,7 @@ function mapDispatchToProps(dispatch:any) {
     };
 }
 
-export const ConfigurationGroupListContainer = connect(
+export const ConfigurationGroupListContainer = connect<any, any, any>(
     null,
     mapDispatchToProps
 )(ConfigurationGroupList);

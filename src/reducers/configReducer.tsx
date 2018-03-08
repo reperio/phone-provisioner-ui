@@ -22,14 +22,17 @@ export default function configReducer(state = initialState.configurationSettings
                 );
             }
             return newState;
-    default:
-        return state;
+        case ActionTypes.SELECT_CONFIG:
+            newState.currentlyEditing = findConfig(newState.allConfigs, action.id);
+            return newState;
+        default:
+            return state;
     }
 }
 
 
 function applyChangesToConfig(config: any, id: string, transformation: Function) {
-    var newConfig = Object.assign({}, config);
+    let newConfig = Object.assign({}, config);
     if(newConfig.id == id) {
         newConfig = transformation(newConfig);
     } else if(newConfig.children != null) {
@@ -55,4 +58,21 @@ const addConfigGroup = (newGroup: any) => (config: any) => {
 
 function addConfigProps(child: any) {
     return Object.assign({expanded: false, children: null}, child);
+}
+
+//Finds a config by id and returns an array of the path to it. Ex: [<some manufacturer>, <some family>, <some model>]
+//Returns null if none is found
+function findConfig(configs: any[], id: string) : any[] {
+    for(const conf of configs) {
+        if(conf.id === id) {
+            return [conf];
+        }
+        if(conf.children != null) {
+            const childConf = findConfig(conf.children, id);
+            if(childConf != null) {
+                return [conf].concat(childConf);
+            }
+        }
+    }
+    return null;
 }

@@ -38,3 +38,10 @@ export const addConfigGroup = (configLevel: ConfigLevel, name: string, parentId:
         newGroup
     });
 };
+
+export const selectConfig = (id: string) => async (dispatch:any) => {
+    dispatch({
+        type: ActionTypes.SELECT_CONFIG,
+        id
+    });
+};

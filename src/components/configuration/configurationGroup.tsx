@@ -11,16 +11,16 @@ class ConfigurationGroup extends React.Component {
     static propTypes: any;
 
     expandGroup = (e: any) => {
-        if(this.props.configLevel === ConfigLevel.MODEL) {
-            return;
-        }
-
         if(this.props.children == null) {
             //Expands the group while also lazy loading the items within
             this.props.actions.expandConfigGroupInitialLoad(this.props.configLevel, this.props.id);
         } else {
             this.props.actions.expandConfigGroup(this.props.id);
         }
+    }
+
+    selectConfig = (e: any) => {
+        this.props.actions.selectConfig(this.props.id);
     }
 
     render() {
@@ -32,7 +32,13 @@ class ConfigurationGroup extends React.Component {
 
         return (
             <div>
-                <p onClick={this.expandGroup}>{this.props.name}</p>
+                <p>
+                    {
+                        this.props.configLevel !== ConfigLevel.MODEL &&
+                        <span onClick={this.expandGroup}>{this.props.isExpanded ? 'v ' : '> '}</span>
+                    }
+                    <span onClick={this.selectConfig}>{this.props.name}</span>
+                </p>
                 {this.props.isExpanded && children}
             </div>
         );

@@ -26,7 +26,7 @@ class ConfigurationsPage extends React.Component {
                     <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
                                                      configLevel={ConfigLevel.MANUFACTURER} parentId={null}/>
                 </div>
-                <div className="col-md-8"><ConfigurationEditorContainer/></div>
+                <div className="col-md-8"><ConfigurationEditorContainer configs={this.props.configurationSettings.currentlyEditing}/></div>
             </div>
         );
     }
@@ -34,7 +34,7 @@ class ConfigurationsPage extends React.Component {
 
 ConfigurationsPage.propTypes = {
     actions: PropTypes.object,
-    test: PropTypes.object
+    configurationSettings: PropTypes.object
 };
 
 

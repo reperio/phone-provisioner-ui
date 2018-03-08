@@ -2,25 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/testActions';
+import * as actions from '../../actions/configActions';
 
 class ConfigurationEditor extends React.Component {
     props: any;
     static propTypes: any;
 
-
-    handleChange = (e: any) => {
-        this.props.actions.test(e.target.name, e.target.value);
-    }
-
-    handleClick = (e:any) => {
-        this.props.actions.test2('test', 123);
-    }
-
     render() {
         return (
             <div>
                 <h2>Edit config</h2>
+                {this.props.configs != null && <p>{this.props.configs.map((c: any) => c.name).join(' > ')}</p>}
             </div>
         );
     }
@@ -28,15 +20,8 @@ class ConfigurationEditor extends React.Component {
 
 ConfigurationEditor.propTypes = {
     actions: PropTypes.object,
-    test: PropTypes.object
+    configs: PropTypes.arrayOf(PropTypes.object)
 };
-
-
-function mapStateToProps(state:any) {
-    return {
-        test: state.test
-    };
-}
 
 function mapDispatchToProps(dispatch:any) {
     return {
@@ -45,6 +30,6 @@ function mapDispatchToProps(dispatch:any) {
 }
 
 export const ConfigurationEditorContainer = connect<any, any, any>(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(ConfigurationEditor);

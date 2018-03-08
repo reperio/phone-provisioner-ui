@@ -65,13 +65,10 @@ export async function getChildren(configLevel: ConfigLevel, id: string) {
 export async function createConfigGroup(configLevel: ConfigLevel, name: string, parent: string) {
     switch(configLevel) {
         case ConfigLevel.MANUFACTURER:
-            await createManufacturer(name);
-            break;
+            return await createManufacturer(name);
         case ConfigLevel.FAMILY:
-            await createFamily(name, parent);
-            break;
+            return await createFamily(name, parent);
         case ConfigLevel.MODEL:
-            await createModel(name, parent);
-            break;
+            return await createModel(name, parent);
     }
 }

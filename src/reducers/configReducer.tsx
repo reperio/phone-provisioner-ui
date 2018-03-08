@@ -15,7 +15,7 @@ export default function configReducer(state = initialState.configurationSettings
             return newState;
         case ActionTypes.ADD_CONFIG_GROUP:
             if(action.parentId == null) {
-                newState.allConfigs.push(addConfigProps(action.newGroup));
+                newState.allConfigs = newState.allConfigs.concat(addConfigProps(action.newGroup));
             } else {
                 newState.allConfigs = newState.allConfigs.map(
                     (c: any) => applyChangesToConfig(c, action.parentId, addConfigGroup(action.newGroup))
@@ -27,15 +27,17 @@ export default function configReducer(state = initialState.configurationSettings
     }
 }
 
+
 function applyChangesToConfig(config: any, id: string, transformation: Function) {
-    if(config.id == id) {
-        config = transformation(config);
-    } else if(config.children != null) {
-        config.children = config.children.map(
+    var newConfig = Object.assign({}, config);
+    if(newConfig.id == id) {
+        newConfig = transformation(newConfig);
+    } else if(newConfig.children != null) {
+        newConfig.children = newConfig.children.map(
             (c: any) => applyChangesToConfig(c, id, transformation)
         );
     }
-    return config;
+    return newConfig;
 }
 
 const expandConfigGroup = (children: any) => (config: any) => {
@@ -47,7 +49,7 @@ const expandConfigGroup = (children: any) => (config: any) => {
 }
 
 const addConfigGroup = (newGroup: any) => (config: any) => {
-    config.children.push(addConfigProps(newGroup));
+    config.children = config.children.concat(addConfigProps(newGroup));
     return config;
 }
 

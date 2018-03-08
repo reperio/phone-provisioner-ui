@@ -26,7 +26,7 @@ class ConfigurationGroupList extends React.Component {
     addGroup = (e: any) => {
         const name = prompt(`Please enter a name for the ${this.getName()}.`);
         if(name != null) {
-            this.props.actions.addConfigGroup(this.props.configLevel, name, this.props.parent);
+            this.props.actions.addConfigGroup(this.props.configLevel, name, this.props.parentId);
         }
     }
 
@@ -45,7 +45,7 @@ ConfigurationGroupList.propTypes = {
     actions: PropTypes.object,
     configs: PropTypes.arrayOf(PropTypes.object),
     configLevel: PropTypes.number,
-    parent: PropTypes.string
+    parentId: PropTypes.string,
 };
 
 function mapDispatchToProps(dispatch:any) {

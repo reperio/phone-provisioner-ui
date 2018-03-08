@@ -23,7 +23,8 @@ class ConfigurationsPage extends React.Component {
                 <br/>
                 <br/>
                 <div className="col-md-4">
-                    <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs} configLevel={ConfigLevel.MANUFACTURER} parent={null}/>
+                    <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
+                                                     configLevel={ConfigLevel.MANUFACTURER} parentId={null}/>
                 </div>
                 <div className="col-md-8"><ConfigurationEditorContainer/></div>
             </div>

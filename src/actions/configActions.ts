@@ -30,7 +30,7 @@ export const expandConfigGroup = (elementId: string) => async (dispatch:any) => 
 };
 
 export const addConfigGroup = (configLevel: ConfigLevel, name: string, parentId: string) => async (dispatch:any) => {
-    const newGroup = ConfigService.createConfigGroup(configLevel, name, parentId);
+    const newGroup = await ConfigService.createConfigGroup(configLevel, name, parentId);
 
     dispatch({
         type: ActionTypes.ADD_CONFIG_GROUP,

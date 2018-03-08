@@ -26,7 +26,7 @@ class ConfigurationGroup extends React.Component {
     render() {
         const children = (
             <div className={'indented'}>
-                <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} parent={this.props.id}/>
+                <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} parentId={this.props.id}/>
             </div>
         );
 

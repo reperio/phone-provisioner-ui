@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigurationGroupContainer} from "./configurationGroup";
 import {ConfigLevel} from '../../constants/configLevel';
+import {AddConfigButtonContainer} from "./addConfigButton";
 
 class ConfigurationGroupList extends React.Component {
     props: any;
@@ -23,19 +24,12 @@ class ConfigurationGroupList extends React.Component {
         }
     }
 
-    addGroup = (e: any) => {
-        const name = prompt(`Please enter a name for the ${this.getName()}.`);
-        if(name != null) {
-            this.props.actions.addConfigGroup(this.props.configLevel, name, this.props.parentId);
-        }
-    }
-
     render() {
         return (
             <div>
                 {this.props.configs.map((c: any) =>
                     <ConfigurationGroupContainer name={c.name} key={c.id} id={c.id} isExpanded={c.expanded} children={c.children} configLevel={this.props.configLevel}/>)}
-                <p onClick={this.addGroup}>+ New {this.getName()}</p>
+                <AddConfigButtonContainer parentId={this.props.parentId} configLevel={this.props.configLevel} name={this.getName()}/>
             </div>
         );
     }

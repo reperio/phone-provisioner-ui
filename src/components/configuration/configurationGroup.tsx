@@ -30,13 +30,14 @@ class ConfigurationGroup extends React.Component {
             </div>
         );
 
+        const expandIcon = (
+            <span onClick={this.expandGroup}>{this.props.isExpanded ? 'v ' : '> '}</span>
+        );
+
         return (
             <div>
                 <p>
-                    {
-                        this.props.configLevel !== ConfigLevel.MODEL &&
-                        <span onClick={this.expandGroup}>{this.props.isExpanded ? 'v ' : '> '}</span>
-                    }
+                    {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
                     <span onClick={this.selectConfig}>{this.props.name}</span>
                 </p>
                 {this.props.isExpanded && children}

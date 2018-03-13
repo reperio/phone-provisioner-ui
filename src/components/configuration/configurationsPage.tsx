@@ -17,6 +17,8 @@ class ConfigurationsPage extends React.Component {
     }
 
     render() {
+        const editing = this.props.configurationSettings.currentlyEditing;
+
         return (
             <div>
                 <h1>Global Configuration</h1>
@@ -24,7 +26,8 @@ class ConfigurationsPage extends React.Component {
                 <br/>
                 <div className="col-md-4">
                     <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
-                                                     configLevel={ConfigLevel.MANUFACTURER} parentId={null}/>
+                                                     configLevel={ConfigLevel.MANUFACTURER} parentId={null}
+                                                     selectedId={editing == null ? null : editing[editing.length - 1].id}/>
                 </div>
                 <div className="col-md-8"><ConfigurationEditorContainer configs={this.props.configurationSettings.currentlyEditing}/></div>
             </div>

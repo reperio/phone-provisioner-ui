@@ -8,6 +8,8 @@
     "core-js": "^2.5.3",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "font-awesome": "^4.7.0",
+    "font-awesome-sass-loader": "^2.0.1",
     "history": "^4.7.2",
     "node-fetch": "^1.7.3",
     "prop-types": "^15.6.0",

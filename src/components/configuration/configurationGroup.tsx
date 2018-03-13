@@ -26,19 +26,21 @@ class ConfigurationGroup extends React.Component {
     render() {
         const children = (
             <div className={'indented'}>
-                <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} parentId={this.props.id}/>
+                <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} parentId={this.props.id} selectedId={this.props.selectedId}/>
             </div>
         );
 
         const expandIcon = (
-            <span onClick={this.expandGroup}>{this.props.isExpanded ? 'v ' : '> '}</span>
+            <span onClick={this.expandGroup}><i className={this.props.isExpanded ? 'fa fa-chevron-down' : 'fa fa-chevron-right'}></i></span>
         );
 
         return (
             <div>
                 <p>
                     {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
-                    <span onClick={this.selectConfig}>{this.props.name}</span>
+                    <span onClick={this.selectConfig}>
+                        {' '}{this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}
+                    </span>
                 </p>
                 {this.props.isExpanded && children}
             </div>
@@ -52,7 +54,8 @@ ConfigurationGroup.propTypes = {
     isExpanded: PropTypes.bool,
     children: PropTypes.arrayOf(PropTypes.object),
     configLevel: PropTypes.number,
-    id: PropTypes.string
+    id: PropTypes.string,
+    selectedId: PropTypes.string
 };
 
 function mapDispatchToProps(dispatch:any) {

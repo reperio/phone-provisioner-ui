@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import configureStore, { history } from './store/configureStore'
-import initialState from './reducers/initialState'
 import App from './app'
+import 'font-awesome-sass-loader';
 import './styles/app.scss'
 
 const store = configureStore();

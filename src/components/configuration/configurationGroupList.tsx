@@ -28,7 +28,7 @@ class ConfigurationGroupList extends React.Component {
         return (
             <div>
                 {this.props.configs.map((c: any) =>
-                    <ConfigurationGroupContainer name={c.name} key={c.id} id={c.id} isExpanded={c.expanded} children={c.children} configLevel={this.props.configLevel}/>)}
+                    <ConfigurationGroupContainer name={c.name} key={c.id} id={c.id} isExpanded={c.expanded} children={c.children} configLevel={this.props.configLevel} selectedId={this.props.selectedId}/>)}
                 <AddConfigButtonContainer parentId={this.props.parentId} configLevel={this.props.configLevel} name={this.getName()}/>
             </div>
         );
@@ -40,6 +40,7 @@ ConfigurationGroupList.propTypes = {
     configs: PropTypes.arrayOf(PropTypes.object),
     configLevel: PropTypes.number,
     parentId: PropTypes.string,
+    selectedId: PropTypes.string
 };
 
 function mapDispatchToProps(dispatch:any) {

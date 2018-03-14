@@ -6,6 +6,16 @@ import * as actions from '../../actions/configActions';
 import {ConfigurationGroupListContainer} from "./configurationGroupList";
 import {ConfigLevel} from "../../constants/configLevel";
 
+const ManufacturerIcon = require('../../assets/manufacturer.png');
+const FamilyIcon = require('../../assets/family.png');
+const ModelIcon = require('../../assets/model.png');
+
+const icons = [
+  ManufacturerIcon,
+  FamilyIcon,
+  ModelIcon
+];
+
 class ConfigurationGroup extends React.Component {
     props: any;
     static propTypes: any;
@@ -39,7 +49,7 @@ class ConfigurationGroup extends React.Component {
                 <p>
                     {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
                     <span onClick={this.selectConfig}>
-                        {' '}{this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}
+                        <span className={"icon"} style={{backgroundImage: `url(${icons[this.props.configLevel]})`}}></span>{this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}
                     </span>
                 </p>
                 {this.props.isExpanded && children}

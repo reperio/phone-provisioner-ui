@@ -20,10 +20,10 @@ export class HelloWorld extends React.Component {
             <div>
                 <h2>Test App -- {this.state.test}</h2>
                 <h2>{this.state.test2}</h2>
-                
+
                 <button className="btn" type="button" onClick={this.handleClick}>Test</button>
                 <button type="button" onClick={this.handleClick2}>Test 2</button>
             </div>
         );
-    } 
+    }
 }

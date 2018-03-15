@@ -46,7 +46,7 @@ class ConfigurationGroup extends React.Component {
 
         return (
             <div>
-                <p>
+                <p className={'tree-item'}>
                     {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
                     <span onClick={this.selectConfig}>
                         <span className={"icon"} style={{backgroundImage: `url(${icons[this.props.configLevel]})`}}></span>{this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}

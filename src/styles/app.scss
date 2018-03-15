@@ -107,16 +107,17 @@ label {
     width: 100%;
 }
 
-.indented {
-    margin-left: 20px;
-}
-
 .icon {
     width: 16px;
     height: 16px;
     display: inline-block;
     background-size: 100% 100%;
     margin: 0 4px 0 2px;
+}
+
+.expand-icon {
+    height: 16px;
+    display: inline-block;
 }
 
 .tree-item {

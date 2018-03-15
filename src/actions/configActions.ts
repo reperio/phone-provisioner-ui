@@ -29,16 +29,6 @@ export const expandConfigGroup = (elementId: string) => async (dispatch:any) => 
     });
 };
 
-export const addConfigGroup = (configLevel: ConfigLevel, name: string, parentId: string) => async (dispatch:any) => {
-    const newGroup = await ConfigService.createConfigGroup(configLevel, name, parentId);
-
-    dispatch({
-        type: ActionTypes.ADD_CONFIG_GROUP,
-        parentId,
-        newGroup
-    });
-};
-
 export const selectConfig = (id: string) => async (dispatch:any) => {
     dispatch({
         type: ActionTypes.SELECT_CONFIG,

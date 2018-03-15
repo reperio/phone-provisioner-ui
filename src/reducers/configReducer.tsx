@@ -13,15 +13,6 @@ export default function configReducer(state = initialState.configurationSettings
                 (c: any) => applyChangesToConfig(c, action.id, expandConfigGroup(action.children))
             );
             return newState;
-        case ActionTypes.ADD_CONFIG_GROUP:
-            if(action.parentId == null) {
-                newState.allConfigs = newState.allConfigs.concat(addConfigProps(action.newGroup));
-            } else {
-                newState.allConfigs = newState.allConfigs.map(
-                    (c: any) => applyChangesToConfig(c, action.parentId, addConfigGroup(action.newGroup))
-                );
-            }
-            return newState;
         case ActionTypes.SELECT_CONFIG:
             newState.currentlyEditing = findConfig(newState.allConfigs, action.id);
             return newState;
@@ -48,11 +39,6 @@ const expandConfigGroup = (children: any) => (config: any) => {
     if(children != null) {
         config.children = children.map(addConfigProps);
     }
-    return config;
-}
-
-const addConfigGroup = (newGroup: any) => (config: any) => {
-    config.children = config.children.concat(addConfigProps(newGroup));
     return config;
 }
 

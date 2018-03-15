@@ -35,20 +35,23 @@ class ConfigurationGroup extends React.Component {
 
     render() {
         const children = (
-            <div className={'indented'}>
-                <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} parentId={this.props.id} selectedId={this.props.selectedId}/>
-            </div>
+            <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} selectedId={this.props.selectedId}/>
         );
 
         const expandIcon = (
-            <span onClick={this.expandGroup}><i className={this.props.isExpanded ? 'fa fa-chevron-down' : 'fa fa-chevron-right'}></i></span>
+            <span onClick={this.expandGroup} className={'tree-item'}>
+                <i className={this.props.isExpanded ? 'fa fa-chevron-down' : 'fa fa-chevron-right'}></i>
+            </span>
         );
 
+        const indentAmount = this.props.configLevel * 22 + 16;
         return (
             <div>
-                <p className={'tree-item'}>
-                    {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
-                    <span onClick={this.selectConfig}>
+                <p>
+                    <span className={'expand-icon'} style={{width: indentAmount + 'px'}}>
+                        {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
+                    </span>
+                    <span onClick={this.selectConfig} className={'tree-item'}>
                         <span className={"icon"} style={{backgroundImage: `url(${icons[this.props.configLevel]})`}}></span>{this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}
                     </span>
                 </p>

@@ -25,9 +25,13 @@ class ConfigurationsPage extends React.Component {
                 <br/>
                 <br/>
                 <div className="col-md-4">
-                    <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
-                                                     configLevel={ConfigLevel.MANUFACTURER} parentId={null}
-                                                     selectedId={editing == null ? null : editing[editing.length - 1].id}/>
+                    <table className={'tree-grid'}>
+                        <tbody>
+                            <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
+                                                             configLevel={ConfigLevel.MANUFACTURER} parentId={null}
+                                                             selectedId={editing == null ? null : editing[editing.length - 1].id}/>
+                        </tbody>
+                    </table>
                 </div>
                 <div className="col-md-8"><ConfigurationEditorContainer configs={this.props.configurationSettings.currentlyEditing}/></div>
             </div>

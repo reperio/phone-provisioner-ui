@@ -11,11 +11,10 @@ class ConfigurationGroupList extends React.Component {
     static propTypes: any;
 
     render() {
-        return (
-            <div>
-                {this.props.configs.map((c: any) =>
-                    <ConfigurationGroupContainer name={c.name} key={c.id} id={c.id} isExpanded={c.expanded} children={c.children} configLevel={this.props.configLevel} selectedId={this.props.selectedId}/>)}
-            </div>
+        return this.props.configs.map((c: any) =>
+            <ConfigurationGroupContainer name={c.name} key={c.id} id={c.id} isExpanded={c.expanded}
+                                         children={c.children} configLevel={this.props.configLevel}
+                                         selectedId={this.props.selectedId}/>
         );
     }
 }

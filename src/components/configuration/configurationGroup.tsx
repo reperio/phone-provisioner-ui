@@ -44,19 +44,23 @@ class ConfigurationGroup extends React.Component {
             </span>
         );
 
-        const indentAmount = this.props.configLevel * 22 + 16;
+        const indentAmount = this.props.configLevel * 22 + 4;
         return (
-            <div>
-                <p>
-                    <span className={'expand-icon'} style={{width: indentAmount + 'px'}}>
+            <>
+                <tr>
+                    <td className={'expand'}>
                         {this.props.configLevel !== ConfigLevel.MODEL && expandIcon}
-                    </span>
-                    <span onClick={this.selectConfig} className={'tree-item'}>
-                        <span className={"icon"} style={{backgroundImage: `url(${icons[this.props.configLevel]})`}}></span>{this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}
-                    </span>
-                </p>
+                    </td>
+                    <td>
+                        <span className={'indent'} style={{width: indentAmount + 'px'}}></span>
+                        <span onClick={this.selectConfig} className={'tree-item'}>
+                            <span className={"icon"} style={{backgroundImage: `url(${icons[this.props.configLevel]})`}}></span>
+                            {this.props.id === this.props.selectedId ? <b>{this.props.name}</b> : this.props.name}
+                        </span>
+                    </td>
+                </tr>
                 {this.props.isExpanded && children}
-            </div>
+            </>
         );
     }
 }

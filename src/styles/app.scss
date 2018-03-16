@@ -115,11 +115,29 @@ label {
     margin: 0 4px 0 2px;
 }
 
-.expand-icon {
+.indent {
     height: 16px;
     display: inline-block;
 }
 
 .tree-item {
     cursor: pointer;
+}
+
+.tree-grid {
+    width: 100%;
+
+    .expand {
+        background-color: lightgray;
+        width: 30px;
+        text-align: center;
+    }
+    td {
+        vertical-align: middle;
+        height: 30px;
+    }
+}
+
+table, th, td {
+    border: 1px solid black;
 }

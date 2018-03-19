@@ -8,14 +8,33 @@ export default function configReducer(state = initialState.configurationSettings
         case ActionTypes.GET_MANUFACTURERS:
             newState.allConfigs = action.manufacturers.map(addConfigProps);
             return newState;
+
         case ActionTypes.EXPAND_CONFIG_GROUP:
             newState.allConfigs = newState.allConfigs.map(
                 (c: any) => applyChangesToConfig(c, action.id, expandConfigGroup(action.children))
             );
             return newState;
+
         case ActionTypes.SELECT_CONFIG:
-            newState.currentlyEditing = findConfig(newState.allConfigs, action.id);
+            const hierarchy = findConfig(newState.allConfigs, action.id);
+            if(hierarchy != null) {
+                newState.currentlyEditing = {
+                    hierarchy,
+                    options: {
+                        test: {inherited: false, value: false, inheritedValue: false},
+                        test2: {inherited: false, value: "test", inheritedValue: false}
+                    }
+                };
+            }
             return newState;
+
+        case ActionTypes.TOGGLE_PROPERTY_INHERITANCE:
+            //Sets state.currentlyEditing.options[action.property].inherited = action.inherit
+            let newOptions = Object.assign({}, newState.currentlyEditing.options);
+            newOptions[action.property] = Object.assign({}, newOptions[action.property], {inherited: action.inherit});
+            newState.currentlyEditing = Object.assign({}, newState.currentlyEditing, {options: newOptions});
+            return newState;
+
         default:
             return state;
     }

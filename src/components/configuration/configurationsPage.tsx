@@ -29,11 +29,13 @@ class ConfigurationsPage extends React.Component {
                         <tbody>
                             <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
                                                              configLevel={ConfigLevel.MANUFACTURER} parentId={null}
-                                                             selectedId={editing == null ? null : editing[editing.length - 1].id}/>
+                                                             selectedId={editing == null ? null : editing.hierarchy[editing.hierarchy.length - 1].id}/>
                         </tbody>
                     </table>
                 </div>
-                <div className="col-md-8"><ConfigurationEditorContainer configs={this.props.configurationSettings.currentlyEditing}/></div>
+                <div className="col-md-8">
+                    <ConfigurationEditorContainer configs={editing}/>
+                </div>
             </div>
         );
     }

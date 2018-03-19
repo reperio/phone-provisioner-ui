@@ -35,3 +35,11 @@ export const selectConfig = (id: string) => async (dispatch:any) => {
         id
     });
 };
+
+export const togglePropertyInheritance = (property: string, inherit: boolean) => async (dispatch:any) => {
+    dispatch({
+        type: ActionTypes.TOGGLE_PROPERTY_INHERITANCE,
+        property,
+        inherit
+    });
+};

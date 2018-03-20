@@ -4,16 +4,26 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
+import {changePropertyValue} from "../../actions/configActions";
 
 class TextProperty extends React.Component {
     props: any;
     static propTypes: any;
 
+    changePropertyValue = (e: any) => {
+        this.props.actions.changePropertyValue(this.props.propertyName, e.target.value);
+    }
+
     render() {
         return (
             <ConfigPropertyContainer propertyName={this.props.propertyName} checked={!this.props.options.inherited}>
                 {this.props.displayName}
-                <input type="text" disabled={this.props.options.inherited} value={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}/>
+                <input
+                    type="text"
+                    disabled={this.props.options.inherited}
+                    value={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}
+                    onChange={this.changePropertyValue}
+                />
             </ConfigPropertyContainer>
         );
     }

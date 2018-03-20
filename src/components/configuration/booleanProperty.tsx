@@ -9,10 +9,19 @@ class BooleanProperty extends React.Component {
     props: any;
     static propTypes: any;
 
+    changePropertyValue = (e: any) => {
+        this.props.actions.changePropertyValue(this.props.propertyName, e.target.checked);
+    }
+
     render() {
         return (
             <ConfigPropertyContainer propertyName={this.props.propertyName} checked={!this.props.options.inherited}>
-                <input type="checkbox" disabled={this.props.options.inherited} checked={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}/>
+                <input
+                    type="checkbox"
+                    disabled={this.props.options.inherited}
+                    checked={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}
+                    onChange={this.changePropertyValue}
+                />
                 {this.props.displayName}
             </ConfigPropertyContainer>
         );

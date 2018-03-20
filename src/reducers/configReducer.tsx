@@ -22,7 +22,7 @@ export default function configReducer(state = initialState.configurationSettings
                     hierarchy,
                     options: {
                         test: {inherited: false, value: false, inheritedValue: false},
-                        test2: {inherited: false, value: "test", inheritedValue: false}
+                        test2: {inherited: false, value: "test", inheritedValue: "this is inherited"}
                     }
                 };
             }
@@ -30,10 +30,11 @@ export default function configReducer(state = initialState.configurationSettings
 
         case ActionTypes.TOGGLE_PROPERTY_INHERITANCE:
             //Sets state.currentlyEditing.options[action.property].inherited = action.inherit
-            let newOptions = Object.assign({}, newState.currentlyEditing.options);
-            newOptions[action.property] = Object.assign({}, newOptions[action.property], {inherited: action.inherit});
-            newState.currentlyEditing = Object.assign({}, newState.currentlyEditing, {options: newOptions});
-            return newState;
+            return changeOptions(newState, action.property, {inherited: action.inherit});
+
+        case ActionTypes.CHANGE_PROPERTY_VALUE:
+            //Sets state.currentlyEditing.options[action.property].value = action.value
+            return changeOptions(newState, action.property, {value: action.value});
 
         default:
             return state;
@@ -80,4 +81,11 @@ function findConfig(configs: any[], id: string) : any[] {
         }
     }
     return null;
+}
+
+function changeOptions(state: any, configProperty: string, propsToChange: object) : any {
+    let newOptions = Object.assign({}, state.currentlyEditing.options);
+    newOptions[configProperty] = Object.assign({}, newOptions[configProperty], propsToChange);
+    state.currentlyEditing = Object.assign({}, state.currentlyEditing, {options: newOptions});
+    return state;
 }

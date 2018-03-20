@@ -43,3 +43,11 @@ export const togglePropertyInheritance = (property: string, inherit: boolean) =>
         inherit
     });
 };
+
+export const changePropertyValue = (property: string, value: any) => async (dispatch:any) => {
+    dispatch({
+        type: ActionTypes.CHANGE_PROPERTY_VALUE,
+        property,
+        value
+    });
+};

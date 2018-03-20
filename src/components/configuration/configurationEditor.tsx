@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
+import {CurrentlyEditing} from "../../store/store";
 
-class ConfigurationEditor extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    configs?: CurrentlyEditing;
+}
+
+class ConfigurationEditor extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
 
     render() {
         let editorBody = null;
@@ -30,18 +34,13 @@ class ConfigurationEditor extends React.Component {
     }
 }
 
-ConfigurationEditor.propTypes = {
-    actions: PropTypes.object,
-    configs: PropTypes.object
-};
-
-function mapDispatchToProps(dispatch:any) {
+function mapDispatchToProps(dispatch:any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const ConfigurationEditorContainer = connect<any, any, any>(
+export const ConfigurationEditorContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
 )(ConfigurationEditor);

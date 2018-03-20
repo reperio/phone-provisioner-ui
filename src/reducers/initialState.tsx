@@ -1,4 +1,6 @@
-export default {
+import {Store} from '../store/store';
+
+export const initialState: Store = {
     test: {
         message1: '',
         message2: '',

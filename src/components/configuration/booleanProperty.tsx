@@ -1,13 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 
-class BooleanProperty extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    propertyName?: string;
+    displayName?: string;
+    options?: any;
+}
+
+class BooleanProperty extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
 
     changePropertyValue = (e: any) => {
         this.props.actions.changePropertyValue(this.props.propertyName, e.target.checked);
@@ -28,20 +33,13 @@ class BooleanProperty extends React.Component {
     }
 }
 
-BooleanProperty.propTypes = {
-    actions: PropTypes.object,
-    propertyName: PropTypes.string,
-    displayName: PropTypes.string,
-    options: PropTypes.object
-};
-
-function mapDispatchToProps(dispatch:any) {
+function mapDispatchToProps(dispatch: any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const BooleanPropertyContainer = connect<any, any, any>(
+export const BooleanPropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
 )(BooleanProperty);

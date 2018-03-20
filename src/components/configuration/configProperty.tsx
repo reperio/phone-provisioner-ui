@@ -1,12 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 
-class ConfigProperty extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    children?: any;
+    propertyName?: string;
+    checked?: boolean;
+}
+
+class ConfigProperty extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
 
     togglePropertyInheritance = (e: any) => {
         this.props.actions.togglePropertyInheritance(this.props.propertyName, !e.target.checked);
@@ -29,20 +34,13 @@ class ConfigProperty extends React.Component {
     }
 }
 
-ConfigProperty.propTypes = {
-    actions: PropTypes.object,
-    children: PropTypes.any,
-    propertyName: PropTypes.string,
-    checked: PropTypes.bool
-};
-
-function mapDispatchToProps(dispatch:any) {
+function mapDispatchToProps(dispatch:any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const ConfigPropertyContainer = connect<any, any, any>(
+export const ConfigPropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
 )(ConfigProperty);

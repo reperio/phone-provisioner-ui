@@ -1,15 +1,12 @@
 import React from 'react';
-import {TestService} from '../services/testService';
 import TestTextInput from './testTextInput';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/noteActions';
-import PropTypes from 'prop-types';
 
 
 export class TestPage extends React.Component {
     props:any;
-    static propTypes:any;
 
     handleChange = (e: any) => {
         this.props.actions.handleUpdate(e.target.name, e.target.value);
@@ -33,11 +30,6 @@ export class TestPage extends React.Component {
         );
     }
 }
-
-TestPage.propTypes = {
-    actions: PropTypes.object.isRequired,
-    notes: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state:any) {
     return {

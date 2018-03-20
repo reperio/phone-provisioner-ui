@@ -1,5 +1,5 @@
 import {ActionTypes} from '../constants/actionTypes';
-import initialState from './initialState';
+import {initialState} from './initialState';
 
 //note the mapping of the initial state property here
 export default function noteReducer(state = initialState.note, action: any) {

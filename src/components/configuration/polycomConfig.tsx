@@ -1,14 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {BooleanPropertyContainer} from "./booleanProperty";
 import {TextPropertyContainer} from "./textProperty";
+import {ConfigProperty} from "../../store/store";
 
-class PolycomConfig extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    options?: {[property: string]: ConfigProperty; };
+}
+
+class PolycomConfig extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
 
     render() {
         return (
@@ -20,18 +24,13 @@ class PolycomConfig extends React.Component {
     }
 }
 
-PolycomConfig.propTypes = {
-    actions: PropTypes.object,
-    options: PropTypes.object
-};
-
-function mapDispatchToProps(dispatch:any) {
+function mapDispatchToProps(dispatch:any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
-export const container = connect<any, any, any>(
+export const container = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
 )(PolycomConfig);

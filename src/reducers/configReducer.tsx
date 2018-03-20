@@ -1,8 +1,9 @@
 import {ActionTypes} from '../constants/actionTypes';
-import initialState from './initialState';
+import {initialState} from './initialState';
+import {ConfigurationSettings} from "../store/store";
 
-export default function configReducer(state = initialState.configurationSettings, action: any) {
-    let newState:any = Object.assign({}, state);
+export default function configReducer(state: ConfigurationSettings = initialState.configurationSettings, action: any) {
+    let newState: ConfigurationSettings = Object.assign({}, state);
 
     switch (action.type) {
         case ActionTypes.GET_MANUFACTURERS:
@@ -30,11 +31,11 @@ export default function configReducer(state = initialState.configurationSettings
 
         case ActionTypes.TOGGLE_PROPERTY_INHERITANCE:
             //Sets state.currentlyEditing.options[action.property].inherited = action.inherit
-            return changeOptions(newState, action.property, {inherited: action.inherit});
+            return changeConfigOptions(newState, action.property, {inherited: action.inherit});
 
         case ActionTypes.CHANGE_PROPERTY_VALUE:
             //Sets state.currentlyEditing.options[action.property].value = action.value
-            return changeOptions(newState, action.property, {value: action.value});
+            return changeConfigOptions(newState, action.property, {value: action.value});
 
         default:
             return state;
@@ -54,7 +55,7 @@ function applyChangesToConfig(config: any, id: string, transformation: Function)
     return newConfig;
 }
 
-const expandConfigGroup = (children: any) => (config: any) => {
+const expandConfigGroup = (children: object[]) => (config: any) => {
     config.expanded = !config.expanded;
     if(children != null) {
         config.children = children.map(addConfigProps);
@@ -62,13 +63,13 @@ const expandConfigGroup = (children: any) => (config: any) => {
     return config;
 }
 
-function addConfigProps(child: any) {
+function addConfigProps(child: object) {
     return Object.assign({expanded: false, children: null}, child);
 }
 
 //Finds a config by id and returns an array of the path to it. Ex: [<some manufacturer>, <some family>, <some model>]
 //Returns null if none is found
-function findConfig(configs: any[], id: string) : any[] {
+function findConfig(configs: any[], id: string) : object[] {
     for(const conf of configs) {
         if(conf.id === id) {
             return [conf];
@@ -83,7 +84,7 @@ function findConfig(configs: any[], id: string) : any[] {
     return null;
 }
 
-function changeOptions(state: any, configProperty: string, propsToChange: object) : any {
+function changeConfigOptions(state: ConfigurationSettings, configProperty: string, propsToChange: object) : ConfigurationSettings {
     let newOptions = Object.assign({}, state.currentlyEditing.options);
     newOptions[configProperty] = Object.assign({}, newOptions[configProperty], propsToChange);
     state.currentlyEditing = Object.assign({}, state.currentlyEditing, {options: newOptions});

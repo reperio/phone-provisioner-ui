@@ -1,17 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigurationGroupListContainer} from './configurationGroupList';
 import {ConfigurationEditorContainer} from './configurationEditor';
 import {ConfigLevel} from "../../constants/configLevel";
+import {Store, ConfigurationSettings} from "../../store/store";
 
-class ConfigurationsPage extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    configurationSettings?: ConfigurationSettings;
+}
 
-    constructor(props: any) {
+class ConfigurationsPage extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
+
+    constructor(props: IComponentProps) {
         super(props);
         this.props.actions.fetchManufacturers();
     }
@@ -41,25 +45,20 @@ class ConfigurationsPage extends React.Component {
     }
 }
 
-ConfigurationsPage.propTypes = {
-    actions: PropTypes.object,
-    configurationSettings: PropTypes.object
-};
 
-
-function mapStateToProps(state: any) {
+function mapStateToProps(state: Store) : IComponentProps {
     return {
         configurationSettings: state.configurationSettings
     };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const ConfigurationsPageContainer = connect<any, any, any>(
+export const ConfigurationsPageContainer = connect<IComponentProps, IComponentProps, IComponentProps, Store>(
     mapStateToProps,
     mapDispatchToProps
 )(ConfigurationsPage);

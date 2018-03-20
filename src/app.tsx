@@ -28,7 +28,7 @@ class App extends React.Component {
               <Route exact path="/testRedux" component={TestPage} />
               <Route exact path="/testReact" component={TestPageReact} />
               <Route exact path="/hello" component={HelloWorld} />
-              <Route exact path="/configurations" component={ConfigurationsPageContainer} />
+              <Route exact path="/configurations" component={ConfigurationsPageContainer}/>
               <Route component={NotFoundPage} />
             </Switch>
         </div>

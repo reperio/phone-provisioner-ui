@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigurationGroupListContainer} from "./configurationGroupList";
 import {ConfigLevel} from "../../constants/configLevel";
+import {CurrentlyEditing} from "../../store/store";
 
 const ManufacturerIcon = require('../../assets/manufacturer.png');
 const FamilyIcon = require('../../assets/family.png');
@@ -16,9 +16,18 @@ const icons = [
   ModelIcon
 ];
 
-class ConfigurationGroup extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    name?: string;
+    isExpanded?: boolean;
+    children?: any[];
+    configLevel?: ConfigLevel;
+    id?: string;
+    selectedId?: string;
+}
+
+class ConfigurationGroup extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
 
     expandGroup = (e: any) => {
         if(this.props.children == null) {
@@ -33,7 +42,7 @@ class ConfigurationGroup extends React.Component {
         this.props.actions.selectConfig(this.props.id);
     }
 
-    render() {
+    render():any {
         const children = (
             <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} selectedId={this.props.selectedId}/>
         );
@@ -65,23 +74,13 @@ class ConfigurationGroup extends React.Component {
     }
 }
 
-ConfigurationGroup.propTypes = {
-    actions: PropTypes.object,
-    name: PropTypes.string.isRequired,
-    isExpanded: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.object),
-    configLevel: PropTypes.number,
-    id: PropTypes.string,
-    selectedId: PropTypes.string
-};
-
-function mapDispatchToProps(dispatch:any) {
+function mapDispatchToProps(dispatch:any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const ConfigurationGroupContainer = connect<any, any, any>(
+export const ConfigurationGroupContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
 )(ConfigurationGroup);

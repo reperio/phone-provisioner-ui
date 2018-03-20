@@ -1,14 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import TestTextInput from './testTextInput';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/testActions';
 
 export class StatusPage extends React.Component {
-    props:any
-    static propTypes:any;
+    props:any;
 
 
     handleChange = (e: any) => {
@@ -50,11 +47,6 @@ export class StatusPage extends React.Component {
         );
     }
 }
-
-StatusPage.propTypes = {
-    actions: PropTypes.object.isRequired,
-    test: PropTypes.object.isRequired
-};
 
 
 function mapStateToProps(state:any) {

@@ -32,7 +32,7 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
                     <table className={'tree-grid'}>
                         <tbody>
                             <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
-                                                             configLevel={ConfigLevel.MANUFACTURER} parentId={null}
+                                                             configLevel={ConfigLevel.MANUFACTURER}
                                                              selectedId={editing == null ? null : editing.hierarchy[editing.hierarchy.length - 1].id}/>
                         </tbody>
                     </table>

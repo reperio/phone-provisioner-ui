@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
+import {ConfigProperty} from "../../store/store";
 
 interface IComponentProps {
     actions?: any;
     propertyName?: string;
     displayName?: string;
-    options?: any;
+    options?: ConfigProperty;
 }
 
 class BooleanProperty extends React.Component<IComponentProps, {}> {

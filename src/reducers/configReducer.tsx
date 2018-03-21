@@ -39,6 +39,9 @@ export default function configReducer(state: ConfigurationSettings = initialStat
 
         case ActionTypes.SAVE_PROPERTY_OPTIONS:
             newState.anyUnsavedChanges = false;
+            newState.allConfigs = newState.allConfigs.map(
+                (c: any) => applyChangesToConfig(c, action.id, updateModel(action.config))
+            );
             return newState;
 
         default:
@@ -65,6 +68,10 @@ const expandConfigGroup = (children: object[]) => (config: any) => {
         config.children = children.map(addConfigProps);
     }
     return config;
+}
+
+const updateModel = (newConf: any) => (config: any) => {
+    return Object.assign({}, config, {config: JSON.stringify(newConf)});
 }
 
 function addConfigProps(child: object) {

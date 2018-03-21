@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {ConfigLevel} from "../constants/configLevel";
+import {ConfigProperty} from "../store/store";
 
 export async function getManufacturers() {
     const manufacturers = await axios.get('http://localhost:3000/config/manufacturers');
@@ -62,4 +63,14 @@ export async function updateConfig(configLevel: ConfigLevel, id: string, config:
         default:
             return {};
     }
+}
+
+export function configFromOptions(options: {[property: string]: ConfigProperty; }) : any {
+    let config: any = {};
+    for(let prop in options) {
+        if(!options[prop].inherited) {
+            config[prop] = options[prop].value;
+        }
+    }
+    return config;
 }

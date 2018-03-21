@@ -54,19 +54,12 @@ export const changePropertyValue = (property: string, value: any) => async (disp
 };
 
 export const savePropertyOptions = (options: {[property: string]: ConfigProperty; }, configLevel: ConfigLevel, id: string) => async (dispatch:any) => {
-    await ConfigService.updateConfig(configLevel, id, configFromOptions(options));
+    const config = ConfigService.configFromOptions(options);
+    await ConfigService.updateConfig(configLevel, id, config);
 
     dispatch({
-        type: ActionTypes.SAVE_PROPERTY_OPTIONS
+        type: ActionTypes.SAVE_PROPERTY_OPTIONS,
+        config,
+        id
     });
 };
-
-function configFromOptions(options: {[property: string]: ConfigProperty; }) : any {
-    let config: any = {};
-    for(let prop in options) {
-        if(!options[prop].inherited) {
-            config[prop] = options[prop].value;
-        }
-    }
-    return config;
-}

@@ -30,7 +30,11 @@ export const expandConfigGroup = (elementId: string) => async (dispatch:any) => 
     });
 };
 
-export const selectConfig = (id: string) => async (dispatch:any) => {
+export const selectConfig = (id: string, save: boolean, options: {[property: string]: ConfigProperty; }, configLevel: ConfigLevel, oldId: string) => async (dispatch:any) => {
+    if(save) {
+        await savePropertyOptions(options, configLevel, oldId)(dispatch);
+    }
+
     dispatch({
         type: ActionTypes.SELECT_CONFIG,
         id

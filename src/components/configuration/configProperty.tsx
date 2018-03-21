@@ -2,12 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
+import {ConfigProperty as StoreConfigProp} from '../../store/store';
+import {ConfigLevelName} from "../../constants/configLevel";
 
 interface IComponentProps {
     actions?: any;
     children?: any;
     propertyName?: string;
-    checked?: boolean;
+    options?: StoreConfigProp;
 }
 
 class ConfigProperty extends React.Component<IComponentProps, {}> {
@@ -21,13 +23,13 @@ class ConfigProperty extends React.Component<IComponentProps, {}> {
         return (
             <div className={'row'}>
                 <div className={'col-md-1'}>
-                    <input type="checkbox" onChange={this.togglePropertyInheritance} checked={this.props.checked}/>
+                    <input type="checkbox" onChange={this.togglePropertyInheritance} checked={!this.props.options.inherited}/>
                 </div>
                 <div className={'col-md-7'}>
                     {this.props.children}
                 </div>
                 <div className={'col-md-4'}>
-                    Inherited from manufacturer
+                    {this.props.options.inherited && `Inherited from ${ConfigLevelName(this.props.options.inheritLevel)}`}
                 </div>
             </div>
         );

@@ -19,6 +19,7 @@ export const initialState: Store = {
         noteList: ['first note', 'second note']
     },
     configurationSettings: {
+        anyUnsavedChanges: false,
         currentlyEditing: null,
         allConfigs: []
     }

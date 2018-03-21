@@ -1,6 +1,7 @@
 import {ActionTypes} from '../constants/actionTypes';
 import {initialState} from './initialState';
-import {ConfigurationSettings} from "../store/store";
+import {ConfigProperty, ConfigurationSettings} from "../store/store";
+import {ConfigLevel} from "../constants/configLevel";
 
 export default function configReducer(state: ConfigurationSettings = initialState.configurationSettings, action: any) {
     let newState: ConfigurationSettings = Object.assign({}, state);
@@ -21,21 +22,24 @@ export default function configReducer(state: ConfigurationSettings = initialStat
             if(hierarchy != null) {
                 newState.currentlyEditing = {
                     hierarchy,
-                    options: {
-                        test: {inherited: false, value: false, inheritedValue: false},
-                        test2: {inherited: false, value: "test", inheritedValue: "this is inherited"}
-                    }
+                    options: composeConfigOptions(hierarchy)
                 };
             }
             return newState;
 
         case ActionTypes.TOGGLE_PROPERTY_INHERITANCE:
+            newState.anyUnsavedChanges = true;
             //Sets state.currentlyEditing.options[action.property].inherited = action.inherit
             return changeConfigOptions(newState, action.property, {inherited: action.inherit});
 
         case ActionTypes.CHANGE_PROPERTY_VALUE:
+            newState.anyUnsavedChanges = true;
             //Sets state.currentlyEditing.options[action.property].value = action.value
             return changeConfigOptions(newState, action.property, {value: action.value});
+
+        case ActionTypes.SAVE_PROPERTY_OPTIONS:
+            newState.anyUnsavedChanges = false;
+            return newState;
 
         default:
             return state;
@@ -69,7 +73,7 @@ function addConfigProps(child: object) {
 
 //Finds a config by id and returns an array of the path to it. Ex: [<some manufacturer>, <some family>, <some model>]
 //Returns null if none is found
-function findConfig(configs: any[], id: string) : object[] {
+function findConfig(configs: any[], id: string) : any[] {
     for(const conf of configs) {
         if(conf.id === id) {
             return [conf];
@@ -82,6 +86,27 @@ function findConfig(configs: any[], id: string) : object[] {
         }
     }
     return null;
+}
+
+//Converts the db models of the config to the properties that you see
+function composeConfigOptions(models: any[]) : {[property: string]: ConfigProperty; } {
+    let options: {[property: string]: ConfigProperty; } = {};
+
+    function setProp(configString: string, configLevel: number, isInherited: boolean) {
+        const config = JSON.parse(configString);
+        for(let prop in config) {
+            const val = config[prop];
+            const inheritedValue = (prop in options) ? options[prop].inheritedValue : val;
+            options[prop] = {inherited: isInherited, inheritLevel: configLevel, value: val, inheritedValue: inheritedValue};
+        }
+    }
+
+    for(let i = 0; i < models.length; i++) {
+        setProp(models[i].default_config, ConfigLevel.DEFAULT, true);
+        setProp(models[i].config, i, i < models.length - 1);
+    }
+
+    return options;
 }
 
 function changeConfigOptions(state: ConfigurationSettings, configProperty: string, propsToChange: object) : ConfigurationSettings {

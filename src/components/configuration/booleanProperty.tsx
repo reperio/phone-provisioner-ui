@@ -21,7 +21,7 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} checked={!this.props.options.inherited}>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={this.props.options}>
                 <input
                     type="checkbox"
                     disabled={this.props.options.inherited}

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {CurrentlyEditing} from "../../store/store";
+import {SaveConfigButtonContainer} from "./saveConfigButton";
 
 interface IComponentProps {
     actions?: any;
@@ -17,8 +18,13 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
         if(this.props.configs != null) {
             try {
                 const currentConfig = this.props.configs.hierarchy[this.props.configs.hierarchy.length - 1];
-                editorBody = React.createElement
-                    (require(`./${currentConfig.component_name}`).container, {options: this.props.configs.options}, null);
+                editorBody = (
+                    <>
+                        {React.createElement
+                            (require(`./${currentConfig.component_name}`).container, {options: this.props.configs.options}, null)}
+                        <SaveConfigButtonContainer/>
+                    </>
+                );
             } catch {
                 editorBody = (<p>CONFIG PAGE NOT FOUND</p>);
             }

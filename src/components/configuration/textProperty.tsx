@@ -21,7 +21,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} checked={!this.props.options.inherited}>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={this.props.options}>
                 {this.props.displayName}
                 <input
                     type="text"

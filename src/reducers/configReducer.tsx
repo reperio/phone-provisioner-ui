@@ -19,7 +19,7 @@ export default function configReducer(state: ConfigurationSettings = initialStat
 
         case ActionTypes.SELECT_CONFIG:
             const hierarchy = findConfig(newState.allConfigs, action.id);
-            if(hierarchy != null) {
+            if(hierarchy !== null) {
                 newState.currentlyEditing = {
                     hierarchy,
                     options: composeConfigOptions(hierarchy)
@@ -52,9 +52,9 @@ export default function configReducer(state: ConfigurationSettings = initialStat
 
 function applyChangesToConfig(config: any, id: string, transformation: Function) {
     let newConfig = Object.assign({}, config);
-    if(newConfig.id == id) {
+    if(newConfig.id === id) {
         newConfig = transformation(newConfig);
-    } else if(newConfig.children != null) {
+    } else if(newConfig.children !== null) {
         newConfig.children = newConfig.children.map(
             (c: any) => applyChangesToConfig(c, id, transformation)
         );
@@ -64,7 +64,7 @@ function applyChangesToConfig(config: any, id: string, transformation: Function)
 
 const expandConfigGroup = (children: object[]) => (config: any) => {
     config.expanded = !config.expanded;
-    if(children != null) {
+    if(children !== null) {
         config.children = children.map(addConfigProps);
     }
     return config;
@@ -87,7 +87,7 @@ function findConfig(configs: any[], id: string) : any[] {
         }
         if(conf.children != null) {
             const childConf = findConfig(conf.children, id);
-            if(childConf != null) {
+            if(childConf !== null) {
                 return [conf].concat(childConf);
             }
         }
@@ -104,6 +104,11 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
         for(let prop in config) {
             const val = config[prop];
             const inheritedValue = (prop in options) ? options[prop].inheritedValue : val;
+            if(!isInherited) { //If the value is being overridden, make sure that the inherit level doesn't show the current level
+                //If it's default here, something went wrong. There must have been an invalid config property
+                //that was in the default but not the actual config.
+                configLevel = (prop in options) ? options[prop].inheritLevel : ConfigLevel.DEFAULT;
+            }
             options[prop] = {inherited: isInherited, inheritLevel: configLevel, value: val, inheritedValue: inheritedValue};
         }
     }

@@ -1,8 +1,6 @@
 import {ConfigLevel} from "../constants/configLevel";
 
 export class Store {
-    test: any;
-    note: any;
     configurationSettings: ConfigurationSettings;
 }
 

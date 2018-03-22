@@ -1,6 +1,6 @@
 import {ActionTypes} from '../constants/actionTypes';
 import {initialState} from './initialState';
-import {ConfigProperty, ConfigurationSettings} from "../store/store";
+import {ConfigProperty, ConfigurationSettings, Store} from "../store/store";
 import {ConfigLevel} from "../constants/configLevel";
 
 export default function configReducer(state: ConfigurationSettings = initialState.configurationSettings, action: any) {

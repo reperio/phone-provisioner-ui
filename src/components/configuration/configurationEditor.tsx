@@ -21,7 +21,7 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
                 editorBody = (
                     <>
                         {React.createElement
-                            (require(`./${currentConfig.component_name}`).container, {options: this.props.configs.options}, null)}
+                            (require(`./pages/${currentConfig.component_name}`).container, {options: this.props.configs.options}, null)}
                         <SaveConfigButtonContainer/>
                     </>
                 );

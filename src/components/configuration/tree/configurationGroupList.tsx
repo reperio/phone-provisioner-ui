@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
+import * as actions from '../../../actions/configActions';
 import {ConfigurationGroupContainer} from "./configurationGroup";
-import {ConfigLevel} from '../../constants/configLevel';
+import {ConfigLevel} from '../../../constants/configLevel';
 
 interface IComponentProps {
     actions?: any;

@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
+import * as actions from '../../../actions/configActions';
 import {ConfigurationGroupListContainer} from "./configurationGroupList";
-import {ConfigLevel} from "../../constants/configLevel";
-import {ConfigProperty, CurrentlyEditing, Store} from "../../store/store";
+import {ConfigLevel} from "../../../constants/configLevel";
+import {ConfigProperty, CurrentlyEditing, Store} from "../../../store/store";
 
-const ManufacturerIcon = require('../../assets/manufacturer.png');
-const FamilyIcon = require('../../assets/family.png');
-const ModelIcon = require('../../assets/model.png');
+const ManufacturerIcon = require('../../../assets/manufacturer.png');
+const FamilyIcon = require('../../../assets/family.png');
+const ModelIcon = require('../../../assets/model.png');
 
 const icons = [
   ManufacturerIcon,

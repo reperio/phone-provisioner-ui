@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
-import {ConfigurationGroupListContainer} from './configurationGroupList';
-import {ConfigurationEditorContainer} from './configurationEditor';
-import {ConfigLevel} from "../../constants/configLevel";
-import {Store, ConfigurationSettings} from "../../store/store";
+import * as actions from '../../../actions/configActions';
+import {ConfigurationGroupListContainer} from '../tree/configurationGroupList';
+import {ConfigurationEditorContainer} from '../configurationEditor';
+import {ConfigLevel} from "../../../constants/configLevel";
+import {Store, ConfigurationSettings} from "../../../store/store";
 
 interface IComponentProps {
     actions?: any;

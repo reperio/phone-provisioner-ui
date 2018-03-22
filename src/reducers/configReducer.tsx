@@ -103,11 +103,12 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
         const config = JSON.parse(configString);
         for(let prop in config) {
             const val = config[prop];
-            const inheritedValue = (prop in options) ? options[prop].inheritedValue : val;
-            if(!isInherited) { //If the value is being overridden, make sure that the inherit level doesn't show the current level
-                //If it's default here, something went wrong. There must have been an invalid config property
-                //that was in the default but not the actual config.
-                configLevel = (prop in options) ? options[prop].inheritLevel : ConfigLevel.DEFAULT;
+            let inheritedValue = val;
+            //If it's default here, something went wrong. There must have been an invalid config property
+            //that was in the default but not the actual config.
+            if(!isInherited && prop in options) { //If the value is being overridden, make sure that the inherit level doesn't show the current level
+                configLevel = options[prop].inheritLevel;
+                inheritedValue = options[prop].inheritedValue;
             }
             options[prop] = {inherited: isInherited, inheritLevel: configLevel, value: val, inheritedValue: inheritedValue};
         }

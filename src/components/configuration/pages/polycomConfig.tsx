@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
-import {BooleanPropertyContainer} from "./booleanProperty";
-import {TextPropertyContainer} from "./textProperty";
-import {ConfigProperty} from "../../store/store";
+import * as actions from '../../../actions/configActions';
+import {BooleanPropertyContainer} from "../properties/booleanProperty";
+import {TextPropertyContainer} from "../properties/textProperty";
+import {ConfigProperty} from "../../../store/store";
 
 interface IComponentProps {
     actions?: any;
@@ -17,8 +17,8 @@ class PolycomConfig extends React.Component<IComponentProps, {}> {
     render() {
         return (
             <div>
-                <BooleanPropertyContainer displayName={'Test'} propertyName={'test'} options={this.props.options.test}/>
-                <TextPropertyContainer displayName={'Test'} propertyName={'test2'} options={this.props.options.test2}/>
+                <BooleanPropertyContainer propertyName={'test'} options={this.props.options.test}>Test</BooleanPropertyContainer>
+                <TextPropertyContainer propertyName={'test2'} options={this.props.options.test2}>Test 2</TextPropertyContainer>
             </div>
         );
     }

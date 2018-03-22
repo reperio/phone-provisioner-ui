@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
+import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
-import {ConfigProperty} from "../../store/store";
+import {ConfigProperty} from "../../../store/store";
 
 interface IComponentProps {
     actions?: any;
     propertyName?: string;
-    displayName?: string;
+    children?: any;
     options?: ConfigProperty;
 }
 
@@ -28,7 +28,7 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
                     checked={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}
                     onChange={this.changePropertyValue}
                 />
-                {this.props.displayName}
+                {this.props.children}
             </ConfigPropertyContainer>
         );
     }

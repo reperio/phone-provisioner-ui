@@ -7,7 +7,7 @@ import TestPage from './components/testPage';
 import {TestPageReact} from './components/testPageReact';
 import NotFoundPage from './components/notFoundPage';
 import {HelloWorld} from './components/HelloWorld';
-import {ConfigurationsPageContainer} from './components/configuration/configurationsPage';
+import {ConfigurationsPageContainer} from './components/configuration/pages/configurationsPage';
 
 class App extends React.Component {
   render() {

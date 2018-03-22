@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
+import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
-import {ConfigProperty} from "../../store/store";
+import {ConfigProperty} from "../../../store/store";
 
 interface IComponentProps {
     actions?: any;
     propertyName?: string;
-    displayName?: string;
+    children?: any;
     options?: ConfigProperty;
 }
 
@@ -22,7 +22,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
     render() {
         return (
             <ConfigPropertyContainer propertyName={this.props.propertyName} options={this.props.options}>
-                {this.props.displayName}
+                {this.props.children}
                 <input
                     type="text"
                     disabled={this.props.options.inherited}

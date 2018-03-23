@@ -7,4 +7,10 @@ const rootReducer = combineReducers({
     routing
 });
 
-export default rootReducer;
+const wrapper = (state: any, action: any) => {
+    const ret = rootReducer(state, action);
+    console.log(ret);
+    return ret;
+};
+
+export default wrapper;

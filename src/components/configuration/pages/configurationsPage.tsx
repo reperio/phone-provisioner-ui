@@ -17,7 +17,24 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
 
     constructor(props: IComponentProps) {
         super(props);
-        this.props.actions.fetchManufacturers();
+        if(this.props.configurationSettings.allConfigs.length === 0) {
+            this.props.actions.fetchManufacturers();
+        }
+        this.onUnload = this.onUnload.bind(this);
+    }
+
+    onUnload = (e: any) => {
+        if(this.props.configurationSettings.anyUnsavedChanges) {
+            e.returnValue = "You have unsaved config changes. Are you sure you want to exit?";
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("beforeunload", this.onUnload)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.onUnload)
     }
 
     render() {

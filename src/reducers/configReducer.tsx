@@ -8,7 +8,9 @@ export default function configReducer(state: ConfigurationSettings = initialStat
 
     switch (action.type) {
         case ActionTypes.GET_MANUFACTURERS:
-            newState.allConfigs = action.manufacturers.map(addConfigProps);
+            if(state.allConfigs.length === 0) {
+                newState.allConfigs = action.manufacturers.map(addConfigProps);
+            }
             return newState;
 
         case ActionTypes.EXPAND_CONFIG_GROUP:

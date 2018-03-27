@@ -34,7 +34,18 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
     }
 
     componentWillUnmount() {
+        this.saveConfigChanges();
         window.removeEventListener("beforeunload", this.onUnload)
+    }
+
+    saveConfigChanges() {
+        const configLevel = this.props.configurationSettings.currentlyEditing.hierarchy.length - 1;
+
+        this.props.actions.savePropertyOptions(
+            this.props.configurationSettings.currentlyEditing.options,
+            configLevel,
+            this.props.configurationSettings.currentlyEditing.hierarchy[configLevel].id
+        );
     }
 
     render() {

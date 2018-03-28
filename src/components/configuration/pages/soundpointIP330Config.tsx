@@ -19,7 +19,6 @@ class SoundpointIP330Config extends React.Component<IComponentProps, {}> {
         return (
             <div>
                 <SoundpointIPConfig options={this.props.options}/>
-                <TextPropertyContainer propertyName={'extra'} options={this.props.options.extra}>Extra</TextPropertyContainer>
             </div>
         );
     }

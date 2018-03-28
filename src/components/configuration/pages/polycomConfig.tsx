@@ -17,8 +17,6 @@ class PolycomConfig extends React.Component<IComponentProps, {}> {
     render() {
         return (
             <div>
-                <BooleanPropertyContainer propertyName={'test'} options={this.props.options.test}>Test</BooleanPropertyContainer>
-                <TextPropertyContainer propertyName={'test2'} options={this.props.options.test2}>Test 2</TextPropertyContainer>
             </div>
         );
     }

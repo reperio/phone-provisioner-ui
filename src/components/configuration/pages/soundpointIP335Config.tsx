@@ -19,7 +19,6 @@ class SoundpointIP335Config extends React.Component<IComponentProps, {}> {
         return (
             <div>
                 <SoundpointIPConfig options={this.props.options}/>
-                <BooleanPropertyContainer propertyName={'extra2'} options={this.props.options.extra2}>Extra 2</BooleanPropertyContainer>
             </div>
         );
     }

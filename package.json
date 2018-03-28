@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@types/mocha": "^2.2.48",
+    "@types/react-sortable-hoc": "^0.6.3",
     "axios": "^0.17.1",
     "core-js": "^2.5.3",
     "enzyme": "^3.3.0",
@@ -18,6 +19,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-sortable-hoc": "^0.6.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },

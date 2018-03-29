@@ -41,7 +41,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
         this.props.actions.changePropertyValue(this.props.propertyName, newList);
     }
 
-    shouldCancelStart = () => this.props.options.inherited;
+    shouldCancelStart = () => this.props.options[this.props.propertyName].inherited;
 
     addNewOption = (e: any) => {
         if(e.target.value !== null) {
@@ -51,8 +51,9 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
     }
 
     deleteOption = (index: number) => () => {
-        this.props.options[this.props.propertyName].value.splice(index, 1);
-        this.props.actions.changePropertyValue(this.props.propertyName, this.props.options.value);
+        const options = this.props.options[this.props.propertyName];
+        options.value.splice(index, 1);
+        this.props.actions.changePropertyValue(this.props.propertyName, options.value);
     }
 
     render() {

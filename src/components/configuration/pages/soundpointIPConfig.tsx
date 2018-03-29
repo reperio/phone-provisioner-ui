@@ -5,6 +5,7 @@ import * as actions from '../../../actions/configActions';
 import {BooleanPropertyContainer} from "../properties/booleanProperty";
 import {TextPropertyContainer} from "../properties/textProperty";
 import {SortableListPropertyContainer} from "../properties/sortableListProperty";
+import {DropdownPropertyContainer} from "../properties/dropdownProperty";
 import {ConfigProperty} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
@@ -51,7 +52,7 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
 
                 <h3>Provisioning Polling</h3>
                 <BooleanPropertyContainer propertyName={'pollingEnabled'}>Enabled</BooleanPropertyContainer>
-                {/*TODO: pollingMode as enum*/}
+                <DropdownPropertyContainer propertyName={'pollingMode'} possibleValues={['abs', 'rel', 'random']}>Mode</DropdownPropertyContainer>
                 {/*TODO: pollingPeriod, pollingTime, and pollingTimeRandomEnd as time span*/}
 
                 <h3>SNTP</h3>

@@ -7,6 +7,7 @@ import {TextPropertyContainer} from "../properties/textProperty";
 import {SortableListPropertyContainer} from "../properties/sortableListProperty";
 import {ConfigProperty} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
+import {PassPropsToChildren} from "../../passPropsToChildren";
 
 const possibleCodecPrefValues: string[] = [
     'G711_A',
@@ -29,21 +30,21 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <div>
-                <PolycomConfig options={this.props.options}/>
+            <PassPropsToChildren options={this.props.options}>
+                <PolycomConfig/>
                 {/*
-                    <TextPropertyContainer propertyName={'digitMap'} options={this.props.options.digitMap}>Digit Map</TextPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'} options={this.props.options.tagSerialNo}>Tag Serial Number</BooleanPropertyContainer>
+                    <TextPropertyContainer propertyName={'digitMap'}>Digit Map</TextPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
                 */}
-                <SortableListPropertyContainer propertyName={'codecPref'} options={this.props.options.codecPref} possibleValues={possibleCodecPrefValues}>Codec Preference</SortableListPropertyContainer>
-            </div>
+                <SortableListPropertyContainer propertyName={'codecPref'} possibleValues={possibleCodecPrefValues}>Codec Preference</SortableListPropertyContainer>
+            </PassPropsToChildren>
         );
     }
 }

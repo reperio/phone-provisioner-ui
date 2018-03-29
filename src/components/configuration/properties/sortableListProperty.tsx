@@ -10,7 +10,7 @@ interface IComponentProps {
     actions?: any;
     propertyName?: string;
     children?: any;
-    options?: ConfigProperty;
+    options?: {[property: string]: ConfigProperty; };
     possibleValues?: string[];
 }
 
@@ -37,7 +37,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
     onSortEnd = (args:any, e:any) => {
-        const newList = arrayMove(this.props.options.value, args.oldIndex, args.newIndex);
+        const newList = arrayMove(this.props.options[this.props.propertyName].value, args.oldIndex, args.newIndex);
         this.props.actions.changePropertyValue(this.props.propertyName, newList);
     }
 
@@ -45,35 +45,37 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
 
     addNewOption = (e: any) => {
         if(e.target.value !== null) {
-            const newList = this.props.options.value.concat([e.target.value]);
+            const newList = this.props.options[this.props.propertyName].value.concat([e.target.value]);
             this.props.actions.changePropertyValue(this.props.propertyName, newList);
         }
     }
 
     deleteOption = (index: number) => () => {
-        this.props.options.value.splice(index, 1);
+        this.props.options[this.props.propertyName].value.splice(index, 1);
         this.props.actions.changePropertyValue(this.props.propertyName, this.props.options.value);
     }
 
     render() {
+        const options = this.props.options[this.props.propertyName];
+
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={this.props.options}>
-                <p>{this.props.children}</p>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
+                <div>{this.props.children}</div>
                 <SortableList
-                    items={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}
+                    items={options.inherited ? options.inheritedValue : options.value}
                     onSortEnd={this.onSortEnd}
                     shouldCancelStart={this.shouldCancelStart}
                     useDragHandle={true}
-                    deleteOption={!this.props.options.inherited && this.deleteOption}
+                    deleteOption={!options.inherited && this.deleteOption}
                 />
                 {
-                    !this.props.options.inherited &&
+                    !options.inherited &&
                     <div>
                         +
                         <select onChange={this.addNewOption}>
                             <option value={null}>New option</option>
                             {this.props.possibleValues.map(
-                                (v: string, i: number) => !this.props.options.value.includes(v) && <option value={v} key={i}>{v}</option>
+                                (v: string, i: number) => !options.value.includes(v) && <option value={v} key={i}>{v}</option>
                             )}
                         </select>
                     </div>

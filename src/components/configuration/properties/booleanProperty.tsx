@@ -9,7 +9,7 @@ interface IComponentProps {
     actions?: any;
     propertyName?: string;
     children?: any;
-    options?: ConfigProperty;
+    options?: {[property: string]: ConfigProperty; };
 }
 
 class BooleanProperty extends React.Component<IComponentProps, {}> {
@@ -20,12 +20,14 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
     }
 
     render() {
+        const options = this.props.options[this.props.propertyName];
+
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={this.props.options}>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
                 <input
                     type="checkbox"
-                    disabled={this.props.options.inherited}
-                    checked={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}
+                    disabled={options.inherited}
+                    checked={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}
                 />
                 {this.props.children}

@@ -9,7 +9,7 @@ interface IComponentProps {
     actions?: any;
     propertyName?: string;
     children?: any;
-    options?: ConfigProperty;
+    options?: {[property: string]: ConfigProperty; };
 }
 
 class TextProperty extends React.Component<IComponentProps, {}> {
@@ -20,13 +20,15 @@ class TextProperty extends React.Component<IComponentProps, {}> {
     }
 
     render() {
+        const options = this.props.options[this.props.propertyName];
+
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={this.props.options}>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
                 {this.props.children}
                 <input
                     type="text"
-                    disabled={this.props.options.inherited}
-                    value={this.props.options.inherited ? this.props.options.inheritedValue : this.props.options.value}
+                    disabled={options.inherited}
+                    value={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}
                 />
             </ConfigPropertyContainer>

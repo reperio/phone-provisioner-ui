@@ -6,6 +6,7 @@ import {BooleanPropertyContainer} from "../properties/booleanProperty";
 import {TextPropertyContainer} from "../properties/textProperty";
 import {ConfigProperty} from "../../../store/store";
 import {container as SoundpointIPConfig} from "./soundpointIPConfig";
+import {PassPropsToChildren} from "../../passPropsToChildren";
 
 interface IComponentProps {
     actions?: any;
@@ -17,9 +18,9 @@ class SoundpointIP335Config extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <div>
-                <SoundpointIPConfig options={this.props.options}/>
-            </div>
+            <PassPropsToChildren options={this.props.options}>
+                <SoundpointIPConfig/>
+            </PassPropsToChildren>
         );
     }
 }

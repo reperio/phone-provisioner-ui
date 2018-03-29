@@ -5,6 +5,7 @@ import * as actions from '../../../actions/configActions';
 import {BooleanPropertyContainer} from "../properties/booleanProperty";
 import {TextPropertyContainer} from "../properties/textProperty";
 import {ConfigProperty} from "../../../store/store";
+import {PassPropsToChildren} from "../../passPropsToChildren";
 
 interface IComponentProps {
     actions?: any;
@@ -16,8 +17,8 @@ class PolycomConfig extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <div>
-            </div>
+            <PassPropsToChildren options={this.props.options}>
+            </PassPropsToChildren>
         );
     }
 }

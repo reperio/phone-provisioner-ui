@@ -32,18 +32,41 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
         return (
             <PassPropsToChildren options={this.props.options}>
                 <PolycomConfig/>
-                {/*
-                    <TextPropertyContainer propertyName={'digitMap'}>Digit Map</TextPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                    <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
-                */}
+
+                <TextPropertyContainer propertyName={'digitMap'}>Digit Map</TextPropertyContainer>
+                <BooleanPropertyContainer propertyName={'tagSerialNo'}>Tag Serial Number</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'oneTouchVoiceMail'}>One Touch Voicemail</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'ztpEnabled'}>ZTP Enabled</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'presence'}>Presence</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'messaging'}>Messaging</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'callWaiting'}>Call Waiting</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'urlModeDialing'}>URL Mode Dialing</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'urlDialing'}>URL Dialing</BooleanPropertyContainer>
+
                 <SortableListPropertyContainer propertyName={'codecPref'} possibleValues={possibleCodecPrefValues}>Codec Preference</SortableListPropertyContainer>
+
+                <h3>Message Waiting</h3>
+                <BooleanPropertyContainer propertyName={'bypassInstantMessage'}>Bypass Instant Message</BooleanPropertyContainer>
+                {/*TODO: MWI properties*/}
+
+                <h3>Provisioning Polling</h3>
+                <BooleanPropertyContainer propertyName={'pollingEnabled'}>Enabled</BooleanPropertyContainer>
+                {/*TODO: pollingMode as enum*/}
+                {/*TODO: pollingPeriod, pollingTime, and pollingTimeRandomEnd as time span*/}
+
+                <h3>SNTP</h3>
+                <TextPropertyContainer propertyName={'sntpAddress'}>Address</TextPropertyContainer>
+                {/*TODO: sntpGmtOffset and sntpResyncPeriod as time span*/}
+
+                <h3>Voice Activity Detection</h3>
+                <BooleanPropertyContainer propertyName={'vadEnable'}>Enable</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'vadSignalAnnexB'}>Signal Annex B</BooleanPropertyContainer>
+                {/*TODO: vadThresh as integer from 1-30*/}
+
+                <h3>Volume Persist</h3>
+                <BooleanPropertyContainer propertyName={'volumePersistHandset'}>Handset</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'volumePersistHeadset'}>Headset</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName={'volumePersistHandsFree'}>Hands Free</BooleanPropertyContainer>
             </PassPropsToChildren>
         );
     }

@@ -4,22 +4,21 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 import {ConfigProperty} from "../../../store/store";
+const TimePicker = require('rc-time-picker').default;
+import moment from 'moment';
 
 interface IComponentProps {
     actions?: any;
     propertyName?: string;
     children?: any;
     options?: {[property: string]: ConfigProperty; };
-    isInteger?: boolean;
-    min?: number;
-    max?: number;
 }
 
-class TextProperty extends React.Component<IComponentProps, {}> {
+class TimeSpanProperty extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
     changePropertyValue = (e: any) => {
-        this.props.actions.changePropertyValue(this.props.propertyName, e.target.value);
+        this.props.actions.changePropertyValue(this.props.propertyName, e.format('HH:mm'));
     }
 
     render() {
@@ -28,13 +27,12 @@ class TextProperty extends React.Component<IComponentProps, {}> {
         return (
             <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
                 {this.props.children}
-                <input
-                    type={this.props.isInteger ? 'number' : 'text'}
+                <TimePicker
+                    defaultValue={moment(options.inherited ? options.inheritedValue : options.value, 'HH:mm')}
                     disabled={options.inherited}
-                    value={options.inherited ? options.inheritedValue : options.value}
+                    showSecond={false}
+                    format="HH:mm"
                     onChange={this.changePropertyValue}
-                    min={this.props.min}
-                    max={this.props.max}
                 />
             </ConfigPropertyContainer>
         );
@@ -47,7 +45,7 @@ function mapDispatchToProps(dispatch:any) : IComponentProps {
     };
 }
 
-export const TextPropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const TimeSpanPropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
-)(TextProperty);
+)(TimeSpanProperty);

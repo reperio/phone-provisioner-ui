@@ -9,6 +9,7 @@ import {DropdownPropertyContainer} from "../properties/dropdownProperty";
 import {ConfigProperty} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
+import {TimeSpanPropertyContainer} from "../properties/timeSpanProperty";
 
 const possibleCodecPrefValues: string[] = [
     'G711_A',
@@ -53,16 +54,19 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <h3>Provisioning Polling</h3>
                 <BooleanPropertyContainer propertyName={'pollingEnabled'}>Enabled</BooleanPropertyContainer>
                 <DropdownPropertyContainer propertyName={'pollingMode'} possibleValues={['abs', 'rel', 'random']}>Mode</DropdownPropertyContainer>
-                {/*TODO: pollingPeriod, pollingTime, and pollingTimeRandomEnd as time span*/}
+                <TextPropertyContainer propertyName={'pollingPeriod'} isInteger min={1}>Period</TextPropertyContainer>
+                <TimeSpanPropertyContainer propertyName={'pollingTime'}>Time</TimeSpanPropertyContainer>
+                <TimeSpanPropertyContainer propertyName={'pollingTimeRandomEnd'}>Random End</TimeSpanPropertyContainer>
 
                 <h3>SNTP</h3>
                 <TextPropertyContainer propertyName={'sntpAddress'}>Address</TextPropertyContainer>
-                {/*TODO: sntpGmtOffset and sntpResyncPeriod as time span*/}
+                <TextPropertyContainer propertyName={'sntpGmtOffset'} isInteger>GMT Offset</TextPropertyContainer>
+                <TextPropertyContainer propertyName={'sntpResyncPeriod'} isInteger min={1}>Resync Period</TextPropertyContainer>
 
                 <h3>Voice Activity Detection</h3>
                 <BooleanPropertyContainer propertyName={'vadEnable'}>Enable</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName={'vadSignalAnnexB'}>Signal Annex B</BooleanPropertyContainer>
-                {/*TODO: vadThresh as integer from 1-30*/}
+                <TextPropertyContainer propertyName={'vadThresh'} isInteger min={0} max={30}>Threshold</TextPropertyContainer>
 
                 <h3>Volume Persist</h3>
                 <BooleanPropertyContainer propertyName={'volumePersistHandset'}>Handset</BooleanPropertyContainer>

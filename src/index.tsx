@@ -6,6 +6,7 @@ import configureStore, { history } from './store/configureStore'
 import {App} from './components/app'
 import 'font-awesome-sass-loader';
 import './styles/app.scss'
+import 'rc-time-picker/assets/index.css';
 
 const store = configureStore();
 

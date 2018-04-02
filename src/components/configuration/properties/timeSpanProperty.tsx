@@ -28,7 +28,7 @@ class TimeSpanProperty extends React.Component<IComponentProps, {}> {
             <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
                 {this.props.children}
                 <TimePicker
-                    defaultValue={moment(options.inherited ? options.inheritedValue : options.value, 'HH:mm')}
+                    value={moment(options.inherited ? options.inheritedValue : options.value, 'HH:mm')}
                     disabled={options.inherited}
                     showSecond={false}
                     format="HH:mm"

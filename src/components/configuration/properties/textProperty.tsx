@@ -21,13 +21,6 @@ class TextProperty extends React.Component<IComponentProps, {}> {
     isValidInt(val: string) : boolean {
         //Only allow 0-9 with a sign at the beginning if the input allows negatives
         const exp = this.props.min >= 0 ? /^[\d]*$/ : /^-?[\d]*$/;
-        //Check if it's in range
-        if(val != '' && val != '-') {
-            const valAsNum = parseInt(val);
-            if(valAsNum < this.props.min || valAsNum > this.props.max) {
-                return false;
-            }
-        }
         return exp.test(val);
     }
 
@@ -36,6 +29,22 @@ class TextProperty extends React.Component<IComponentProps, {}> {
             return;
         }
         this.props.actions.changePropertyValue(this.props.propertyName, e.target.value);
+    }
+
+    isInRange(val: string) : boolean {
+        if (val === '' || val === '-') {
+            return false;
+        }
+        const valAsNum = parseInt(val);
+        return (this.props.min === undefined || valAsNum >= this.props.min) && (this.props.max === undefined || valAsNum <= this.props.max);
+    }
+
+
+    validatePropertyRange = (e: any) => {
+        if(this.props.isInteger && !this.isInRange(e.target.value)) {
+            const defaultValue = this.props.options[this.props.propertyName].inheritedValue;
+            this.props.actions.changePropertyValue(this.props.propertyName, defaultValue);
+        }
     }
 
     render() {
@@ -49,8 +58,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
                     disabled={options.inherited}
                     value={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}
-                    min={this.props.min}
-                    max={this.props.max}
+                    onBlur={this.validatePropertyRange}
                 />
             </ConfigPropertyContainer>
         );

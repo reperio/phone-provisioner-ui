@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 import {ConfigProperty} from "../../../store/store";
+import Checkbox from 'material-ui/Checkbox';
 
 interface IComponentProps {
     actions?: any;
@@ -24,8 +25,7 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
 
         return (
             <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
-                <input
-                    type="checkbox"
+                <Checkbox
                     disabled={options.inherited}
                     checked={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}

@@ -51,22 +51,22 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
 
                 <h3>Message Waiting</h3>
                 <BooleanPropertyContainer propertyName='bypassInstantMessage'>Bypass Instant Message</BooleanPropertyContainer>
-                <h5>MWI-1</h5>
+                <h4>MWI-1</h4>
                 <DropdownPropertyContainer propertyName='mwi1_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='mwi1_callBack'>Callback</TextPropertyContainer>
-                <h5>MWI-2</h5>
+                <h4>MWI-2</h4>
                 <DropdownPropertyContainer propertyName='mwi2_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='mwi2_callBack'>Callback</TextPropertyContainer>
-                <h5>MWI-3</h5>
+                <h4>MWI-3</h4>
                 <DropdownPropertyContainer propertyName='mwi3_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='mwi3_callBack'>Callback</TextPropertyContainer>
-                <h5>MWI-4</h5>
+                <h4>MWI-4</h4>
                 <DropdownPropertyContainer propertyName='mwi4_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='mwi4_callBack'>Callback</TextPropertyContainer>
-                <h5>MWI-5</h5>
+                <h4>MWI-5</h4>
                 <DropdownPropertyContainer propertyName='mwi5_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi6_callBack'>Callback</TextPropertyContainer>
-                <h5>MWI-6</h5>
+                <TextPropertyContainer propertyName='mwi5_callBack'>Callback</TextPropertyContainer>
+                <h4>MWI-6</h4>
                 <DropdownPropertyContainer propertyName='mwi6_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='mwi6_callBack'>Callback</TextPropertyContainer>
 

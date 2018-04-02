@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {ConfigProperty as StoreConfigProp} from '../../../store/store';
 import {ConfigLevelName} from "../../../constants/configLevel";
+import Switch from 'material-ui/Switch';
 
 interface IComponentProps {
     actions?: any;
@@ -22,13 +23,13 @@ class ConfigProperty extends React.Component<IComponentProps, {}> {
     render() {
         return (
             <div className={'row'}>
-                <div className={'col-md-1'}>
-                    <input type="checkbox" onChange={this.togglePropertyInheritance} checked={!this.props.options.inherited}/>
+                <div className={'col-sm-2'}>
+                    <Switch onChange={this.togglePropertyInheritance} checked={!this.props.options.inherited}/>
                 </div>
-                <div className={'col-md-7'}>
+                <div className={'col-sm-6'}>
                     {this.props.children}
                 </div>
-                <div className={'col-md-4'}>
+                <div className={'col-sm-4'}>
                     {this.props.options.inherited && `Inherited from ${ConfigLevelName(this.props.options.inheritLevel)}`}
                 </div>
             </div>

@@ -18,7 +18,23 @@ interface IComponentProps {
 class TextProperty extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
+    isValidInt(val: string) : boolean {
+        //Only allow 0-9 with a sign at the beginning if the input allows negatives
+        const exp = this.props.min >= 0 ? /^[\d]*$/ : /^-?[\d]*$/;
+        //Check if it's in range
+        if(val != '' && val != '-') {
+            const valAsNum = parseInt(val);
+            if(valAsNum < this.props.min || valAsNum > this.props.max) {
+                return false;
+            }
+        }
+        return exp.test(val);
+    }
+
     changePropertyValue = (e: any) => {
+        if(this.props.isInteger && !this.isValidInt(e.target.value)) {
+            return;
+        }
         this.props.actions.changePropertyValue(this.props.propertyName, e.target.value);
     }
 
@@ -29,7 +45,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
             <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
                 {this.props.children}
                 <input
-                    type={this.props.isInteger ? 'number' : 'text'}
+                    type='text'
                     disabled={options.inherited}
                     value={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}

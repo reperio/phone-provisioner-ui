@@ -59,6 +59,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
                     onChange={this.changePropertyValue}
                     onBlur={this.validatePropertyRange}
                     label={this.props.children}
+                    className='form-input'
                 />
             </ConfigPropertyContainer>
         );

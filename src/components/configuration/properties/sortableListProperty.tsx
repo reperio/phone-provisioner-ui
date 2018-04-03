@@ -5,6 +5,10 @@ import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 import {ConfigProperty} from "../../../store/store";
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
+import Select from 'material-ui/Select';
+import {MenuItem} from 'material-ui/Menu';
+import { FormControl } from 'material-ui/Form';
+import { InputLabel } from 'material-ui/Input';
 
 interface IComponentProps {
     actions?: any;
@@ -17,19 +21,20 @@ interface IComponentProps {
 const DragHandle = SortableHandle((params: any) => <span>{params.value}</span>);
 
 const SortableItem = SortableElement((params:any) =>
-    <li>
+    <div>
+        <div className='indent' style={{width: '16px'}}></div>
         <DragHandle value={params.value}/>&nbsp;
         {params.deleteOption && <i className="fa fa-times-circle" onClick={params.deleteOption}></i>}
-    </li>
+    </div>
 );
 
 const SortableList = SortableContainer((params:any) => {
     return (
-        <ul>
+        <div>
             {params.items.map((value:any, index:number) => (
                 <SortableItem key={`item-${index}`} index={index} value={value} deleteOption={params.deleteOption && params.deleteOption(index)} />
             ))}
-        </ul>
+        </div>
     );
 });
 
@@ -44,7 +49,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
     shouldCancelStart = () => this.props.options[this.props.propertyName].inherited;
 
     addNewOption = (e: any) => {
-        if(e.target.value !== null) {
+        if(e.target.value !== '') {
             const newList = this.props.options[this.props.propertyName].value.concat([e.target.value]);
             this.props.actions.changePropertyValue(this.props.propertyName, newList);
         }
@@ -71,15 +76,23 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
                 />
                 {
                     !options.inherited &&
-                    <div>
-                        +
-                        <select onChange={this.addNewOption}>
-                            <option value={null}>New option</option>
+                    <FormControl>
+                        <InputLabel htmlFor={this.props.propertyName}>New option</InputLabel>
+                        <Select
+                            onChange={this.addNewOption}
+                            value=''
+                            name='New option'
+                            inputProps={{
+                                name: this.props.propertyName,
+                                id: this.props.propertyName,
+                            }}
+                            className='form-input'
+                        >
                             {this.props.possibleValues.map(
-                                (v: string, i: number) => !options.value.includes(v) && <option value={v} key={i}>{v}</option>
+                                (v: string, i: number) => !options.value.includes(v) && <MenuItem value={v} key={i}>{v}</MenuItem>
                             )}
-                        </select>
-                    </div>
+                        </Select>
+                    </FormControl>
                 }
             </ConfigPropertyContainer>
         );

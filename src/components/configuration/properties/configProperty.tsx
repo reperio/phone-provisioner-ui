@@ -22,7 +22,7 @@ class ConfigProperty extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <div className={'row'} style={{height: '100px'}}>
+            <div className={'row'} style={{minHeight: '80px'}}>
                 <div className={'col-sm-2'}>
                     <Switch onChange={this.togglePropertyInheritance} checked={!this.props.options.inherited}/>
                 </div>

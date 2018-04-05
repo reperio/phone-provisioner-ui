@@ -4,10 +4,6 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 import {ConfigProperty} from "../../../store/store";
-import Select from 'material-ui/Select';
-import {MenuItem} from 'material-ui/Menu';
-import { FormControl } from 'material-ui/Form';
-import { InputLabel } from 'material-ui/Input';
 
 interface IComponentProps {
     actions?: any;
@@ -28,24 +24,17 @@ class DropdownProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
-                <FormControl>
-                    <InputLabel htmlFor={this.props.propertyName}>{this.props.children}</InputLabel>
-                    <Select
-                        onChange={this.selectOption}
-                        disabled={options.inherited}
-                        value={options.inherited ? options.inheritedValue : options.value}
-                        inputProps={{
-                            name: this.props.propertyName,
-                            id: this.props.propertyName,
-                        }}
-                        className='form-input'
-                    >
-                        {this.props.possibleValues.map(
-                            (v: string, i: number) => <MenuItem value={v} key={i}>{v}</MenuItem>
-                        )}
-                    </Select>
-                </FormControl>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} displayName={this.props.children}>
+                <select
+                    onChange={this.selectOption}
+                    disabled={options.inherited}
+                    value={options.inherited ? options.inheritedValue : options.value}
+                    className='form-input'
+                >
+                    {this.props.possibleValues.map(
+                        (v: string, i: number) => <option value={v} key={i}>{v}</option>
+                    )}
+                </select>
             </ConfigPropertyContainer>
         );
     }

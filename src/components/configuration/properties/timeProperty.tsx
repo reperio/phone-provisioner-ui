@@ -14,19 +14,20 @@ interface IComponentProps {
     options?: {[property: string]: ConfigProperty; };
 }
 
-class TimeSpanProperty extends React.Component<IComponentProps, {}> {
+class TimeProperty extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
     changePropertyValue = (e: any) => {
-        this.props.actions.changePropertyValue(this.props.propertyName, e.format('HH:mm'));
+        const options = this.props.options[this.props.propertyName];
+        this.props.actions.changePropertyValue(
+            this.props.propertyName, e !== null ? e.format('HH:mm') : options.inheritedValue);
     }
 
     render() {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
-                {this.props.children}
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} displayName={this.props.children}>
                 <TimePicker
                     value={moment(options.inherited ? options.inheritedValue : options.value, 'HH:mm')}
                     disabled={options.inherited}
@@ -45,7 +46,7 @@ function mapDispatchToProps(dispatch:any) : IComponentProps {
     };
 }
 
-export const TimeSpanPropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const TimePropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
-)(TimeSpanProperty);
+)(TimeProperty);

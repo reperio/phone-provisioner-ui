@@ -5,10 +5,6 @@ import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 import {ConfigProperty} from "../../../store/store";
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
-import Select from 'material-ui/Select';
-import {MenuItem} from 'material-ui/Menu';
-import { FormControl } from 'material-ui/Form';
-import { InputLabel } from 'material-ui/Input';
 
 interface IComponentProps {
     actions?: any;
@@ -18,13 +14,16 @@ interface IComponentProps {
     possibleValues?: string[];
 }
 
-const DragHandle = SortableHandle((params: any) => <span>{params.value}</span>);
+const DragHandle = SortableHandle((params: any) => <span className={params.active ? 'draggable-property' : ''}>{params.value}</span>);
 
 const SortableItem = SortableElement((params:any) =>
     <div>
         <div className='indent' style={{width: '16px'}}></div>
-        <DragHandle value={params.value}/>&nbsp;
-        {params.deleteOption && <i className="fa fa-times-circle" onClick={params.deleteOption}></i>}
+        {/*Ensure that the X only appears when it's hovered over, but not when anything is being dragged*/}
+        <span className={params.sorting ? 'show-x-on-hover-hidden' : 'show-x-on-hover'}>
+            <DragHandle value={params.value} active={params.deleteOption}/>&nbsp;
+            {params.deleteOption && <i className="fa fa-times-circle x" onClick={params.deleteOption}></i>}
+        </span>
     </div>
 );
 
@@ -32,7 +31,13 @@ const SortableList = SortableContainer((params:any) => {
     return (
         <div>
             {params.items.map((value:any, index:number) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} deleteOption={params.deleteOption && params.deleteOption(index)} />
+                <SortableItem
+                    key={`item-${index}`}
+                    index={index}
+                    value={value}
+                    deleteOption={params.deleteOption && params.deleteOption(index)}
+                    sorting={params.sorting}
+                />
             ))}
         </div>
     );
@@ -40,8 +45,19 @@ const SortableList = SortableContainer((params:any) => {
 
 class SortableListProperty extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
+    state: any;
+
+    constructor(props: IComponentProps) {
+        super(props);
+        this.state = {sorting: false};
+    }
+
+    onSortStart = (args:any, e:any) => {
+        this.setState({sorting: true});
+    }
 
     onSortEnd = (args:any, e:any) => {
+        this.setState({sorting: false});
         const newList = arrayMove(this.props.options[this.props.propertyName].value, args.oldIndex, args.newIndex);
         this.props.actions.changePropertyValue(this.props.propertyName, newList);
     }
@@ -49,7 +65,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
     shouldCancelStart = () => this.props.options[this.props.propertyName].inherited;
 
     addNewOption = (e: any) => {
-        if(e.target.value !== '') {
+        if(e.target.value !== null) {
             const newList = this.props.options[this.props.propertyName].value.concat([e.target.value]);
             this.props.actions.changePropertyValue(this.props.propertyName, newList);
         }
@@ -69,30 +85,24 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
                 <div>{this.props.children}</div>
                 <SortableList
                     items={options.inherited ? options.inheritedValue : options.value}
+                    onSortStart={this.onSortStart}
                     onSortEnd={this.onSortEnd}
                     shouldCancelStart={this.shouldCancelStart}
                     useDragHandle={true}
                     deleteOption={!options.inherited && this.deleteOption}
+                    sorting={this.state.sorting}
                 />
                 {
                     !options.inherited &&
-                    <FormControl>
-                        <InputLabel htmlFor={this.props.propertyName}>New option</InputLabel>
-                        <Select
-                            onChange={this.addNewOption}
-                            value=''
-                            name='New option'
-                            inputProps={{
-                                name: this.props.propertyName,
-                                id: this.props.propertyName,
-                            }}
-                            className='form-input'
-                        >
-                            {this.props.possibleValues.map(
-                                (v: string, i: number) => !options.value.includes(v) && <MenuItem value={v} key={i}>{v}</MenuItem>
-                            )}
-                        </Select>
-                    </FormControl>
+                    <select
+                        onChange={this.addNewOption}
+                        className='form-input'
+                    >
+                        <option value={null}>New Option</option>
+                        {this.props.possibleValues.map(
+                            (v: string, i: number) => !options.value.includes(v) && <option value={v} key={i}>{v}</option>
+                        )}
+                    </select>
                 }
             </ConfigPropertyContainer>
         );

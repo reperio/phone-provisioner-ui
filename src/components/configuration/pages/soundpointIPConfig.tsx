@@ -9,7 +9,7 @@ import {DropdownPropertyContainer} from "../properties/dropdownProperty";
 import {ConfigProperty} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
-import {TimeSpanPropertyContainer} from "../properties/timeSpanProperty";
+import {TimePropertyContainer} from "../properties/timeProperty";
 
 const possibleCodecPrefValues: string[] = [
     'G711_A',
@@ -74,8 +74,8 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <BooleanPropertyContainer propertyName='pollingEnabled'>Enabled</BooleanPropertyContainer>
                 <DropdownPropertyContainer propertyName='pollingMode' possibleValues={['abs', 'rel', 'random']}>Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='pollingPeriod' isInteger min={1}>Period</TextPropertyContainer>
-                <TimeSpanPropertyContainer propertyName='pollingTime'>Time</TimeSpanPropertyContainer>
-                <TimeSpanPropertyContainer propertyName='pollingTimeRandomEnd'>Random End</TimeSpanPropertyContainer>
+                <TimePropertyContainer propertyName='pollingTime'>Time</TimePropertyContainer>
+                <TimePropertyContainer propertyName='pollingTimeRandomEnd'>Random End</TimePropertyContainer>
 
                 <h3>SNTP</h3>
                 <TextPropertyContainer propertyName='sntpAddress'>Address</TextPropertyContainer>

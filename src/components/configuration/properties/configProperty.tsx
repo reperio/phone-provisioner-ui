@@ -10,6 +10,7 @@ interface IComponentProps {
     actions?: any;
     children?: any;
     propertyName?: string;
+    displayName?: string;
     options?: StoreConfigProp;
 }
 
@@ -22,12 +23,14 @@ class ConfigProperty extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <div className={'row'} style={{minHeight: '80px'}}>
+            <div className={'row'}>
                 <div className={'col-sm-2'}>
                     <Switch onChange={this.togglePropertyInheritance} checked={!this.props.options.inherited}/>
                 </div>
                 <div className={'col-sm-6'}>
+                    {this.props.displayName && <div className='input-name'>{this.props.displayName}</div>}
                     {this.props.children}
+
                 </div>
                 <div className={'col-sm-4'}>
                     {this.props.options.inherited && `Inherited from ${ConfigLevelName(this.props.options.inheritLevel)}`}

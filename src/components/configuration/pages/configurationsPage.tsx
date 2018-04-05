@@ -56,7 +56,7 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
                 <h1>Global Configuration</h1>
                 <br/>
                 <br/>
-                <div className="col-md-4">
+                <div className="col-lg-4">
                     <table className={'tree-grid'}>
                         <tbody>
                             <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
@@ -65,7 +65,7 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
                         </tbody>
                     </table>
                 </div>
-                <div className="col-md-8">
+                <div className="col-lg-8">
                     <ConfigurationEditorContainer configs={editing}/>
                 </div>
             </div>

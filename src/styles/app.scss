@@ -128,7 +128,7 @@ label {
     width: 100%;
 
     .expand {
-        background-color: lightgray;
+        background-color: $main-gray;
         width: 30px;
         text-align: center;
     }
@@ -138,12 +138,45 @@ label {
     }
 }
 
-.form-input {
-    width: 300px;
-    height: 32px;
-    font-size: 20px;
-}
-
 table, th, td {
     border: 1px solid black;
+}
+
+.draggable-property {
+    cursor: move;
+}
+
+.show-x-on-hover:hover .x {
+    visibility: visible;
+}
+.show-x-on-hover:not(hover) .x, .show-x-on-hover-hidden .x {
+    visibility: hidden;
+}
+
+.form-input {
+    height: 30px;
+    border: 2px solid $main-gray;
+    padding: 4px;
+    width: 200px;
+}
+.input-name {
+    display: inline-block;
+    background-color: $main-gray;
+    line-height: 22px;
+    padding: 4px;
+    color: white;
+    width: 110px;
+}
+.form-input:not(:focus) {
+    background-color: $unfocused-input;
+}
+.form-input:focus {
+    outline: none;
+    background-color: white;
+}
+select.form-input:not(:disabled) {
+    background-color: white;
+}
+.form-input:disabled {
+    background-color: $disabled-input;
 }

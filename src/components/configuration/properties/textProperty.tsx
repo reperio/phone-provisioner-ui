@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {ConfigPropertyContainer} from "./configProperty";
 import {ConfigProperty} from "../../../store/store";
-import TextField from 'material-ui/TextField';
 
 interface IComponentProps {
     actions?: any;
@@ -52,13 +51,13 @@ class TextProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
-                <TextField
-                    disabled={options.inherited}
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} displayName={this.props.children}>
+                <input
+                    id={this.props.propertyName}
                     value={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}
                     onBlur={this.validatePropertyRange}
-                    label={this.props.children}
+                    disabled={options.inherited}
                     className='form-input'
                 />
             </ConfigPropertyContainer>

@@ -29,7 +29,7 @@ class DropdownProperty extends React.Component<IComponentProps, {}> {
                     onChange={this.selectOption}
                     disabled={options.inherited}
                     value={options.inherited ? options.inheritedValue : options.value}
-                    className='form-input'
+                    className='reperio-form-input'
                 >
                     {this.props.possibleValues.map(
                         (v: string, i: number) => <option value={v} key={i}>{v}</option>

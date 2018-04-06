@@ -58,7 +58,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
                     onChange={this.changePropertyValue}
                     onBlur={this.validatePropertyRange}
                     disabled={options.inherited}
-                    className='form-input'
+                    className='reperio-form-input'
                 />
             </ConfigPropertyContainer>
         );

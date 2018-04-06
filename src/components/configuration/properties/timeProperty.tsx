@@ -34,6 +34,7 @@ class TimeProperty extends React.Component<IComponentProps, {}> {
                     showSecond={false}
                     format="HH:mm"
                     onChange={this.changePropertyValue}
+                    prefixCls='reperio-form'
                 />
             </ConfigPropertyContainer>
         );

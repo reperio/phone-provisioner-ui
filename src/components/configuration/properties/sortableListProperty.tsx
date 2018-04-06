@@ -96,7 +96,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
                     !options.inherited &&
                     <select
                         onChange={this.addNewOption}
-                        className='form-input'
+                        className='reperio-form-input'
                     >
                         <option value={null}>New Option</option>
                         {this.props.possibleValues.map(

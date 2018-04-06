@@ -33,9 +33,6 @@ $fa-font-path: "~font-awesome/fonts";
     }
 }
 
-
-
-
 .group { 
     position:relative; 
     margin-bottom: 35px; 
@@ -153,7 +150,7 @@ table, th, td {
     visibility: hidden;
 }
 
-.form-input {
+.reperio-form-input {
     height: 30px;
     border: 2px solid $main-gray;
     padding: 4px;
@@ -167,16 +164,43 @@ table, th, td {
     color: white;
     width: 110px;
 }
-.form-input:not(:focus) {
+.reperio-form-input:not(:focus) {
     background-color: $unfocused-input;
 }
-.form-input:focus {
+.reperio-form-input:focus {
     outline: none;
     background-color: white;
 }
-select.form-input:not(:disabled) {
+select.reperio-form-input:not(:disabled) {
     background-color: white;
 }
-.form-input:disabled {
+.reperio-form-input:disabled {
     background-color: $disabled-input;
+}
+
+.reperio-form-panel {
+    position: relative;
+    background-color: red;
+    width: 200px;
+    height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+    //Remove scrollbar
+    -ms-overflow-style: none;  // IE 10+
+    overflow: -moz-scrollbars-none;  // Firefox
+}
+.reperio-form-panel::-webkit-scrollbar {
+    display: none;  // Safari and Chrome
+}
+.reperio-form-panel-input-wrap {
+    visibility: hidden;
+}
+.reperio-form-panel-select {
+    :first-child {
+        border-left: 0;
+        margin-left: 0;
+    }
+    :last-child {
+        border-right: 0;
+    }
 }

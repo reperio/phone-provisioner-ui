@@ -180,27 +180,45 @@ select.reperio-form-input:not(:disabled) {
 
 .reperio-form-panel {
     position: relative;
-    background-color: red;
     width: 200px;
-    height: 400px;
-    overflow: scroll;
-    overflow-x: hidden;
-    //Remove scrollbar
-    -ms-overflow-style: none;  // IE 10+
-    overflow: -moz-scrollbars-none;  // Firefox
-}
-.reperio-form-panel::-webkit-scrollbar {
-    display: none;  // Safari and Chrome
-}
-.reperio-form-panel-input-wrap {
-    visibility: hidden;
-}
-.reperio-form-panel-select {
-    :first-child {
-        border-left: 0;
-        margin-left: 0;
+    height: 300px;
+
+    .reperio-form-panel-input-wrap {
+        visibility: hidden;
     }
-    :last-child {
-        border-right: 0;
+    .reperio-form-panel-select {
+        position: relative;
+        width: 100px;
+        height: 300px - 26px;
+        overflow: scroll;
+        overflow-x: hidden;
+        background-color: $unfocused-input;
+        border-color: $main-gray;
+        border-style: solid;
+        border-width: 0 1px 2px 1px;
+        //Remove scrollbar
+        -ms-overflow-style: none;  // IE 10+
+        overflow: -moz-scrollbars-none;  // Firefox
+    }
+    .reperio-form-panel-select::-webkit-scrollbar {
+        display: none;  // Safari and Chrome
+    }
+    .reperio-form-panel-select:first-child {
+        float: left;
+        border-left-width: 2px;
+    }
+    .reperio-form-panel-select:last-child {
+        float: right;
+        border-right-width: 2px;
+    }
+    ul {
+        list-style-type: none;
+        cursor: pointer;
+    }
+    .reperio-form-panel-select-active {
+        background-color: white;
+    }
+    .reperio-form-panel-select-option-selected {
+        font-weight: bold;
     }
 }

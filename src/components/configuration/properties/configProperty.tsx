@@ -25,7 +25,11 @@ class ConfigProperty extends React.Component<IComponentProps, {}> {
         return (
             <div className={'row'}>
                 <div className={'col-sm-2'}>
-                    <Switch onChange={this.togglePropertyInheritance} checked={!this.props.options.inherited}/>
+                    <Switch
+                        onChange={this.togglePropertyInheritance}
+                        checked={!this.props.options.inherited}
+                        classes={{checked: 'selected-toggle', bar: !this.props.options.inherited ? 'selected-toggle-bar' : null}}
+                    />
                 </div>
                 <div className={'col-sm-6'}>
                     {this.props.displayName && <div className='input-name'>{this.props.displayName}</div>}

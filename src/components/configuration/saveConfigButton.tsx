@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {Store, CurrentlyEditing} from "../../store/store";
+import Button from 'material-ui/Button';
 
 interface IComponentProps {
     actions?: any;
@@ -24,9 +25,17 @@ class SaveConfigButton extends React.Component<IComponentProps, {}> {
     render() {
         return (
             <div>
-                <button type="button" disabled={!this.props.anyChanges} onClick={this.saveChanges}>
+                <div className="vertical-spacer"></div>
+                <Button
+                    variant="raised"
+                    color="primary"
+                    disabled={!this.props.anyChanges}
+                    onClick={this.saveChanges}
+                    className="save-button"
+                >
                     Save
-                </button>
+                </Button>
+                <div className="vertical-spacer"></div>
             </div>
         );
     }

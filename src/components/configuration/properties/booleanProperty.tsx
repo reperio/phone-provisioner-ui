@@ -29,6 +29,7 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
                     disabled={options.inherited}
                     checked={options.inherited ? options.inheritedValue : options.value}
                     onChange={this.changePropertyValue}
+                    classes={{checked: 'selected-toggle', disabled: 'disabled-toggle'}}
                 />
                 {this.props.children}
             </ConfigPropertyContainer>

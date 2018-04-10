@@ -222,3 +222,20 @@ select.reperio-form-input:not(:disabled) {
         font-weight: bold;
     }
 }
+
+.vertical-spacer {
+    height: 32px;
+}
+
+.save-button {
+    font-size: 14px !important;
+}
+.selected-toggle {
+    color: $selected !important;
+}
+.selected-toggle-bar {
+    background-color: $selected !important;
+}
+.disabled-toggle {
+    color: $main-gray !important;
+}

@@ -11,6 +11,7 @@ interface IComponentProps {
     propertyName?: string;
     children?: any;
     options?: {[property: string]: ConfigProperty; };
+    hidden?: boolean;
 }
 
 class BooleanProperty extends React.Component<IComponentProps, {}> {
@@ -24,10 +25,10 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
                 <Checkbox
                     disabled={options.inherited}
-                    checked={options.inherited ? options.inheritedValue : options.value}
+                    checked={options.getValue()}
                     onChange={this.changePropertyValue}
                     classes={{checked: 'selected-toggle', disabled: 'disabled-toggle'}}
                 />

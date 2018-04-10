@@ -13,6 +13,7 @@ interface IComponentProps {
     isInteger?: boolean;
     min?: number;
     max?: number;
+    hidden?: boolean;
 }
 
 class TextProperty extends React.Component<IComponentProps, {}> {
@@ -51,10 +52,15 @@ class TextProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} displayName={this.props.children}>
+            <ConfigPropertyContainer
+                propertyName={this.props.propertyName}
+                options={options}
+                displayName={this.props.children}
+                hidden={this.props.hidden}
+            >
                 <input
                     id={this.props.propertyName}
-                    value={options.inherited ? options.inheritedValue : options.value}
+                    value={options.getValue()}
                     onChange={this.changePropertyValue}
                     onBlur={this.validatePropertyRange}
                     disabled={options.inherited}

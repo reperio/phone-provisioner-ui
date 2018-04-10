@@ -10,6 +10,7 @@ import {ConfigProperty} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import {TimePropertyContainer} from "../properties/timeProperty";
+import ConfigHeader from '../configHeader';
 
 const possibleCodecPrefValues: string[] = [
     'G711_A',
@@ -32,7 +33,8 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
     render() {
-
+        const pollingEnabled = this.props.options.pollingEnabled.getValue();
+        
         return (
             <PassPropsToChildren options={this.props.options}>
                 <PolycomConfig/>
@@ -50,6 +52,7 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <SortableListPropertyContainer propertyName='codecPref' possibleValues={possibleCodecPrefValues}>Codec Preference</SortableListPropertyContainer>
 
                 <h3>Message Waiting</h3>
+                <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='bypassInstantMessage'>Bypass Instant Message</BooleanPropertyContainer>
                 <h4>MWI-1</h4>
                 <DropdownPropertyContainer propertyName='mwi1_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
@@ -71,23 +74,35 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <TextPropertyContainer propertyName='mwi6_callBack'>Callback</TextPropertyContainer>
 
                 <h3>Provisioning Polling</h3>
+                <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='pollingEnabled'>Enabled</BooleanPropertyContainer>
-                <DropdownPropertyContainer propertyName='pollingMode' possibleValues={['abs', 'rel', 'random']}>Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='pollingPeriod' isInteger min={1}>Period</TextPropertyContainer>
-                <TimePropertyContainer propertyName='pollingTime'>Time</TimePropertyContainer>
-                <TimePropertyContainer propertyName='pollingTimeRandomEnd'>Random End</TimePropertyContainer>
+                <DropdownPropertyContainer propertyName='pollingMode' possibleValues={['abs', 'rel', 'random']} hidden={!pollingEnabled}>
+                    Mode
+                </DropdownPropertyContainer>
+                <TextPropertyContainer propertyName='pollingPeriod' isInteger min={1} hidden={!pollingEnabled}>
+                    Period
+                </TextPropertyContainer>
+                <TimePropertyContainer propertyName='pollingTime' hidden={!pollingEnabled}>
+                    Time
+                </TimePropertyContainer>
+                <TimePropertyContainer propertyName='pollingTimeRandomEnd' hidden={!pollingEnabled || this.props.options.pollingMode.getValue() !== 'random'}>
+                    Random End
+                </TimePropertyContainer>
 
                 <h3>SNTP</h3>
+                <ConfigHeader/>
                 <TextPropertyContainer propertyName='sntpAddress'>Address</TextPropertyContainer>
                 <TextPropertyContainer propertyName='sntpGmtOffset' isInteger>GMT Offset</TextPropertyContainer>
                 <TextPropertyContainer propertyName='sntpResyncPeriod' isInteger min={1}>Resync Period</TextPropertyContainer>
 
                 <h3>Voice Activity Detection</h3>
+                <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='vadEnable'>Enable</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='vadSignalAnnexB'>Signal Annex B</BooleanPropertyContainer>
                 <TextPropertyContainer propertyName='vadThresh' isInteger min={0} max={30}>Threshold</TextPropertyContainer>
 
                 <h3>Volume Persist</h3>
+                <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='volumePersistHandset'>Handset</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='volumePersistHeadset'>Headset</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='volumePersistHandsFree'>Hands Free</BooleanPropertyContainer>

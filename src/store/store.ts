@@ -20,4 +20,15 @@ export class ConfigProperty {
     inheritLevel: ConfigLevel;
     value: any;
     inheritedValue: any;
+
+    constructor(inherited: boolean, inheritLevel: ConfigLevel, value: any, inheritedValue: any) {
+        this.inherited = inherited;
+        this.inheritLevel = inheritLevel;
+        this.value = value;
+        this.inheritedValue = inheritedValue;
+    }
+
+    getValue() : any {
+        return this.inherited ? this.inheritedValue : this.value;
+    }
 }

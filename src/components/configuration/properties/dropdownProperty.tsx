@@ -11,6 +11,7 @@ interface IComponentProps {
     children?: any;
     options?: {[property: string]: ConfigProperty; };
     possibleValues?: string[];
+    hidden?: boolean;
 }
 
 class DropdownProperty extends React.Component<IComponentProps, {}> {
@@ -24,11 +25,16 @@ class DropdownProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} displayName={this.props.children}>
+            <ConfigPropertyContainer
+                propertyName={this.props.propertyName}
+                options={options}
+                displayName={this.props.children}
+                hidden={this.props.hidden}
+            >
                 <select
                     onChange={this.selectOption}
                     disabled={options.inherited}
-                    value={options.inherited ? options.inheritedValue : options.value}
+                    value={options.getValue()}
                     className='reperio-form-input'
                 >
                     {this.props.possibleValues.map(

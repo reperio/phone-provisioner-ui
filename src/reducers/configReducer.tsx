@@ -112,7 +112,7 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
                 configLevel = options[prop].inheritLevel;
                 inheritedValue = options[prop].inheritedValue;
             }
-            options[prop] = {inherited: isInherited, inheritLevel: configLevel, value: val, inheritedValue: inheritedValue};
+            options[prop] = new ConfigProperty(isInherited, configLevel, val, inheritedValue);
         }
     }
 
@@ -125,8 +125,16 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
 }
 
 function changeConfigOptions(state: ConfigurationSettings, configProperty: string, propsToChange: object) : ConfigurationSettings {
-    let newOptions = Object.assign({}, state.currentlyEditing.options);
-    newOptions[configProperty] = Object.assign({}, newOptions[configProperty], propsToChange);
-    state.currentlyEditing = Object.assign({}, state.currentlyEditing, {options: newOptions});
+    let newOptions = {};
+    Object.keys(state.currentlyEditing.options).map((key: string) => {
+        let option = state.currentlyEditing.options[key];
+        if(key === configProperty) {
+            option = Object.assign({}, option, propsToChange);
+        }
+        newOptions = new ConfigProperty(option.inherited, option.inheritLevel, option.value, option.inheritedValue);
+    });
+    const newState = Object.assign({}, state.currentlyEditing);
+    newState.options = newOptions;
+    state.currentlyEditing = newState;
     return state;
 }

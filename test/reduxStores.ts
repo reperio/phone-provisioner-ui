@@ -1,4 +1,4 @@
-import {CurrentlyEditing, Store} from "../src/store/store";
+import {CurrentlyEditing, Store, ConfigProperty} from "../src/store/store";
 import {ConfigLevel} from "../src/constants/configLevel";
 
 export const initialState: Store = {
@@ -148,8 +148,8 @@ export const manufacturerCurrentlyEditing: CurrentlyEditing = {
         }
     ],
     options: {
-        test: {inherited: false, inheritLevel: ConfigLevel.DEFAULT, value: true, inheritedValue: false },
-        test2: {inherited: true, inheritLevel: ConfigLevel.DEFAULT, value: "Inherited!", inheritedValue: "Inherited!" }
+        test: new ConfigProperty(false, ConfigLevel.DEFAULT, true, false),
+        test2: new ConfigProperty(true, ConfigLevel.DEFAULT, "Inherited!", "Inherited!")
     }
 };
 
@@ -187,9 +187,9 @@ export const familyCurrentlyEditing: CurrentlyEditing = {
         }
     ],
     options: {
-        test: {inherited: true, inheritLevel: ConfigLevel.MANUFACTURER, value: true, inheritedValue: true },
-        test2: {inherited: false, inheritLevel: ConfigLevel.DEFAULT, value: "ayy", inheritedValue: "Inherited!" },
-        something: {inherited: true, inheritLevel: ConfigLevel.DEFAULT, value: "", inheritedValue: ""}
+        test: new ConfigProperty(true, ConfigLevel.MANUFACTURER, true, true),
+        test2: new ConfigProperty(false, ConfigLevel.DEFAULT, "ayy", "Inherited!"),
+        something: new ConfigProperty(true, ConfigLevel.DEFAULT, "", "")
     }
 };
 
@@ -279,10 +279,10 @@ export const modelCurrentlyEditing: CurrentlyEditing = {
         }
     ],
     options: {
-        test: {inherited: true, inheritLevel: ConfigLevel.MANUFACTURER, value: true, inheritedValue: true },
-        test2: {inherited: true, inheritLevel: ConfigLevel.FAMILY, value: "ayy", inheritedValue: "ayy" },
-        something: {inherited: true, inheritLevel: ConfigLevel.DEFAULT, value: "", inheritedValue: ""},
-        extra: {inherited: true, inheritLevel: ConfigLevel.DEFAULT, value: "hey", inheritedValue: "hey"}
+        test: new ConfigProperty(true, ConfigLevel.MANUFACTURER, true, true),
+        test2: new ConfigProperty(true, ConfigLevel.FAMILY, "ayy", "ayy"),
+        something: new ConfigProperty(true, ConfigLevel.DEFAULT, "", ""),
+        extra: new ConfigProperty(true, ConfigLevel.DEFAULT, "hey", "hey")
     }
 };
 

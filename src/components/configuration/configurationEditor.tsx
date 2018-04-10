@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {CurrentlyEditing} from "../../store/store";
 import {SaveConfigButtonContainer} from "./saveConfigButton";
-import {ConfigLevelName} from "../../constants/configLevel";
+import ConfigHeader from './configHeader';
 
 interface IComponentProps {
     actions?: any;
@@ -21,11 +21,7 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
                 const currentConfig = this.props.configs.hierarchy[this.props.configs.hierarchy.length - 1];
                 editorBody = (
                     <div>
-                        <div className={'row'}>
-                            <div className={'col-sm-2'}><h4>Override?</h4></div>
-                            <div className={'col-sm-6'}><h4>Property</h4></div>
-                            <div className={'col-sm-4'}><h4>Origin</h4></div>
-                        </div>
+                        <ConfigHeader/>
                         {React.createElement
                             (require(`./pages/${currentConfig.component_name}`).container, {options: this.props.configs.options}, null)}
                         <SaveConfigButtonContainer/>

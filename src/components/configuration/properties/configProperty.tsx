@@ -12,6 +12,7 @@ interface IComponentProps {
     propertyName?: string;
     displayName?: string;
     options?: StoreConfigProp;
+    hidden?: boolean;
 }
 
 class ConfigProperty extends React.Component<IComponentProps, {}> {
@@ -22,6 +23,10 @@ class ConfigProperty extends React.Component<IComponentProps, {}> {
     }
 
     render() {
+        if(this.props.hidden && this.props.options.inherited) {
+            return <div></div>;
+        }
+
         return (
             <div className={'row'}>
                 <div className={'col-sm-2 centered-column'}>

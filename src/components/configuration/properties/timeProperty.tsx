@@ -12,6 +12,7 @@ interface IComponentProps {
     propertyName?: string;
     children?: any;
     options?: {[property: string]: ConfigProperty; };
+    hidden?: boolean;
 }
 
 class TimeProperty extends React.Component<IComponentProps, {}> {
@@ -27,9 +28,14 @@ class TimeProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} displayName={this.props.children}>
+            <ConfigPropertyContainer
+                propertyName={this.props.propertyName}
+                options={options}
+                displayName={this.props.children}
+                hidden={this.props.hidden}
+            >
                 <TimePicker
-                    value={moment(options.inherited ? options.inheritedValue : options.value, 'HH:mm')}
+                    value={moment(options.getValue(), 'HH:mm')}
                     disabled={options.inherited}
                     showSecond={false}
                     format="HH:mm"

@@ -12,6 +12,7 @@ interface IComponentProps {
     children?: any;
     options?: {[property: string]: ConfigProperty; };
     possibleValues?: string[];
+    hidden?: boolean;
 }
 
 const DragHandle = SortableHandle((params: any) => <span className={params.active ? 'draggable-property' : ''}>{params.value}</span>);
@@ -81,10 +82,10 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options}>
+            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
                 <div>{this.props.children}</div>
                 <SortableList
-                    items={options.inherited ? options.inheritedValue : options.value}
+                    items={options.getValue()}
                     onSortStart={this.onSortStart}
                     onSortEnd={this.onSortEnd}
                     shouldCancelStart={this.shouldCancelStart}

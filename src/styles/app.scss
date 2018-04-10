@@ -239,3 +239,9 @@ select.reperio-form-input:not(:disabled) {
 .disabled-toggle {
     color: $main-gray !important;
 }
+
+.centered-column {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

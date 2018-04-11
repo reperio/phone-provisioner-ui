@@ -125,13 +125,13 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
 }
 
 function changeConfigOptions(state: ConfigurationSettings, configProperty: string, propsToChange: object) : ConfigurationSettings {
-    let newOptions = {};
+    let newOptions : any = {};
     Object.keys(state.currentlyEditing.options).map((key: string) => {
         let option = state.currentlyEditing.options[key];
         if(key === configProperty) {
             option = Object.assign({}, option, propsToChange);
         }
-        newOptions = new ConfigProperty(option.inherited, option.inheritLevel, option.value, option.inheritedValue);
+        newOptions[key] = new ConfigProperty(option.inherited, option.inheritLevel, option.value, option.inheritedValue);
     });
     const newState = Object.assign({}, state.currentlyEditing);
     newState.options = newOptions;

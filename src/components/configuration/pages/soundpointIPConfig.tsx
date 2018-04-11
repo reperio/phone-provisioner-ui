@@ -34,7 +34,9 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
 
     render() {
         const pollingEnabled = this.props.options.pollingEnabled.getValue();
-        
+        const pollingMode = this.props.options.pollingMode.getValue();
+        const vadEnable = this.props.options.vadEnable.getValue();
+
         return (
             <PassPropsToChildren options={this.props.options}>
                 <PolycomConfig/>
@@ -85,7 +87,7 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <TimePropertyContainer propertyName='pollingTime' hidden={!pollingEnabled}>
                     Time
                 </TimePropertyContainer>
-                <TimePropertyContainer propertyName='pollingTimeRandomEnd' hidden={!pollingEnabled || this.props.options.pollingMode.getValue() !== 'random'}>
+                <TimePropertyContainer propertyName='pollingTimeRandomEnd' hidden={!pollingEnabled || pollingMode !== 'random'}>
                     Random End
                 </TimePropertyContainer>
 
@@ -99,7 +101,9 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='vadEnable'>Enable</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='vadSignalAnnexB'>Signal Annex B</BooleanPropertyContainer>
-                <TextPropertyContainer propertyName='vadThresh' isInteger min={0} max={30}>Threshold</TextPropertyContainer>
+                <TextPropertyContainer propertyName='vadThresh' isInteger min={0} max={30} hidden={!vadEnable}>
+                    Threshold
+                </TextPropertyContainer>
 
                 <h3>Volume Persist</h3>
                 <ConfigHeader/>

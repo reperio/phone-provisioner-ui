@@ -53,7 +53,7 @@ class TimeSpanProperty extends React.Component<IComponentProps, {}> {
 
     savePropertyValue = (e: any) => {
         let time = this.unformatTime(e.target.value);
-        if(time < this.props.min || time > this.props.max) {
+        if((this.props.min !== undefined && time < this.props.min) || (this.props.max !== undefined && time > this.props.max)) {
             time = this.props.options[this.props.propertyName].inheritedValue;
         }
         this.setState({text: this.formatTime(time)});

@@ -10,6 +10,7 @@ import {ConfigProperty} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import {TimePropertyContainer} from "../properties/timeProperty";
+import {TimeSpanPropertyContainer} from "../properties/timeSpanProperty";
 import ConfigHeader from '../configHeader';
 
 const possibleCodecPrefValues: string[] = [
@@ -81,9 +82,9 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <DropdownPropertyContainer propertyName='pollingMode' possibleValues={['abs', 'rel', 'random']} hidden={!pollingEnabled}>
                     Mode
                 </DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='pollingPeriod' isInteger min={1} hidden={!pollingEnabled}>
+                <TimeSpanPropertyContainer propertyName='pollingPeriod' min={1} hidden={!pollingEnabled}>
                     Period
-                </TextPropertyContainer>
+                </TimeSpanPropertyContainer>
                 <TimePropertyContainer propertyName='pollingTime' hidden={!pollingEnabled}>
                     Time
                 </TimePropertyContainer>
@@ -94,8 +95,8 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <h3>SNTP</h3>
                 <ConfigHeader/>
                 <TextPropertyContainer propertyName='sntpAddress'>Address</TextPropertyContainer>
-                <TextPropertyContainer propertyName='sntpGmtOffset' isInteger>GMT Offset</TextPropertyContainer>
-                <TextPropertyContainer propertyName='sntpResyncPeriod' isInteger min={1}>Resync Period</TextPropertyContainer>
+                <TimeSpanPropertyContainer propertyName='sntpGmtOffset'>GMT Offset</TimeSpanPropertyContainer>
+                <TimeSpanPropertyContainer propertyName='sntpResyncPeriod' min={1}>Resync Period</TimeSpanPropertyContainer>
 
                 <h3>Voice Activity Detection</h3>
                 <ConfigHeader/>

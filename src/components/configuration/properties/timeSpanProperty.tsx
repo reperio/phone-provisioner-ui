@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyContainer} from "./configProperty";
+import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty} from "../../../store/store";
 const juration = require('juration');
 
@@ -68,7 +68,7 @@ class TimeSpanProperty extends React.Component<IComponentProps, {}> {
         }
 
         return (
-            <ConfigPropertyContainer
+            <ConfigPropertyRowContainer
                 propertyName={this.props.propertyName}
                 options={options}
                 displayName={this.props.children}
@@ -82,7 +82,7 @@ class TimeSpanProperty extends React.Component<IComponentProps, {}> {
                     disabled={options.inherited}
                     className='reperio-form-input'
                 />
-            </ConfigPropertyContainer>
+            </ConfigPropertyRowContainer>
         );
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyContainer} from "./configProperty";
+import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty} from "../../../store/store";
 import Checkbox from 'material-ui/Checkbox';
 
@@ -25,7 +25,7 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
+            <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
                 <Checkbox
                     disabled={options.inherited}
                     checked={options.getValue()}
@@ -33,7 +33,7 @@ class BooleanProperty extends React.Component<IComponentProps, {}> {
                     classes={{checked: 'selected-toggle', disabled: 'disabled-toggle'}}
                 />
                 {this.props.children}
-            </ConfigPropertyContainer>
+            </ConfigPropertyRowContainer>
         );
     }
 }

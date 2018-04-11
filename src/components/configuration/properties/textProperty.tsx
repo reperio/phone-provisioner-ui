@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyContainer} from "./configProperty";
+import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty} from "../../../store/store";
 
 interface IComponentProps {
@@ -52,7 +52,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer
+            <ConfigPropertyRowContainer
                 propertyName={this.props.propertyName}
                 options={options}
                 displayName={this.props.children}
@@ -66,7 +66,7 @@ class TextProperty extends React.Component<IComponentProps, {}> {
                     disabled={options.inherited}
                     className='reperio-form-input'
                 />
-            </ConfigPropertyContainer>
+            </ConfigPropertyRowContainer>
         );
     }
 }

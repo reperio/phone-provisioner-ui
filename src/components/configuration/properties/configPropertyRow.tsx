@@ -15,7 +15,7 @@ interface IComponentProps {
     hidden?: boolean;
 }
 
-class ConfigProperty extends React.Component<IComponentProps, {}> {
+class ConfigPropertyRow extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
     togglePropertyInheritance = (e: any) => {
@@ -55,7 +55,7 @@ function mapDispatchToProps(dispatch:any) : IComponentProps {
     };
 }
 
-export const ConfigPropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const ConfigPropertyRowContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
     null,
     mapDispatchToProps
-)(ConfigProperty);
+)(ConfigPropertyRow);

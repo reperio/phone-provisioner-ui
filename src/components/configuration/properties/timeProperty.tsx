@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyContainer} from "./configProperty";
+import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty} from "../../../store/store";
 const TimePicker = require('rc-time-picker').default;
 import moment from 'moment';
@@ -28,7 +28,7 @@ class TimeProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer
+            <ConfigPropertyRowContainer
                 propertyName={this.props.propertyName}
                 options={options}
                 displayName={this.props.children}
@@ -42,7 +42,7 @@ class TimeProperty extends React.Component<IComponentProps, {}> {
                     onChange={this.changePropertyValue}
                     prefixCls='reperio-form'
                 />
-            </ConfigPropertyContainer>
+            </ConfigPropertyRowContainer>
         );
     }
 }

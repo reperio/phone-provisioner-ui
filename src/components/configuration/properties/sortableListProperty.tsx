@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyContainer} from "./configProperty";
+import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty} from "../../../store/store";
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
 
@@ -82,7 +82,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
         const options = this.props.options[this.props.propertyName];
 
         return (
-            <ConfigPropertyContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
+            <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
                 <div>{this.props.children}</div>
                 <SortableList
                     items={options.getValue()}
@@ -105,7 +105,7 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
                         )}
                     </select>
                 }
-            </ConfigPropertyContainer>
+            </ConfigPropertyRowContainer>
         );
     }
 }

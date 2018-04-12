@@ -49,14 +49,12 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <BooleanPropertyContainer propertyName='presence'>Presence</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='messaging'>Messaging</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='callWaiting'>Call Waiting</BooleanPropertyContainer>
-                <BooleanPropertyContainer propertyName='urlModeDialing'>URL Mode Dialing</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='urlDialing'>URL Dialing</BooleanPropertyContainer>
 
                 <SortableListPropertyContainer propertyName='codecPref' possibleValues={possibleCodecPrefValues}>Codec Preference</SortableListPropertyContainer>
 
                 <h3>Message Waiting</h3>
                 <ConfigHeader/>
-                <BooleanPropertyContainer propertyName='bypassInstantMessage'>Bypass Instant Message</BooleanPropertyContainer>
                 <h4>MWI-1</h4>
                 <DropdownPropertyContainer propertyName='mwi1_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
                 <TextPropertyContainer propertyName='mwi1_callBack'>Callback</TextPropertyContainer>

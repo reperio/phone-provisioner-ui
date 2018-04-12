@@ -5,25 +5,20 @@ import * as actions from '../../../actions/configActions';
 import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty} from "../../../store/store";
 const juration = require('juration');
+import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
+import moment from "moment";
 
-interface IComponentProps {
-    actions?: any;
-    propertyName?: string;
-    children?: any;
-    options?: {[property: string]: ConfigProperty; };
+interface IComponentProps extends BaseComponentProps {
     min?: number;
     max?: number;
-    hidden?: boolean;
 }
 
-class TimeSpanProperty extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
+class TimeSpanProperty extends BaseConfigProperty<IComponentProps, {}> {
     state: any;
 
     constructor(props: IComponentProps) {
         super(props);
-        let options = this.props.options[this.props.propertyName];
-        this.state = {text: this.formatTime(options.getValue())};
+        this.state = {text: this.formatTime(this.options().getValue())};
     }
 
     formatTime(time: number) : string {
@@ -60,29 +55,24 @@ class TimeSpanProperty extends React.Component<IComponentProps, {}> {
         this.props.actions.changePropertyValue(this.props.propertyName, time);
     }
 
-    render() {
-        const options = this.props.options[this.props.propertyName];
+    renderProperty() {
         let text = this.state.text;
-        if(options.inherited) {
-            text = this.formatTime(options.inheritedValue);
+        if(this.options().inherited) {
+            text = this.formatTime(this.options().inheritedValue);
         }
 
         return (
-            <ConfigPropertyRowContainer
-                propertyName={this.props.propertyName}
-                options={options}
-                displayName={this.props.children}
-                hidden={this.props.hidden}
-            >
+            <div>
+                <div className="input-name">{this.props.children}</div>
                 <input
                     id={this.props.propertyName}
                     value={text}
                     onChange={this.changePropertyValue}
                     onBlur={this.savePropertyValue}
-                    disabled={options.inherited}
+                    disabled={this.options().inherited}
                     className='reperio-form-input'
                 />
-            </ConfigPropertyRowContainer>
+            </div>
         );
     }
 }

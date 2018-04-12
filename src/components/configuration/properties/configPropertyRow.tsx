@@ -10,7 +10,6 @@ interface IComponentProps {
     actions?: any;
     children?: any;
     propertyName?: string;
-    displayName?: string;
     options?: StoreConfigProp;
     hidden?: boolean;
 }
@@ -37,7 +36,6 @@ class ConfigPropertyRow extends React.Component<IComponentProps, {}> {
                     />
                 </div>
                 <div className={'col-sm-6 centered-column'}>
-                    {this.props.displayName && <div className='input-name'>{this.props.displayName}</div>}
                     {this.props.children}
 
                 </div>

@@ -2,17 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyRowContainer} from "./configPropertyRow";
-import {ConfigProperty} from "../../../store/store";
 import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
+import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
 
-interface IComponentProps {
-    actions?: any;
-    propertyName?: string;
-    children?: any;
-    options?: {[property: string]: ConfigProperty; };
+interface IComponentProps extends BaseComponentProps {
     possibleValues?: string[];
-    hidden?: boolean;
 }
 
 const DragHandle = SortableHandle((params: any) => <span className={params.active ? 'draggable-property' : ''}>{params.value}</span>);
@@ -44,8 +38,7 @@ const SortableList = SortableContainer((params:any) => {
     );
 });
 
-class SortableListProperty extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
+class SortableListProperty extends BaseConfigProperty<IComponentProps, {}> {
     state: any;
 
     constructor(props: IComponentProps) {
@@ -78,34 +71,32 @@ class SortableListProperty extends React.Component<IComponentProps, {}> {
         this.props.actions.changePropertyValue(this.props.propertyName, options.value);
     }
 
-    render() {
-        const options = this.props.options[this.props.propertyName];
-
+    renderProperty() {
         return (
-            <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={options} hidden={this.props.hidden}>
+            <div>
                 <div>{this.props.children}</div>
                 <SortableList
-                    items={options.getValue()}
+                    items={this.options().getValue()}
                     onSortStart={this.onSortStart}
                     onSortEnd={this.onSortEnd}
                     shouldCancelStart={this.shouldCancelStart}
                     useDragHandle={true}
-                    deleteOption={!options.inherited && this.deleteOption}
+                    deleteOption={!this.options().inherited && this.deleteOption}
                     sorting={this.state.sorting}
                 />
                 {
-                    !options.inherited &&
+                    !this.options().inherited &&
                     <select
                         onChange={this.addNewOption}
                         className='reperio-form-input'
                     >
                         <option value={null}>New Option</option>
                         {this.props.possibleValues.map(
-                            (v: string, i: number) => !options.value.includes(v) && <option value={v} key={i}>{v}</option>
+                            (v: string, i: number) => !this.options().value.includes(v) && <option value={v} key={i}>{v}</option>
                         )}
                     </select>
                 }
-            </ConfigPropertyRowContainer>
+            </div>
         );
     }
 }

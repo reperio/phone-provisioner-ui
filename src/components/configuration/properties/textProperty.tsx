@@ -2,23 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyRowContainer} from "./configPropertyRow";
-import {ConfigProperty} from "../../../store/store";
+import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
 
-interface IComponentProps {
-    actions?: any;
-    propertyName?: string;
-    children?: any;
-    options?: {[property: string]: ConfigProperty; };
+interface IComponentProps extends BaseComponentProps {
     isInteger?: boolean;
     min?: number;
     max?: number;
-    hidden?: boolean;
 }
 
-class TextProperty extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
-
+class TextProperty extends BaseConfigProperty<IComponentProps, {}> {
     isValidInt(val: string) : boolean {
         //Only allow 0-9 with a sign at the beginning if the input allows negatives
         const exp = this.props.min >= 0 ? /^[\d]*$/ : /^-?[\d]*$/;
@@ -48,25 +40,19 @@ class TextProperty extends React.Component<IComponentProps, {}> {
         }
     }
 
-    render() {
-        const options = this.props.options[this.props.propertyName];
-
+    renderProperty() {
         return (
-            <ConfigPropertyRowContainer
-                propertyName={this.props.propertyName}
-                options={options}
-                displayName={this.props.children}
-                hidden={this.props.hidden}
-            >
+            <div>
+                <div className="input-name">{this.props.children}</div>
                 <input
                     id={this.props.propertyName}
-                    value={options.getValue()}
+                    value={this.options().getValue()}
                     onChange={this.changePropertyValue}
                     onBlur={this.validatePropertyRange}
-                    disabled={options.inherited}
+                    disabled={this.options().inherited}
                     className='reperio-form-input'
                 />
-            </ConfigPropertyRowContainer>
+            </div>
         );
     }
 }

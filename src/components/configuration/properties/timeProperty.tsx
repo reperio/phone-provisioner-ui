@@ -2,58 +2,41 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyRowContainer} from "./configPropertyRow";
-import {ConfigProperty} from "../../../store/store";
 const TimePicker = require('rc-time-picker').default;
 import moment from 'moment';
+import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
 
-interface IComponentProps {
-    actions?: any;
-    propertyName?: string;
-    children?: any;
-    options?: {[property: string]: ConfigProperty; };
-    hidden?: boolean;
-}
-
-class TimeProperty extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
-
+class TimeProperty extends BaseConfigProperty<BaseComponentProps, {}> {
     changePropertyValue = (e: any) => {
         const options = this.props.options[this.props.propertyName];
         this.props.actions.changePropertyValue(
             this.props.propertyName, e !== null ? e.format('HH:mm') : options.inheritedValue);
     }
 
-    render() {
-        const options = this.props.options[this.props.propertyName];
-
+    renderProperty() {
         return (
-            <ConfigPropertyRowContainer
-                propertyName={this.props.propertyName}
-                options={options}
-                displayName={this.props.children}
-                hidden={this.props.hidden}
-            >
+            <div>
+                <div className="input-name">{this.props.children}</div>
                 <TimePicker
-                    value={moment(options.getValue(), 'HH:mm')}
-                    disabled={options.inherited}
+                    value={moment(this.options().getValue(), 'HH:mm')}
+                    disabled={this.options().inherited}
                     showSecond={false}
                     format="HH:mm"
                     onChange={this.changePropertyValue}
                     prefixCls='reperio-form'
                 />
-            </ConfigPropertyRowContainer>
+            </div>
         );
     }
 }
 
-function mapDispatchToProps(dispatch:any) : IComponentProps {
+function mapDispatchToProps(dispatch:any) : BaseComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const TimePropertyContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const TimePropertyContainer = connect<BaseComponentProps, BaseComponentProps, BaseComponentProps>(
     null,
     mapDispatchToProps
 )(TimeProperty);

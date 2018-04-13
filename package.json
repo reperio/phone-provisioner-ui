@@ -1,9 +1,11 @@
 {
-  "name": "reperio-backups-client-2",
+  "name": "phone-provisioner-ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@types/mocha": "^2.2.48",
+    "@types/react-sortable-hoc": "^0.6.3",
     "axios": "^0.17.1",
     "core-js": "^2.5.3",
     "enzyme": "^3.3.0",
@@ -11,13 +13,17 @@
     "font-awesome": "^4.7.0",
     "font-awesome-sass-loader": "^2.0.1",
     "history": "^4.7.2",
+    "juration": "^0.1.0",
+    "material-ui": "^1.0.0-beta.40",
+    "moment": "^2.21.0",
     "node-fetch": "^1.7.3",
-    "prop-types": "^15.6.0",
+    "rc-time-picker": "^3.3.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-sortable-hoc": "^0.6.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
@@ -37,6 +43,7 @@
     "file-loader": "^1.1.10",
     "html-webpack-plugin": "^3.0.6",
     "http-server": "^0.11.1",
+    "mocha": "^5.0.4",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.2",
@@ -50,7 +57,7 @@
     "webpack-dev-server": "^2.11.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register ./test/*.spec.ts",
     "start": "http-server -p 8080 ./dist",
     "webpack-watch": "webpack -wd",
     "webpack": "webpack",

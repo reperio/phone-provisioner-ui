@@ -1,14 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/configActions';
+import * as actions from '../../../actions/configActions';
 import {ConfigurationGroupListContainer} from "./configurationGroupList";
-import {ConfigLevel} from "../../constants/configLevel";
+import {ConfigLevel} from "../../../constants/configLevel";
+import {ConfigProperty, CurrentlyEditing, Store} from "../../../store/store";
 
-const ManufacturerIcon = require('../../assets/manufacturer.png');
-const FamilyIcon = require('../../assets/family.png');
-const ModelIcon = require('../../assets/model.png');
+const ManufacturerIcon = require('../../../assets/manufacturer.png');
+const FamilyIcon = require('../../../assets/family.png');
+const ModelIcon = require('../../../assets/model.png');
 
 const icons = [
   ManufacturerIcon,
@@ -16,9 +16,20 @@ const icons = [
   ModelIcon
 ];
 
-class ConfigurationGroup extends React.Component {
-    props: any;
-    static propTypes: any;
+interface IComponentProps {
+    actions?: any;
+    name?: string;
+    isExpanded?: boolean;
+    children?: any[];
+    configLevel?: ConfigLevel;
+    id?: string;
+    selectedId?: string;
+    anyChanges?: boolean;
+    currentlyEditing?: CurrentlyEditing;
+}
+
+class ConfigurationGroup extends React.Component<IComponentProps, {}> {
+    props: IComponentProps;
 
     expandGroup = (e: any) => {
         if(this.props.children == null) {
@@ -30,10 +41,21 @@ class ConfigurationGroup extends React.Component {
     }
 
     selectConfig = (e: any) => {
-        this.props.actions.selectConfig(this.props.id);
+        if(this.props.currentlyEditing != null) {
+            const configLevel = this.props.currentlyEditing.hierarchy.length - 1;
+            this.props.actions.selectConfig(
+                this.props.id,
+                this.props.anyChanges,
+                this.props.currentlyEditing.options,
+                configLevel,
+                this.props.currentlyEditing.hierarchy[configLevel].id
+            );
+        } else {
+            this.props.actions.selectConfig(this.props.id, false, null, 0, null);
+        }
     }
 
-    render() {
+    render():any {
         const children = (
             <ConfigurationGroupListContainer configs={this.props.children} configLevel={this.props.configLevel + 1} selectedId={this.props.selectedId}/>
         );
@@ -65,23 +87,20 @@ class ConfigurationGroup extends React.Component {
     }
 }
 
-ConfigurationGroup.propTypes = {
-    actions: PropTypes.object,
-    name: PropTypes.string.isRequired,
-    isExpanded: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.object),
-    configLevel: PropTypes.number,
-    id: PropTypes.string,
-    selectedId: PropTypes.string
-};
+function mapStateToProps(state: Store) : IComponentProps {
+    return {
+        anyChanges: state.configurationSettings.anyUnsavedChanges,
+        currentlyEditing: state.configurationSettings.currentlyEditing
+    };
+}
 
-function mapDispatchToProps(dispatch:any) {
+function mapDispatchToProps(dispatch:any) : IComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch)
     };
 }
 
-export const ConfigurationGroupContainer = connect<any, any, any>(
-    null,
+export const ConfigurationGroupContainer = connect<IComponentProps, IComponentProps, IComponentProps>(
+    mapStateToProps,
     mapDispatchToProps
 )(ConfigurationGroup);

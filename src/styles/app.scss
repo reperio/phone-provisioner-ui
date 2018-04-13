@@ -33,9 +33,6 @@ $fa-font-path: "~font-awesome/fonts";
     }
 }
 
-
-
-
 .group { 
     position:relative; 
     margin-bottom: 35px; 
@@ -128,7 +125,7 @@ label {
     width: 100%;
 
     .expand {
-        background-color: lightgray;
+        background-color: $main-gray;
         width: 30px;
         text-align: center;
     }
@@ -140,4 +137,111 @@ label {
 
 table, th, td {
     border: 1px solid black;
+}
+
+.draggable-property {
+    cursor: move;
+}
+
+.show-x-on-hover:hover .x {
+    visibility: visible;
+}
+.show-x-on-hover:not(hover) .x, .show-x-on-hover-hidden .x {
+    visibility: hidden;
+}
+
+.reperio-form-input {
+    height: 30px;
+    border: 2px solid $main-gray;
+    padding: 4px;
+    width: 200px;
+}
+.input-name {
+    display: inline-block;
+    background-color: $main-gray;
+    line-height: 22px;
+    padding: 4px;
+    color: white;
+    width: 110px;
+}
+.reperio-form-input:not(:focus) {
+    background-color: $unfocused-input;
+}
+.reperio-form-input:focus {
+    outline: none;
+    background-color: white;
+}
+select.reperio-form-input:not(:disabled) {
+    background-color: white;
+}
+.reperio-form-input:disabled {
+    background-color: $disabled-input;
+}
+
+.reperio-form-panel {
+    position: relative;
+    width: 200px;
+    height: 300px;
+
+    .reperio-form-panel-input-wrap {
+        visibility: hidden;
+    }
+    .reperio-form-panel-select {
+        position: relative;
+        width: 100px;
+        height: 300px - 26px;
+        overflow: scroll;
+        overflow-x: hidden;
+        background-color: $unfocused-input;
+        border-color: $main-gray;
+        border-style: solid;
+        border-width: 0 1px 2px 1px;
+        //Remove scrollbar
+        -ms-overflow-style: none;  // IE 10+
+        overflow: -moz-scrollbars-none;  // Firefox
+    }
+    .reperio-form-panel-select::-webkit-scrollbar {
+        display: none;  // Safari and Chrome
+    }
+    .reperio-form-panel-select:first-child {
+        float: left;
+        border-left-width: 2px;
+    }
+    .reperio-form-panel-select:last-child {
+        float: right;
+        border-right-width: 2px;
+    }
+    ul {
+        list-style-type: none;
+        cursor: pointer;
+    }
+    .reperio-form-panel-select-active {
+        background-color: white;
+    }
+    .reperio-form-panel-select-option-selected {
+        font-weight: bold;
+    }
+}
+
+.vertical-spacer {
+    height: 32px;
+}
+
+.save-button {
+    font-size: 14px !important;
+}
+.selected-toggle {
+    color: $selected !important;
+}
+.selected-toggle-bar {
+    background-color: $selected !important;
+}
+.disabled-toggle {
+    color: $main-gray !important;
+}
+
+.centered-column {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }

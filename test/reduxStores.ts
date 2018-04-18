@@ -5,7 +5,9 @@ export const initialState: Store = {
     configurationSettings: {
         anyUnsavedChanges: false,
         currentlyEditing: null,
-        allConfigs: []
+        allConfigs: [],
+        currentOrganization: null,
+        organizations: null
     }
 }
 
@@ -23,7 +25,9 @@ export const initialStateWithManufacturerLoaded: Store = {
                 expanded: false,
                 children: null,
             }
-        ]
+        ],
+        currentOrganization: null,
+        organizations: null
     }
 }
 
@@ -52,7 +56,9 @@ export const initialStateWithFamilyLoaded: Store = {
                     }
                 ]
             }
-        ]
+        ],
+        currentOrganization: null,
+        organizations: null
     }
 }
 
@@ -81,7 +87,9 @@ export const initialStateWithFamilyLoadedButHidden: Store = {
                     }
                 ]
             }
-        ]
+        ],
+        currentOrganization: null,
+        organizations: null
     }
 }
 
@@ -131,7 +139,9 @@ export const initialStateWithModelLoaded: Store = {
                     }
                 ]
             }
-        ]
+        ],
+        currentOrganization: null,
+        organizations: null
     }
 }
 

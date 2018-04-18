@@ -1,14 +1,14 @@
 import {ActionTypes} from "../constants/actionTypes";
 import {ConfigLevel} from "../constants/configLevel";
 import * as ConfigService from "../services/configService";
-import {ConfigProperty} from "../store/store";
+import {ConfigProperty, Organization} from "../store/store";
 
-export const fetchManufacturers = () => async (dispatch:any) => {
+export const initialConfigLoad = () => async (dispatch:any) => {
     const manufacturers = await ConfigService.getManufacturers();
 
     dispatch({
         type: ActionTypes.GET_MANUFACTURERS,
-        manufacturers: manufacturers
+        manufacturers
     });
 };
 
@@ -64,6 +64,22 @@ export const savePropertyOptions = (options: {[property: string]: ConfigProperty
     dispatch({
         type: ActionTypes.SAVE_PROPERTY_OPTIONS,
         config,
+        id
+    });
+};
+
+export const fetchOrganizations = () => async (dispatch:any) => {
+    const organizations: Organization[] = [];
+
+    dispatch({
+        type: ActionTypes.LOAD_ORGANIZATIONS,
+        organizations
+    });
+};
+
+export const changeOrganization = (id: string) => async (dispatch:any) => {
+    dispatch({
+        type: ActionTypes.CHANGE_ORGANIZATION,
         id
     });
 };

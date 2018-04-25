@@ -19,7 +19,7 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
     constructor(props: IComponentProps) {
         super(props);
         if(this.props.configurationSettings.allConfigs.length === 0) {
-            this.props.actions.initialConfigLoad();
+            this.props.actions.initialConfigLoad(this.props.configurationSettings.currentOrganization.id);
         }
         this.onUnload = this.onUnload.bind(this);
     }
@@ -45,7 +45,8 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
         this.props.actions.savePropertyOptions(
             this.props.configurationSettings.currentlyEditing.options,
             configLevel,
-            this.props.configurationSettings.currentlyEditing.hierarchy[configLevel].id
+            this.props.configurationSettings.currentlyEditing.hierarchy[configLevel].id,
+            this.props.configurationSettings.currentOrganization.id
         );
     }
 

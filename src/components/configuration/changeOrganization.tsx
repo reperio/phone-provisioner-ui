@@ -8,6 +8,7 @@ interface IComponentProps {
     actions?: any;
     currentOrganization?: Organization;
     organizations?: Organization[];
+    disabled?: boolean;
 }
 
 class ChangeOrganization extends React.Component<IComponentProps, {}> {
@@ -23,6 +24,7 @@ class ChangeOrganization extends React.Component<IComponentProps, {}> {
                 onChange={this.selectOption}
                 value={this.props.currentOrganization.id}
                 className='reperio-form-input'
+                disabled={this.props.disabled}
             >
                 {this.props.organizations.map(
                     (v: Organization, i: number) => <option value={v.id} key={i}>{v.name}</option>
@@ -36,7 +38,8 @@ class ChangeOrganization extends React.Component<IComponentProps, {}> {
 function mapStateToProps(state: Store) : IComponentProps {
     return {
         currentOrganization: state.configurationSettings.currentOrganization,
-        organizations: state.configurationSettings.organizations
+        organizations: state.configurationSettings.organizations,
+        disabled: state.configurationSettings.anyUnsavedChanges
     };
 }
 

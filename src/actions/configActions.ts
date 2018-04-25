@@ -3,8 +3,8 @@ import {ConfigLevel} from "../constants/configLevel";
 import * as ConfigService from "../services/configService";
 import {ConfigProperty, Organization} from "../store/store";
 
-export const initialConfigLoad = () => async (dispatch:any) => {
-    const manufacturers = await ConfigService.getManufacturers();
+export const initialConfigLoad = (organization: string) => async (dispatch:any) => {
+    const manufacturers = await ConfigService.getManufacturers(organization);
 
     dispatch({
         type: ActionTypes.GET_MANUFACTURERS,
@@ -12,8 +12,8 @@ export const initialConfigLoad = () => async (dispatch:any) => {
     });
 };
 
-export const expandConfigGroupInitialLoad = (configLevel: ConfigLevel, elementId: string) => async (dispatch:any) => {
-    const children = await ConfigService.getChildren(configLevel, elementId);
+export const expandConfigGroupInitialLoad = (configLevel: ConfigLevel, elementId: string, organization: string) => async (dispatch:any) => {
+    const children = await ConfigService.getChildren(configLevel, elementId, organization);
 
     dispatch({
         type: ActionTypes.EXPAND_CONFIG_GROUP,
@@ -30,9 +30,9 @@ export const expandConfigGroup = (elementId: string) => async (dispatch:any) => 
     });
 };
 
-export const selectConfig = (id: string, save: boolean, options: {[property: string]: ConfigProperty; }, configLevel: ConfigLevel, oldId: string) => async (dispatch:any) => {
+export const selectConfig = (id: string, save: boolean, options: {[property: string]: ConfigProperty; }, configLevel: ConfigLevel, oldId: string, organization: string) => async (dispatch:any) => {
     if(save) {
-        await savePropertyOptions(options, configLevel, oldId)(dispatch);
+        await savePropertyOptions(options, configLevel, oldId, organization)(dispatch);
     }
 
     dispatch({
@@ -57,9 +57,9 @@ export const changePropertyValue = (property: string, value: any) => async (disp
     });
 };
 
-export const savePropertyOptions = (options: {[property: string]: ConfigProperty; }, configLevel: ConfigLevel, id: string) => async (dispatch:any) => {
+export const savePropertyOptions = (options: {[property: string]: ConfigProperty; }, configLevel: ConfigLevel, id: string, organization: string) => async (dispatch:any) => {
     const config = ConfigService.configFromOptions(options);
-    await ConfigService.updateConfig(configLevel, id, config);
+    await ConfigService.updateConfig(configLevel, id, config, organization);
 
     dispatch({
         type: ActionTypes.SAVE_PROPERTY_OPTIONS,
@@ -77,9 +77,12 @@ export const fetchOrganizations = () => async (dispatch:any) => {
     });
 };
 
-export const changeOrganization = (id: string) => async (dispatch:any) => {
+export const changeOrganization = (newOrganization: string) => async (dispatch:any) => {
+    const manufacturers = await ConfigService.getManufacturers(newOrganization);
+
     dispatch({
         type: ActionTypes.CHANGE_ORGANIZATION,
-        id
+        newOrganization,
+        manufacturers
     });
 };

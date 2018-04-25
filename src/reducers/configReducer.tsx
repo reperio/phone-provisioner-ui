@@ -51,7 +51,9 @@ export default function configReducer(state: ConfigurationSettings = initialStat
             return newState;
 
         case ActionTypes.CHANGE_ORGANIZATION:
-            newState.currentOrganization = newState.organizations.find((org: Organization) => org.id == action.id);
+            newState.currentOrganization = newState.organizations.find((org: Organization) => org.id == action.newOrganization);
+            newState.allConfigs = action.manufacturers.map(addConfigProps);
+            newState.currentlyEditing = null;
             return newState;
 
         default:
@@ -125,8 +127,7 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
     }
 
     for(let i = 0; i < models.length; i++) {
-        //TODO: default config
-        //setProp(models[i].default_config, ConfigLevel.DEFAULT, true);
+        setProp(models[i].default_config, ConfigLevel.DEFAULT, true);
         setProp(models[i].config, i, i < models.length - 1);
     }
 

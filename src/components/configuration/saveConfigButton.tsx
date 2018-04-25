@@ -9,6 +9,7 @@ interface IComponentProps {
     actions?: any;
     anyChanges?: boolean;
     currentlyEditing?: CurrentlyEditing;
+    organization?: string;
 }
 
 class SaveConfigButton extends React.Component<IComponentProps, {}> {
@@ -18,7 +19,10 @@ class SaveConfigButton extends React.Component<IComponentProps, {}> {
         const configLevel = this.props.currentlyEditing.hierarchy.length - 1;
 
         this.props.actions.savePropertyOptions(
-            this.props.currentlyEditing.options, configLevel, this.props.currentlyEditing.hierarchy[configLevel].id
+            this.props.currentlyEditing.options,
+            configLevel,
+            this.props.currentlyEditing.hierarchy[configLevel].id,
+            this.props.organization
         );
     }
 
@@ -44,7 +48,8 @@ class SaveConfigButton extends React.Component<IComponentProps, {}> {
 function mapStateToProps(state: Store) : IComponentProps {
     return {
         anyChanges: state.configurationSettings.anyUnsavedChanges,
-        currentlyEditing: state.configurationSettings.currentlyEditing
+        currentlyEditing: state.configurationSettings.currentlyEditing,
+        organization: state.configurationSettings.currentOrganization.id
     };
 }
 

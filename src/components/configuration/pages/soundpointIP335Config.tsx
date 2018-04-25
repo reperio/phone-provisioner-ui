@@ -20,7 +20,7 @@ class SoundpointIP335Config extends React.Component<IComponentProps, {}> {
     render() {
         return (
             <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
-                {!this.props.organization.global && <SoundpointIPConfig/>}
+                {!this.props.organization.is_global_organization && <SoundpointIPConfig/>}
                 <h3>335 Model Properties</h3>
                 <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='urlModeDialing'>URL Mode Dialing</BooleanPropertyContainer>

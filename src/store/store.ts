@@ -10,7 +10,6 @@ export class ConfigurationSettings {
     allConfigs: any[];
     currentOrganization: Organization;
     organizations: Organization[];
-    defaultOptions: {[property: string]: any; };
 }
 
 export class CurrentlyEditing {
@@ -38,6 +37,6 @@ export class ConfigProperty {
 
 export class Organization {
     id: string;
-    global: boolean;
+    is_global_organization: boolean;
     name: string;
 }

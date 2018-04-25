@@ -41,7 +41,7 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
 
         return (
             <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
-                {!this.props.organization.global && <PolycomConfig/>}
+                {!this.props.organization.is_global_organization && <PolycomConfig/>}
 
                 <ConfigHeader/>
                 <TextPropertyContainer propertyName='digitMap'>Digit Map</TextPropertyContainer>

@@ -20,6 +20,7 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
         super(props);
         if(this.props.configurationSettings.allConfigs.length === 0) {
             this.props.actions.initialConfigLoad(this.props.configurationSettings.currentOrganization.id);
+            this.props.actions.fetchOrganizations();
         }
         this.onUnload = this.onUnload.bind(this);
     }

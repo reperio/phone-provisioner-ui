@@ -17,7 +17,7 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
     options = () => this.props.options[this.props.propertyName];
 
     render() {
-        if(this.props.organization.global) {
+        if(this.props.organization.is_global_organization) {
             return this.renderProperty();
         } else {
             return (

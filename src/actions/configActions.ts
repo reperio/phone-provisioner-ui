@@ -69,7 +69,7 @@ export const savePropertyOptions = (options: {[property: string]: ConfigProperty
 };
 
 export const fetchOrganizations = () => async (dispatch:any) => {
-    const organizations: Organization[] = [];
+    const organizations = await ConfigService.getOrganizations();
 
     dispatch({
         type: ActionTypes.LOAD_ORGANIZATIONS,

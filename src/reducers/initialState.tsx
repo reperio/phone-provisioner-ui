@@ -8,22 +8,9 @@ export const initialState: Store = {
         currentOrganization: {
             name: 'Global',
             id: '0',
-            global: true
+            is_global_organization: true
         },
-        //TODO: load from db
-        organizations: [
-            {
-                name: 'Global',
-                id: '0',
-                global: true
-            },
-            {
-                name: 'Test',
-                id: '1',
-                global: false
-            }
-        ],
-        defaultOptions: {}
+        organizations: []
     }
   };
   

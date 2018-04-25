@@ -74,3 +74,8 @@ export function configFromOptions(options: {[property: string]: ConfigProperty; 
     }
     return config;
 }
+
+export async function getOrganizations() {
+    const organizations = await axios.get(`http://localhost:3000/config/organizations`);
+    return organizations.data;
+}

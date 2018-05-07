@@ -19,9 +19,14 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
     render() {
         if(this.props.hidden && (this.options().inherited || this.props.organization.is_global_organization)) {
             return <div></div>;
-        }
-        else if(this.props.organization.is_global_organization) {
-            return this.renderProperty();
+        } else if(this.props.organization.is_global_organization) {
+            return (
+                <div className='row'>
+                    <div className='col-xs-12 centered-column'>
+                        {this.renderProperty()}
+                    </div>
+                </div>
+            );
         } else {
             return (
                 <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={this.options()}>

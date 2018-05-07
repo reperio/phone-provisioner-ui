@@ -6,6 +6,7 @@ import {ConfigurationGroupListContainer} from '../tree/configurationGroupList';
 import {ConfigurationEditorContainer} from '../configurationEditor';
 import {ConfigLevel} from "../../../constants/configLevel";
 import {Store, ConfigurationSettings} from "../../../store/store";
+import {ChangeOrganizationContainer} from "../changeOrganization";
 
 interface IComponentProps {
     actions?: any;
@@ -18,7 +19,8 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
     constructor(props: IComponentProps) {
         super(props);
         if(this.props.configurationSettings.allConfigs.length === 0) {
-            this.props.actions.fetchManufacturers();
+            this.props.actions.initialConfigLoad(this.props.configurationSettings.currentOrganization.id);
+            this.props.actions.fetchOrganizations();
         }
         this.onUnload = this.onUnload.bind(this);
     }
@@ -44,7 +46,8 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
         this.props.actions.savePropertyOptions(
             this.props.configurationSettings.currentlyEditing.options,
             configLevel,
-            this.props.configurationSettings.currentlyEditing.hierarchy[configLevel].id
+            this.props.configurationSettings.currentlyEditing.hierarchy[configLevel].id,
+            this.props.configurationSettings.currentOrganization.id
         );
     }
 
@@ -53,10 +56,14 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
 
         return (
             <div>
-                <h1>Global Configuration</h1>
+                <h1>Configuration</h1>
                 <br/>
                 <br/>
                 <div className="col-lg-4">
+                    <div className="input-name">Organization</div>
+                    <ChangeOrganizationContainer/>
+                    <br/>
+                    <br/>
                     <table className={'tree-grid'}>
                         <tbody>
                             <ConfigurationGroupListContainer configs={this.props.configurationSettings.allConfigs}
@@ -66,7 +73,7 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
                     </table>
                 </div>
                 <div className="col-lg-8">
-                    <ConfigurationEditorContainer configs={editing}/>
+                    <ConfigurationEditorContainer configs={editing} organization={this.props.configurationSettings.currentOrganization}/>
                 </div>
             </div>
         );

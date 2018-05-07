@@ -8,6 +8,8 @@ export class ConfigurationSettings {
     anyUnsavedChanges: boolean;
     currentlyEditing: CurrentlyEditing;
     allConfigs: any[];
+    currentOrganization: Organization;
+    organizations: Organization[];
 }
 
 export class CurrentlyEditing {
@@ -31,4 +33,10 @@ export class ConfigProperty {
     getValue() : any {
         return this.inherited ? this.inheritedValue : this.value;
     }
+}
+
+export class Organization {
+    id: string;
+    is_global_organization: boolean;
+    name: string;
 }

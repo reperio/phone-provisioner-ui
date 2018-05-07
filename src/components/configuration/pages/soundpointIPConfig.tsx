@@ -6,7 +6,7 @@ import {BooleanPropertyContainer} from "../properties/booleanProperty";
 import {TextPropertyContainer} from "../properties/textProperty";
 import {SortableListPropertyContainer} from "../properties/sortableListProperty";
 import {DropdownPropertyContainer} from "../properties/dropdownProperty";
-import {ConfigProperty} from "../../../store/store";
+import {ConfigProperty, Organization} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import {TimePropertyContainer} from "../properties/timeProperty";
@@ -28,6 +28,7 @@ const possibleCallBackModeValues = ['contact', 'registration', 'disabled'];
 interface IComponentProps {
     actions?: any;
     options?: {[property: string]: ConfigProperty; };
+    organization?: Organization;
 }
 
 class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
@@ -39,9 +40,10 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
         const vadEnable = this.props.options.vadEnable.getValue();
 
         return (
-            <PassPropsToChildren options={this.props.options}>
-                <PolycomConfig/>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
+                {!this.props.organization.is_global_organization && <PolycomConfig/>}
 
+                <ConfigHeader/>
                 <TextPropertyContainer propertyName='digitMap'>Digit Map</TextPropertyContainer>
                 <BooleanPropertyContainer propertyName='tagSerialNo'>Tag Serial Number</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='oneTouchVoiceMail'>One Touch Voicemail</BooleanPropertyContainer>

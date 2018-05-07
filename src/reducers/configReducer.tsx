@@ -1,6 +1,6 @@
 import {ActionTypes} from '../constants/actionTypes';
 import {initialState} from './initialState';
-import {ConfigProperty, ConfigurationSettings, Store} from "../store/store";
+import {ConfigProperty, ConfigurationSettings, Organization, Store} from "../store/store";
 import {ConfigLevel} from "../constants/configLevel";
 
 export default function configReducer(state: ConfigurationSettings = initialState.configurationSettings, action: any) {
@@ -44,6 +44,16 @@ export default function configReducer(state: ConfigurationSettings = initialStat
             newState.allConfigs = newState.allConfigs.map(
                 (c: any) => applyChangesToConfig(c, action.id, updateModel(action.config))
             );
+            return newState;
+
+        case ActionTypes.LOAD_ORGANIZATIONS:
+            newState.organizations = action.organizations;
+            return newState;
+
+        case ActionTypes.CHANGE_ORGANIZATION:
+            newState.currentOrganization = newState.organizations.find((org: Organization) => org.id == action.newOrganization);
+            newState.allConfigs = action.manufacturers.map(addConfigProps);
+            newState.currentlyEditing = null;
             return newState;
 
         default:

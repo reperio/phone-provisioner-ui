@@ -26,6 +26,7 @@ interface IComponentProps {
     selectedId?: string;
     anyChanges?: boolean;
     currentlyEditing?: CurrentlyEditing;
+    organization?: string;
 }
 
 class ConfigurationGroup extends React.Component<IComponentProps, {}> {
@@ -34,7 +35,7 @@ class ConfigurationGroup extends React.Component<IComponentProps, {}> {
     expandGroup = (e: any) => {
         if(this.props.children == null) {
             //Expands the group while also lazy loading the items within
-            this.props.actions.expandConfigGroupInitialLoad(this.props.configLevel, this.props.id);
+            this.props.actions.expandConfigGroupInitialLoad(this.props.configLevel, this.props.id, this.props.organization);
         } else {
             this.props.actions.expandConfigGroup(this.props.id);
         }
@@ -48,10 +49,11 @@ class ConfigurationGroup extends React.Component<IComponentProps, {}> {
                 this.props.anyChanges,
                 this.props.currentlyEditing.options,
                 configLevel,
-                this.props.currentlyEditing.hierarchy[configLevel].id
+                this.props.currentlyEditing.hierarchy[configLevel].id,
+                this.props.organization
             );
         } else {
-            this.props.actions.selectConfig(this.props.id, false, null, 0, null);
+            this.props.actions.selectConfig(this.props.id, false, null, 0, null, this.props.organization);
         }
     }
 
@@ -90,7 +92,8 @@ class ConfigurationGroup extends React.Component<IComponentProps, {}> {
 function mapStateToProps(state: Store) : IComponentProps {
     return {
         anyChanges: state.configurationSettings.anyUnsavedChanges,
-        currentlyEditing: state.configurationSettings.currentlyEditing
+        currentlyEditing: state.configurationSettings.currentlyEditing,
+        organization: state.configurationSettings.currentOrganization.id
     };
 }
 

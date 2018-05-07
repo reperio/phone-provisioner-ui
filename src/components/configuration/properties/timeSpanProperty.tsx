@@ -2,11 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyRowContainer} from "./configPropertyRow";
-import {ConfigProperty} from "../../../store/store";
 const juration = require('juration');
 import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
-import moment from "moment";
 
 interface IComponentProps extends BaseComponentProps {
     min?: number;
@@ -51,8 +48,11 @@ class TimeSpanProperty extends BaseConfigProperty<IComponentProps, {}> {
         if((this.props.min !== undefined && time < this.props.min) || (this.props.max !== undefined && time > this.props.max)) {
             time = this.props.options[this.props.propertyName].inheritedValue;
         }
-        this.setState({text: this.formatTime(time)});
-        this.props.actions.changePropertyValue(this.props.propertyName, time);
+        const newTime = this.formatTime(time);
+        if(this.state.text != newTime) {
+            this.setState({text: newTime});
+            this.props.actions.changePropertyValue(this.props.propertyName, time);
+        }
     }
 
     renderProperty() {

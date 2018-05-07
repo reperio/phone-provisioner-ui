@@ -17,11 +17,14 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
     options = () => this.props.options[this.props.propertyName];
 
     render() {
-        if(this.props.organization.is_global_organization) {
+        if(this.props.hidden && (this.options().inherited || this.props.organization.is_global_organization)) {
+            return <div></div>;
+        }
+        else if(this.props.organization.is_global_organization) {
             return this.renderProperty();
         } else {
             return (
-                <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={this.options()} hidden={this.props.hidden}>
+                <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={this.options()}>
                     {this.renderProperty()}
                 </ConfigPropertyRowContainer>
             );

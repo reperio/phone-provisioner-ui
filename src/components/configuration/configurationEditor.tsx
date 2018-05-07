@@ -29,7 +29,8 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
                         <SaveConfigButtonContainer/>
                     </div>
                 );
-            } catch {
+            } catch(e) {
+                console.log(e);
                 editorBody = (<p>CONFIG PAGE NOT FOUND</p>);
             }
         }

@@ -10,7 +10,9 @@ import {
     manufacturerCurrentlyEditing,
     familyCurrentlyEditing,
     modelCurrentlyEditing,
-    manufacturerLoadedAndSelected
+    manufacturerLoadedAndSelected,
+    initialStateWithOrganizationsLoaded,
+    initialStateWithFamilyAndOrganizationsLoaded
 } from "./reduxStores";
 import * as ConfigService from "../src/services/configService";
 
@@ -165,5 +167,90 @@ describe('The Redux store', () => {
         });
 
         assert.deepEqual(JSON.parse(newState.configurationSettings.allConfigs[0].config), {test: false});
+    });
+
+    describe('has organizations which', () => {
+        it('are loaded when requested', () => {
+            const newState:any = reducer(initialState, {
+                type: ActionTypes.LOAD_ORGANIZATIONS,
+                organizations: [
+                    {
+                        name: 'Test',
+                        id: '1',
+                        is_global_organization: false
+                    },
+                    {
+                        name: 'Test2',
+                        id: '2',
+                        is_global_organization: false
+                    }
+                ]
+            });
+
+            assert.deepEqual(newState.configurationSettings.organizations, [
+                {
+                    name: 'Test',
+                    id: '1',
+                    is_global_organization: false
+                },
+                {
+                    name: 'Test2',
+                    id: '2',
+                    is_global_organization: false
+                }
+            ]);
+        });
+
+        it('can be toggled to when selected', () => {
+            const newState:any = reducer(initialStateWithOrganizationsLoaded, {
+                type: ActionTypes.CHANGE_ORGANIZATION,
+                newOrganization: '2',
+                manufacturers: [
+                    {
+                        component_name: "polycomConfig",
+                        config: '{"test": true}',
+                        default_config: '{"test": false, "test2": "Inherited!"}',
+                        id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7",
+                        name: "Polycom"
+                    }
+                ]
+            });
+
+            assert.deepEqual(newState.configurationSettings.currentOrganization, {
+                name: 'Test2',
+                id: '2',
+                is_global_organization: false
+            });
+        });
+
+        it('reset the page when toggled', () => {
+            const newState:any = reducer(initialStateWithFamilyAndOrganizationsLoaded, {
+                type: ActionTypes.CHANGE_ORGANIZATION,
+                newOrganization: '2',
+                manufacturers: [
+                    {
+                        component_name: "polycomConfig",
+                        config: '{"test": true}',
+                        default_config: '{"test": false, "test2": "Inherited!"}',
+                        id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7",
+                        name: "Polycom"
+                    }
+                ]
+            });
+
+            assert.deepEqual(newState.configurationSettings.allConfigs, [
+                {
+                    component_name: "polycomConfig",
+                    config: '{"test": true}',
+                    default_config: '{"test": false, "test2": "Inherited!"}',
+                    id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7",
+                    name: "Polycom",
+                    expanded: false,
+                    children: null,
+                }
+            ]);
+
+            assert.equal(newState.configurationSettings.currentlyEditing, null);
+        });
     });
 });

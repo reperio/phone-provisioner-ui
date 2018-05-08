@@ -38,6 +38,12 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
         const pollingEnabled = this.props.options.pollingEnabled.getValue();
         const pollingMode = this.props.options.pollingMode.getValue();
         const vadEnable = this.props.options.vadEnable.getValue();
+        const mwi1_callBackMode = this.props.options.mwi1_callBackMode.getValue();
+        const mwi2_callBackMode = this.props.options.mwi2_callBackMode.getValue();
+        const mwi3_callBackMode = this.props.options.mwi3_callBackMode.getValue();
+        const mwi4_callBackMode = this.props.options.mwi4_callBackMode.getValue();
+        const mwi5_callBackMode = this.props.options.mwi5_callBackMode.getValue();
+        const mwi6_callBackMode = this.props.options.mwi6_callBackMode.getValue();
 
         return (
             <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
@@ -59,22 +65,22 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
                 <ConfigHeader/>
                 <h4>MWI-1</h4>
                 <DropdownPropertyContainer propertyName='mwi1_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi1_callBack'>Callback</TextPropertyContainer>
+                <TextPropertyContainer propertyName='mwi1_callBack' hidden={mwi1_callBackMode === 'disabled'}>Callback</TextPropertyContainer>
                 <h4>MWI-2</h4>
                 <DropdownPropertyContainer propertyName='mwi2_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi2_callBack'>Callback</TextPropertyContainer>
+                <TextPropertyContainer propertyName='mwi2_callBack'hidden={mwi2_callBackMode === 'disabled'}>Callback</TextPropertyContainer>
                 <h4>MWI-3</h4>
                 <DropdownPropertyContainer propertyName='mwi3_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi3_callBack'>Callback</TextPropertyContainer>
+                <TextPropertyContainer propertyName='mwi3_callBack'hidden={mwi3_callBackMode === 'disabled'}>Callback</TextPropertyContainer>
                 <h4>MWI-4</h4>
                 <DropdownPropertyContainer propertyName='mwi4_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi4_callBack'>Callback</TextPropertyContainer>
+                <TextPropertyContainer propertyName='mwi4_callBack'hidden={mwi4_callBackMode === 'disabled'}>Callback</TextPropertyContainer>
                 <h4>MWI-5</h4>
                 <DropdownPropertyContainer propertyName='mwi5_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi5_callBack'>Callback</TextPropertyContainer>
+                <TextPropertyContainer propertyName='mwi5_callBack'hidden={mwi5_callBackMode === 'disabled'}>Callback</TextPropertyContainer>
                 <h4>MWI-6</h4>
                 <DropdownPropertyContainer propertyName='mwi6_callBackMode' possibleValues={possibleCallBackModeValues}>Callback Mode</DropdownPropertyContainer>
-                <TextPropertyContainer propertyName='mwi6_callBack'>Callback</TextPropertyContainer>
+                <TextPropertyContainer propertyName='mwi6_callBack'hidden={mwi6_callBackMode === 'disabled'}>Callback</TextPropertyContainer>
 
                 <h3>Provisioning Polling</h3>
                 <ConfigHeader/>

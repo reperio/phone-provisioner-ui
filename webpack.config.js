@@ -63,7 +63,7 @@ const config = {
         }),
         new CopyWebpackPlugin(['./src/test.json'], {debug: 'info'}),
         new webpack.DefinePlugin({
-            API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000/api")
+            API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000")
         })
     ]
 };

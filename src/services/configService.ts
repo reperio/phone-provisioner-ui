@@ -2,20 +2,20 @@ import axios from 'axios';
 import {ConfigLevel} from "../constants/configLevel";
 import {ConfigProperty} from "../store/store";
 
-const url = process.env.API_URL;
+declare const API_URL: string;
 
 export async function getManufacturers(organization: string) {
-    const manufacturers = await axios.get(`${url}/config/${organization}/manufacturers`);
+    const manufacturers = await axios.get(`${API_URL}/config/${organization}/manufacturers`);
     return manufacturers.data;
 }
 
 export async function getFamilies(manufacturer: string, organization: string) {
-    const families = await axios.get(`${url}/config/${organization}/families/${manufacturer}`);
+    const families = await axios.get(`${API_URL}/config/${organization}/families/${manufacturer}`);
     return families.data;
 }
 
 export async function getModels(family: string, organization: string) {
-    const models = await axios.get(`${url}/config/${organization}/models/${family}`);
+    const models = await axios.get(`${API_URL}/config/${organization}/models/${family}`);
     return models.data;
 }
 
@@ -31,7 +31,7 @@ export async function getChildren(configLevel: ConfigLevel, id: string, organiza
 }
 
 export async function updateManufacturerConfig(manufacturer: string, config: any, organization: string) {
-    const newObj = await axios.post(`${url}/config/${organization}/update-manufacturer-config`, {
+    const newObj = await axios.post(`${API_URL}/config/${organization}/update-manufacturer-config`, {
         id: manufacturer,
         config
     });
@@ -39,7 +39,7 @@ export async function updateManufacturerConfig(manufacturer: string, config: any
 }
 
 export async function updateFamilyConfig(family: string, config: any, organization: string) {
-    const newObj = await axios.post(`${url}/config/${organization}/update-family-config`, {
+    const newObj = await axios.post(`${API_URL}/config/${organization}/update-family-config`, {
         id: family,
         config
     });
@@ -47,7 +47,7 @@ export async function updateFamilyConfig(family: string, config: any, organizati
 }
 
 export async function updateModelConfig(model: string, config: any, organization: string) {
-    const newObj = await axios.post(`${url}/config/${organization}/update-model-config`, {
+    const newObj = await axios.post(`${API_URL}/config/${organization}/update-model-config`, {
         id: model,
         config
     });
@@ -78,6 +78,6 @@ export function configFromOptions(options: {[property: string]: ConfigProperty; 
 }
 
 export async function getOrganizations() {
-    const organizations = await axios.get(`${url}/config/organizations`);
+    const organizations = await axios.get(`${API_URL}/config/organizations`);
     return organizations.data;
 }

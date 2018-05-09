@@ -3,6 +3,7 @@ exports.__esModule = true;
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 const config = {
     entry: [
@@ -60,7 +61,10 @@ const config = {
             },
             inject: true
         }),
-        new CopyWebpackPlugin(['./src/test.json'], {debug: 'info'})
+        new CopyWebpackPlugin(['./src/test.json'], {debug: 'info'}),
+        new webpack.DefinePlugin({
+            API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000/api")
+        })
     ]
 };
 module.exports = config;

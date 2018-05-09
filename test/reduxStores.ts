@@ -7,7 +7,32 @@ export const initialState: Store = {
         currentlyEditing: null,
         allConfigs: [],
         currentOrganization: null,
-        organizations: null
+        organizations: []
+    }
+}
+
+export const initialStateWithOrganizationsLoaded: Store = {
+    configurationSettings: {
+        anyUnsavedChanges: false,
+        currentlyEditing: null,
+        allConfigs: [],
+        currentOrganization: {
+            name: 'Test',
+            id: '1',
+            is_global_organization: false
+        },
+        organizations: [
+            {
+                name: 'Test',
+                id: '1',
+                is_global_organization: false
+            },
+            {
+                name: 'Test2',
+                id: '2',
+                is_global_organization: false
+            }
+        ]
     }
 }
 
@@ -27,7 +52,7 @@ export const initialStateWithManufacturerLoaded: Store = {
             }
         ],
         currentOrganization: null,
-        organizations: null
+        organizations: []
     }
 }
 
@@ -58,7 +83,53 @@ export const initialStateWithFamilyLoaded: Store = {
             }
         ],
         currentOrganization: null,
-        organizations: null
+        organizations: []
+    }
+}
+
+export const initialStateWithFamilyAndOrganizationsLoaded: Store = {
+    configurationSettings: {
+        anyUnsavedChanges: false,
+        currentlyEditing: null,
+        allConfigs: [
+            {
+                component_name: "polycomConfig",
+                config: '{"test": true}',
+                default_config: '{"test": false, "test2": "Inherited!"}',
+                id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7",
+                name: "Polycom",
+                expanded: true,
+                children: [
+                    {
+                        component_name: "soundpointIPConfig",
+                        config: '{"test2":"ayy"}',
+                        default_config: '{"something":""}',
+                        id: "188a8ddd-9a57-4f45-aac2-effd96933039",
+                        manufacturer: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7",
+                        name: "Soundpoint IP",
+                        expanded: false,
+                        children: null
+                    }
+                ]
+            }
+        ],
+        currentOrganization: {
+            name: 'Test',
+            id: '1',
+            is_global_organization: false
+        },
+        organizations: [
+            {
+                name: 'Test',
+                id: '1',
+                is_global_organization: false
+            },
+            {
+                name: 'Test2',
+                id: '2',
+                is_global_organization: false
+            }
+        ]
     }
 }
 
@@ -89,7 +160,7 @@ export const initialStateWithFamilyLoadedButHidden: Store = {
             }
         ],
         currentOrganization: null,
-        organizations: null
+        organizations: []
     }
 }
 
@@ -141,7 +212,7 @@ export const initialStateWithModelLoaded: Store = {
             }
         ],
         currentOrganization: null,
-        organizations: null
+        organizations: []
     }
 }
 

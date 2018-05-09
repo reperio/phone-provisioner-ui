@@ -58,10 +58,10 @@
   },
   "scripts": {
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --require ts-node/register ./test/*.spec.ts",
-    "start": "http-server -p 8080 ./dist",
-    "webpack-watch": "webpack -wd",
+    "start": "API_URL=http://localhost:3000 http-server -p 8080 ./dist",
+    "webpack-watch": "API_URL=http://localhost:3000 webpack -wd",
     "webpack": "webpack",
-    "dev": "concurrently -k -r -s first \"npm run start\" \"npm run webpack-watch\""
+    "dev": "API_URL=http://localhost:3000 concurrently -k -r -s first \"npm run start\" \"npm run webpack-watch\""
   },
   "repository": {
     "type": "git",

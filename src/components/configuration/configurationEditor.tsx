@@ -38,7 +38,7 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
         return (
             <div>
                 <h2>Edit config</h2>
-                {this.props.configs != null && <p>{this.props.configs.hierarchy.map((c: any) => c.name).join(' > ')}</p>}
+                {this.props.configs != null && <p>{this.props.organization.name} > {this.props.configs.hierarchy.map((c: any) => c.name).join(' > ')}</p>}
                 {editorBody}
             </div>
         );

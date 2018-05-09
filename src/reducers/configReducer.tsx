@@ -51,7 +51,7 @@ export default function configReducer(state: ConfigurationSettings = initialStat
             return newState;
 
         case ActionTypes.CHANGE_ORGANIZATION:
-            newState.currentOrganization = newState.organizations.find((org: Organization) => org.id == action.newOrganization);
+            newState.currentOrganization = newState.organizations.find((org: Organization) => org.id === action.newOrganization);
             newState.allConfigs = action.manufacturers.map(addConfigProps);
             newState.currentlyEditing = null;
             return newState;

@@ -155,6 +155,9 @@ table, th, td {
     border: 2px solid $main-gray;
     padding: 4px;
     width: 200px;
+    border-radius: 0;
+    -webkit-appearance: none;
+
 }
 .input-name {
     display: inline-block;
@@ -176,6 +179,9 @@ select.reperio-form-input:not(:disabled) {
 }
 .reperio-form-input:disabled {
     background-color: $disabled-input;
+}
+select.reperio-form-input {
+    transform: translateY(1px);
 }
 
 .reperio-form-panel {
@@ -244,4 +250,8 @@ select.reperio-form-input:not(:disabled) {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+
+.row {
+    min-height: 48px;
 }

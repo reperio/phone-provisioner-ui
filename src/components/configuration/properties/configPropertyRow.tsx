@@ -22,7 +22,7 @@ class ConfigPropertyRow extends React.Component<IComponentProps, {}> {
 
     render() {
         return (
-            <div className={'row'}>
+            <div className='row'>
                 <div className={'col-sm-2 centered-column'}>
                     <Switch
                         onChange={this.togglePropertyInheritance}

@@ -7,8 +7,9 @@ export interface BaseComponentProps {
     propertyName?: string;
     children?: any;
     options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;
+    organization?: Organization;//Remove?
     hidden?: boolean;
+    isBaseOption?: boolean;
 }
 
 export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extends React.Component<P, S> {
@@ -17,23 +18,14 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
     options = () => this.props.options[this.props.propertyName];
 
     render() {
-        if(this.props.hidden && (this.options().inherited || this.props.organization.is_global_organization)) {
+        if(this.props.hidden && (this.options().inherited || this.props.isBaseOption)) {
             return <div></div>;
-        } else if(this.props.organization.is_global_organization) {
-            return (
-                <div className='row'>
-                    <div className='col-xs-12 centered-column'>
-                        {this.renderProperty()}
-                    </div>
-                </div>
-            );
-        } else {
-            return (
-                <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={this.options()}>
-                    {this.renderProperty()}
-                </ConfigPropertyRowContainer>
-            );
         }
+        return (
+            <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={this.options()} isBaseOption={this.props.isBaseOption}>
+                {this.renderProperty()}
+            </ConfigPropertyRowContainer>
+        );
     }
 
     abstract renderProperty() : React.ReactNode;

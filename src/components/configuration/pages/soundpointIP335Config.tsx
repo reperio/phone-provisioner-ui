@@ -7,20 +7,16 @@ import {ConfigProperty, Organization} from "../../../store/store";
 import {container as SoundpointIPConfig} from "./soundpointIPConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import ConfigHeader from '../configHeader';
+import {PageComponentProps} from "./pageComponentProps";
 
-interface IComponentProps {
-    actions?: any;
-    options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;
-}
 
-class SoundpointIP335Config extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
+class SoundpointIP335Config extends React.Component<PageComponentProps, {}> {
+    props: PageComponentProps;
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
-                {!this.props.organization.is_global_organization && <SoundpointIPConfig/>}
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+                <SoundpointIPConfig base={false}/>
                 <h3>335 Model Properties</h3>
                 <ConfigHeader/>
                 <BooleanPropertyContainer propertyName='urlModeDialing'>URL Mode Dialing</BooleanPropertyContainer>
@@ -29,13 +25,13 @@ class SoundpointIP335Config extends React.Component<IComponentProps, {}> {
     }
 }
 
-function mapDispatchToProps(dispatch:any) : IComponentProps {
+function mapDispatchToProps(dispatch:any) : PageComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
-export const container = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const container = connect<PageComponentProps, PageComponentProps, PageComponentProps>(
     null,
     mapDispatchToProps
 )(SoundpointIP335Config);

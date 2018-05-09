@@ -12,6 +12,7 @@ import {PassPropsToChildren} from "../../passPropsToChildren";
 import {TimePropertyContainer} from "../properties/timeProperty";
 import {TimeSpanPropertyContainer} from "../properties/timeSpanProperty";
 import ConfigHeader from '../configHeader';
+import {PageComponentProps} from "./pageComponentProps";
 
 const possibleCodecPrefValues: string[] = [
     'G711_A',
@@ -25,14 +26,8 @@ const possibleCodecPrefValues: string[] = [
 ];
 const possibleCallBackModeValues = ['contact', 'registration', 'disabled'];
 
-interface IComponentProps {
-    actions?: any;
-    options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;
-}
-
-class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
+class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
+    props: PageComponentProps;
 
     render() {
         const pollingEnabled = this.props.options.pollingEnabled.getValue();
@@ -44,10 +39,9 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
         const mwi4_callBackMode = this.props.options.mwi4_callBackMode.getValue();
         const mwi5_callBackMode = this.props.options.mwi5_callBackMode.getValue();
         const mwi6_callBackMode = this.props.options.mwi6_callBackMode.getValue();
-
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
-                {!this.props.organization.is_global_organization && <PolycomConfig/>}
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+                <PolycomConfig base={false}/>
 
                 <ConfigHeader/>
                 <TextPropertyContainer propertyName='digitMap'>Digit Map</TextPropertyContainer>
@@ -122,13 +116,13 @@ class SoundpointIPConfig extends React.Component<IComponentProps, {}> {
     }
 }
 
-function mapDispatchToProps(dispatch:any) : IComponentProps {
+function mapDispatchToProps(dispatch:any) : PageComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
-export const container = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const container = connect<PageComponentProps, PageComponentProps, PageComponentProps>(
     null,
     mapDispatchToProps
 )(SoundpointIPConfig);

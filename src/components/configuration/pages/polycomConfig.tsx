@@ -4,31 +4,27 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {ConfigProperty, Organization} from "../../../store/store";
 import {PassPropsToChildren} from "../../passPropsToChildren";
+import {PageComponentProps} from "./pageComponentProps";
 
-interface IComponentProps {
-    actions?: any;
-    options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;
-}
 
-class PolycomConfig extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
+class PolycomConfig extends React.Component<PageComponentProps, {}> {
+    props: PageComponentProps;
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
             </PassPropsToChildren>
         );
     }
 }
 
-function mapDispatchToProps(dispatch:any) : IComponentProps {
+function mapDispatchToProps(dispatch:any) : PageComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
-export const container = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const container = connect<PageComponentProps, PageComponentProps, PageComponentProps>(
     null,
     mapDispatchToProps
 )(PolycomConfig);

@@ -5,32 +5,27 @@ import * as actions from '../../../actions/configActions';
 import {ConfigProperty, Organization} from "../../../store/store";
 import {container as SoundpointIPConfig} from "./soundpointIPConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
+import {PageComponentProps} from "./pageComponentProps";
 
-interface IComponentProps {
-    actions?: any;
-    options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;
-}
-
-class SoundpointIP330Config extends React.Component<IComponentProps, {}> {
-    props: IComponentProps;
+class SoundpointIP330Config extends React.Component<PageComponentProps, {}> {
+    props: PageComponentProps;
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
-                {!this.props.organization.is_global_organization && <SoundpointIPConfig/>}
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+                <SoundpointIPConfig base={false}/>
             </PassPropsToChildren>
         );
     }
 }
 
-function mapDispatchToProps(dispatch:any) : IComponentProps {
+function mapDispatchToProps(dispatch:any) : PageComponentProps {
     return {
         actions: bindActionCreators(actions, dispatch),
     };
 }
 
-export const container = connect<IComponentProps, IComponentProps, IComponentProps>(
+export const container = connect<PageComponentProps, PageComponentProps, PageComponentProps>(
     null,
     mapDispatchToProps
 )(SoundpointIP330Config);

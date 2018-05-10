@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {CurrentlyEditing, Organization} from "../../store/store";
 import {SaveConfigButtonContainer} from "./saveConfigButton";
+import {OrganizationType} from "../../constants/organizationType";
 
 interface IComponentProps {
     actions?: any;
@@ -26,7 +27,7 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
                                 {
                                     options: this.props.configs.options,
                                     organization: this.props.organization,
-                                    base: this.props.organization.is_global_organization
+                                    base: this.props.organization.type != OrganizationType.NORMAL
                                 },
                                 null
                             )}

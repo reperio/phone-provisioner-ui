@@ -15,6 +15,7 @@ import {
     initialStateWithFamilyAndOrganizationsLoaded
 } from "./reduxStores";
 import * as ConfigService from "../src/services/configService";
+import {OrganizationType} from "../src/constants/organizationType";
 
 describe('The Redux store', () => {
     it('loads manufacturers into the config tree', () => {
@@ -177,12 +178,12 @@ describe('The Redux store', () => {
                     {
                         name: 'Test',
                         id: '1',
-                        is_global_organization: false
+                        type: OrganizationType.NORMAL
                     },
                     {
                         name: 'Test2',
                         id: '2',
-                        is_global_organization: false
+                        type: OrganizationType.NORMAL
                     }
                 ]
             });
@@ -191,12 +192,12 @@ describe('The Redux store', () => {
                 {
                     name: 'Test',
                     id: '1',
-                    is_global_organization: false
+                    type: OrganizationType.NORMAL
                 },
                 {
                     name: 'Test2',
                     id: '2',
-                    is_global_organization: false
+                    type: OrganizationType.NORMAL
                 }
             ]);
         });
@@ -219,7 +220,7 @@ describe('The Redux store', () => {
             assert.deepEqual(newState.configurationSettings.currentOrganization, {
                 name: 'Test2',
                 id: '2',
-                is_global_organization: false
+                type: OrganizationType.NORMAL
             });
         });
 

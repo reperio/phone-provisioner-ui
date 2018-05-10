@@ -23,7 +23,11 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
                     <div>
                         {React.createElement
                             (require(`./pages/${currentConfig.component_name}`).container,
-                                {options: this.props.configs.options, organization: this.props.organization},
+                                {
+                                    options: this.props.configs.options,
+                                    organization: this.props.organization,
+                                    base: this.props.organization.is_global_organization
+                                },
                                 null
                             )}
                         <SaveConfigButtonContainer/>

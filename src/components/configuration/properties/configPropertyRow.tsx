@@ -11,6 +11,7 @@ interface IComponentProps {
     children?: any;
     propertyName?: string;
     options?: StoreConfigProp;
+    isBaseOption?: boolean;
 }
 
 class ConfigPropertyRow extends React.Component<IComponentProps, {}> {
@@ -24,11 +25,15 @@ class ConfigPropertyRow extends React.Component<IComponentProps, {}> {
         return (
             <div className='row'>
                 <div className={'col-sm-2 centered-column'}>
-                    <Switch
-                        onChange={this.togglePropertyInheritance}
-                        checked={!this.props.options.inherited}
-                        classes={{checked: 'selected-toggle', bar: !this.props.options.inherited ? 'selected-toggle-bar' : null}}
-                    />
+                    {
+                        !this.props.isBaseOption ?
+                        <Switch
+                            onChange={this.togglePropertyInheritance}
+                            checked={!this.props.options.inherited}
+                            classes={{checked: 'selected-toggle', bar: !this.props.options.inherited ? 'selected-toggle-bar' : null}}
+                        /> :
+                        <div style={{height:48}}></div>
+                    }
                 </div>
                 <div className={'col-sm-6 centered-column'}>
                     {this.props.children}

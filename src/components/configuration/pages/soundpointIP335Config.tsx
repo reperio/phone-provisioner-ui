@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
 import {BooleanPropertyContainer} from "../properties/booleanProperty";
-import {ConfigProperty, Organization} from "../../../store/store";
 import {container as SoundpointIPConfig} from "./soundpointIPConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import ConfigHeader from '../configHeader';

@@ -1,4 +1,5 @@
 import {ConfigLevel} from "../constants/configLevel";
+import {OrganizationType} from "../constants/organizationType";
 
 export class Store {
     configurationSettings: ConfigurationSettings;
@@ -37,6 +38,6 @@ export class ConfigProperty {
 
 export class Organization {
     id: string;
-    is_global_organization: boolean;
+    type: OrganizationType;
     name: string;
 }

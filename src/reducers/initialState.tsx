@@ -1,4 +1,5 @@
 import {Store} from '../store/store';
+import {OrganizationType} from "../constants/organizationType";
 
 export const initialState: Store = {
     configurationSettings: {
@@ -8,7 +9,7 @@ export const initialState: Store = {
         currentOrganization: {
             name: 'Global',
             id: '0',
-            is_global_organization: true
+            type: OrganizationType.GLOBAL
         },
         organizations: []
     }

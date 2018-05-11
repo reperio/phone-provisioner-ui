@@ -1,5 +1,6 @@
 import {CurrentlyEditing, Store, ConfigProperty} from "../src/store/store";
 import {ConfigLevel} from "../src/constants/configLevel";
+import {OrganizationType} from "../src/constants/organizationType";
 
 export const initialState: Store = {
     configurationSettings: {
@@ -19,18 +20,18 @@ export const initialStateWithOrganizationsLoaded: Store = {
         currentOrganization: {
             name: 'Test',
             id: '1',
-            is_global_organization: false
+            type: OrganizationType.NORMAL
         },
         organizations: [
             {
                 name: 'Test',
                 id: '1',
-                is_global_organization: false
+                type: OrganizationType.NORMAL
             },
             {
                 name: 'Test2',
                 id: '2',
-                is_global_organization: false
+                type: OrganizationType.NORMAL
             }
         ]
     }
@@ -116,18 +117,18 @@ export const initialStateWithFamilyAndOrganizationsLoaded: Store = {
         currentOrganization: {
             name: 'Test',
             id: '1',
-            is_global_organization: false
+            type: OrganizationType.NORMAL
         },
         organizations: [
             {
                 name: 'Test',
                 id: '1',
-                is_global_organization: false
+                type: OrganizationType.NORMAL
             },
             {
                 name: 'Test2',
                 id: '2',
-                is_global_organization: false
+                type: OrganizationType.NORMAL
             }
         ]
     }

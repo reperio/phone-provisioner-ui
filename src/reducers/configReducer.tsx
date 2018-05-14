@@ -116,33 +116,42 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
         for(let prop in config) {
             const val = config[prop];
             let inheritedValue = val;
-            //If it's default here, something went wrong. There must have been an invalid config property
-            //that was in the default but not the actual config.
-            if(!isInherited && prop in options) { //If the value is being overridden, make sure that the inherit level doesn't show the current level
-                configLevel = options[prop].inheritLevel;
-                inheritedValue = options[prop].inheritedValue;
+            let level = configLevel;
+            if(!isInherited) { //If the value is being overridden, make sure that the inherit level doesn't show the current level
+                if(prop in options) {
+                    level = options[prop].inheritLevel;
+                    inheritedValue = options[prop].inheritedValue;
+                } else {
+                    level = ConfigLevel.DISABLED;
+                }
             }
-            options[prop] = new ConfigProperty(isInherited, configLevel, val, inheritedValue);
+            options[prop] = new ConfigProperty(isInherited, level, val, inheritedValue);
         }
     }
 
     for(let i = 0; i < models.length; i++) {
-        setProp(models[i].default_config, ConfigLevel.DEFAULT, true);
+        setProp(models[i].default_config, ConfigLevel.GLOBAL, true);
         setProp(models[i].config, i, i < models.length - 1);
     }
 
     return options;
 }
 
-function changeConfigOptions(state: ConfigurationSettings, configProperty: string, propsToChange: object) : ConfigurationSettings {
+function changeConfigOptions(state: ConfigurationSettings, configProperty: string, propsToChange: any) : ConfigurationSettings {
     let newOptions : any = {};
+    let assigned = false;
     Object.keys(state.currentlyEditing.options).map((key: string) => {
         let option = state.currentlyEditing.options[key];
         if(key === configProperty) {
             option = Object.assign({}, option, propsToChange);
+            assigned = true;
         }
         newOptions[key] = new ConfigProperty(option.inherited, option.inheritLevel, option.value, option.inheritedValue);
     });
+    if(!assigned) {
+        //Create option from undefined global property
+        newOptions[configProperty] = new ConfigProperty(false, ConfigLevel.DISABLED, propsToChange.value, undefined);
+    }
     const newState = Object.assign({}, state.currentlyEditing);
     newState.options = newOptions;
     state.currentlyEditing = newState;

@@ -18,7 +18,7 @@ class SoundpointIP6000Config extends React.Component<PageComponentProps, {}> {
                 <SoundpointIPConfig base={false}/>
                 <h3>6000 Model Properties</h3>
                 <ConfigHeader/>
-                <BooleanPropertyContainer propertyName='bypassInstantMessage'>Bypass Instant Message</BooleanPropertyContainer>
+                <BooleanPropertyContainer propertyName='bypassInstantMessage' defaultValue={true}>Bypass Instant Message</BooleanPropertyContainer>
             </PassPropsToChildren>
         );
     }

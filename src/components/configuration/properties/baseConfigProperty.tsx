@@ -1,6 +1,7 @@
 import React from 'react';
 import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty, Organization} from "../../../store/store";
+import {ConfigLevel} from "../../../constants/configLevel";
 
 export interface BaseComponentProps {
     actions?: any;
@@ -10,12 +11,18 @@ export interface BaseComponentProps {
     organization?: Organization;//Remove?
     hidden?: boolean;
     isBaseOption?: boolean;
+    defaultValue?: any;
 }
 
 export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extends React.Component<P, S> {
     props: P;
 
-    options = () => this.props.options[this.props.propertyName];
+    options = () => {
+        if(this.props.options[this.props.propertyName] === undefined) {
+            this.props.options[this.props.propertyName] = new ConfigProperty(true, ConfigLevel.DISABLED, this.props.defaultValue, this.props.defaultValue);
+        }
+        return this.props.options[this.props.propertyName];
+    };
 
     render() {
         if(this.props.hidden && (this.options().inherited || this.props.isBaseOption)) {

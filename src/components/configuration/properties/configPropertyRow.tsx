@@ -25,22 +25,17 @@ class ConfigPropertyRow extends React.Component<IComponentProps, {}> {
         return (
             <div className='row'>
                 <div className={'col-sm-2 centered-column'}>
-                    {
-                        !this.props.isBaseOption ?
-                        <Switch
-                            onChange={this.togglePropertyInheritance}
-                            checked={!this.props.options.inherited}
-                            classes={{checked: 'selected-toggle', bar: !this.props.options.inherited ? 'selected-toggle-bar' : null}}
-                        /> :
-                        <div style={{height:48}}></div>
-                    }
+                    <Switch
+                        onChange={this.togglePropertyInheritance}
+                        checked={!this.props.options.inherited}
+                        classes={{checked: 'selected-toggle', bar: !this.props.options.inherited ? 'selected-toggle-bar' : null}}
+                    />
                 </div>
                 <div className={'col-sm-6 centered-column'}>
                     {this.props.children}
-
                 </div>
                 <div className={'col-sm-4 centered-column'}>
-                    {this.props.options.inherited && `Inherited from ${ConfigLevelName(this.props.options.inheritLevel)}`}
+                    {this.props.options.inherited && ConfigLevelName(this.props.options.inheritLevel)}
                 </div>
             </div>
         );

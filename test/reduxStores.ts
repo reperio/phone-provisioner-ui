@@ -230,8 +230,8 @@ export const manufacturerCurrentlyEditing: CurrentlyEditing = {
         }
     ],
     options: {
-        test: new ConfigProperty(false, ConfigLevel.DEFAULT, true, false),
-        test2: new ConfigProperty(true, ConfigLevel.DEFAULT, "Inherited!", "Inherited!")
+        test: new ConfigProperty(false, ConfigLevel.GLOBAL, true, false),
+        test2: new ConfigProperty(true, ConfigLevel.GLOBAL, "Inherited!", "Inherited!")
     }
 };
 
@@ -270,8 +270,8 @@ export const familyCurrentlyEditing: CurrentlyEditing = {
     ],
     options: {
         test: new ConfigProperty(true, ConfigLevel.MANUFACTURER, true, true),
-        test2: new ConfigProperty(false, ConfigLevel.DEFAULT, "ayy", "Inherited!"),
-        something: new ConfigProperty(true, ConfigLevel.DEFAULT, "", "")
+        test2: new ConfigProperty(false, ConfigLevel.GLOBAL, "ayy", "Inherited!"),
+        something: new ConfigProperty(true, ConfigLevel.GLOBAL, "", "")
     }
 };
 
@@ -363,8 +363,8 @@ export const modelCurrentlyEditing: CurrentlyEditing = {
     options: {
         test: new ConfigProperty(true, ConfigLevel.MANUFACTURER, true, true),
         test2: new ConfigProperty(true, ConfigLevel.FAMILY, "ayy", "ayy"),
-        something: new ConfigProperty(true, ConfigLevel.DEFAULT, "", ""),
-        extra: new ConfigProperty(true, ConfigLevel.DEFAULT, "hey", "hey")
+        something: new ConfigProperty(true, ConfigLevel.GLOBAL, "", ""),
+        extra: new ConfigProperty(true, ConfigLevel.GLOBAL, "hey", "hey")
     }
 };
 

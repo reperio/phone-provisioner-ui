@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import {ConfigPropertyRowContainer} from "./configPropertyRow";
-import {ConfigProperty} from "../../../store/store";
 import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
 
 interface IComponentProps extends BaseComponentProps {

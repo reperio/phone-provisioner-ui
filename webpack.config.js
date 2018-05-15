@@ -61,7 +61,7 @@ const config = {
             },
             inject: true
         }),
-        new CopyWebpackPlugin(['./src/test.json'], {debug: 'info'}),
+        new CopyWebpackPlugin(['./src/test.json', './src/assets/favicon.ico'], {debug: 'info'}),
         new webpack.DefinePlugin({
             API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000")
         })

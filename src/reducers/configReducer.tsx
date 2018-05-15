@@ -1,7 +1,8 @@
 import {ActionTypes} from '../constants/actionTypes';
 import {initialState} from './initialState';
-import {ConfigProperty, ConfigurationSettings, Organization, Store} from "../store/store";
+import {ConfigProperty, ConfigurationSettings, Organization} from "../store/store";
 import {ConfigLevel} from "../constants/configLevel";
+import {OrganizationType} from "../constants/organizationType";
 
 export default function configReducer(state: ConfigurationSettings = initialState.configurationSettings, action: any) {
     let newState: ConfigurationSettings = Object.assign({}, state);
@@ -24,7 +25,7 @@ export default function configReducer(state: ConfigurationSettings = initialStat
             if(hierarchy !== null) {
                 newState.currentlyEditing = {
                     hierarchy,
-                    options: composeConfigOptions(hierarchy)
+                    options: composeConfigOptions(hierarchy, state.currentOrganization.type === OrganizationType.NORMAL)
                 };
             }
             return newState;
@@ -108,7 +109,7 @@ function findConfig(configs: any[], id: string) : any[] {
 }
 
 //Converts the db models of the config to the properties that you see
-function composeConfigOptions(models: any[]) : {[property: string]: ConfigProperty; } {
+function composeConfigOptions(models: any[], inheritsFromGlobal: boolean) : {[property: string]: ConfigProperty; } {
     let options: {[property: string]: ConfigProperty; } = {};
 
     function setProp(configString: string, configLevel: number, isInherited: boolean) {
@@ -130,7 +131,9 @@ function composeConfigOptions(models: any[]) : {[property: string]: ConfigProper
     }
 
     for(let i = 0; i < models.length; i++) {
-        setProp(models[i].default_config, ConfigLevel.GLOBAL, true);
+        if(inheritsFromGlobal) {
+            setProp(models[i].default_config, ConfigLevel.GLOBAL, true);
+        }
         setProp(models[i].config, i, i < models.length - 1);
     }
 

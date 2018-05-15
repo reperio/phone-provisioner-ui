@@ -1,5 +1,5 @@
 import React from 'react';
-import {ConfigProperty, Organization} from "../../../store/store";
+import {ConfigProperty} from "../../../store/store";
 import {ConfigLevel, ConfigLevelName} from "../../../constants/configLevel";
 import Switch from 'material-ui/Switch';
 
@@ -8,7 +8,6 @@ export interface BaseComponentProps {
     propertyName?: string;
     children?: any;
     options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;//Remove?
     hidden?: boolean;
     isBaseOption?: boolean;
     defaultValue?: any;

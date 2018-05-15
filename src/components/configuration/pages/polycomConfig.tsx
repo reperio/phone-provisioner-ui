@@ -12,7 +12,7 @@ class PolycomConfig extends React.Component<PageComponentProps, {}> {
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
             </PassPropsToChildren>
         );
     }

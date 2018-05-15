@@ -27,7 +27,7 @@ class ConfigurationEditor extends React.Component<IComponentProps, {}> {
                                 {
                                     options: this.props.configs.options,
                                     organization: this.props.organization,
-                                    base: this.props.organization.type != OrganizationType.NORMAL
+                                    base: this.props.organization.type !== OrganizationType.NORMAL
                                 },
                                 null
                             )}

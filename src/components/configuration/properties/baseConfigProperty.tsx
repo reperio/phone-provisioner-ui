@@ -9,7 +9,6 @@ export interface BaseComponentProps {
     children?: any;
     options?: {[property: string]: ConfigProperty; };
     hidden?: boolean;
-    isBaseOption?: boolean;
     defaultValue?: any;
 }
 
@@ -28,7 +27,7 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
     }
 
     render() {
-        if(this.props.hidden && (this.options().inherited || this.props.isBaseOption)) {
+        if(this.props.hidden && this.options().inherited) {
             return <div></div>;
         }
         return (

@@ -14,10 +14,10 @@ class SoundpointIP670Config extends React.Component<PageComponentProps, {}> {
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
                 <SoundpointIPConfig base={false}/>
                 <h3>670 Model Properties</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='bypassInstantMessage' defaultValue={true}>Bypass Instant Message</BooleanPropertyContainer>
             </PassPropsToChildren>
         );

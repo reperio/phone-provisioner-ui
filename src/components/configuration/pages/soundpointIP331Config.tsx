@@ -14,10 +14,10 @@ class SoundpointIP331Config extends React.Component<PageComponentProps, {}> {
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
                 <SoundpointIPConfig base={false}/>
                 <h3>331 Model Properties</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='urlModeDialing' defaultValue={false}>URL Mode Dialing</BooleanPropertyContainer>
             </PassPropsToChildren>
         );

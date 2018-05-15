@@ -40,10 +40,10 @@ class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
         const mwi5_callBackMode = this.props.options.mwi5_callBackMode ? this.props.options.mwi5_callBackMode.getValue(): 'disabled';
         const mwi6_callBackMode = this.props.options.mwi6_callBackMode ? this.props.options.mwi6_callBackMode.getValue(): 'disabled';
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
                 <PolycomConfig base={false}/>
 
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <TextPropertyContainer propertyName='digitMap'defaultValue='*97|*0xxxx|911|9911|0T|011xxx.T|[0-1][2-9]xxxxxxxxx|[2-9]xxxxxxxxx|[2-9]xxxT|**x.T'>
                     Digit Map
                 </TextPropertyContainer>
@@ -60,7 +60,7 @@ class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
                 </SortableListPropertyContainer>
 
                 <h3>Message Waiting</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <h4>MWI-1</h4>
                 <DropdownPropertyContainer propertyName='mwi1_callBackMode' possibleValues={possibleCallBackModeValues} defaultValue='disabled'>
                     Callback Mode
@@ -105,7 +105,7 @@ class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
                 </TextPropertyContainer>
 
                 <h3>Provisioning Polling</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='pollingEnabled' defaultValue={false}>Enabled</BooleanPropertyContainer>
                 <DropdownPropertyContainer propertyName='pollingMode' possibleValues={['abs', 'rel', 'random']} hidden={!pollingEnabled} defaultValue='abs'>
                     Mode
@@ -121,13 +121,13 @@ class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
                 </TimePropertyContainer>
 
                 <h3>SNTP</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <TextPropertyContainer propertyName='sntpAddress' defaultValue='0.pool.ntp.org'>Address</TextPropertyContainer>
                 <TimeSpanPropertyContainer propertyName='sntpGmtOffset' defaultValue={-18000}>GMT Offset</TimeSpanPropertyContainer>
                 <TimeSpanPropertyContainer propertyName='sntpResyncPeriod' min={1} defaultValue={3600}>Resync Period</TimeSpanPropertyContainer>
 
                 <h3>Voice Activity Detection</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='vadEnable' defaultValue={false}>Enable</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='vadSignalAnnexB' defaultValue={true}>Signal Annex B</BooleanPropertyContainer>
                 <TextPropertyContainer propertyName='vadThresh' isInteger min={0} max={30} hidden={!vadEnable} defaultValue={0}>
@@ -135,7 +135,7 @@ class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
                 </TextPropertyContainer>
 
                 <h3>Volume Persist</h3>
-                <ConfigHeader/>
+                <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='volumePersistHandset' defaultValue={true}>Handset</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='volumePersistHeadset' defaultValue={true}>Headset</BooleanPropertyContainer>
                 <BooleanPropertyContainer propertyName='volumePersistHandsFree' defaultValue={true}>Hands Free</BooleanPropertyContainer>

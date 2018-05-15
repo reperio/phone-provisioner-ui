@@ -1,7 +1,7 @@
 import React from 'react';
-import {ConfigPropertyRowContainer} from "./configPropertyRow";
 import {ConfigProperty, Organization} from "../../../store/store";
-import {ConfigLevel} from "../../../constants/configLevel";
+import {ConfigLevel, ConfigLevelName} from "../../../constants/configLevel";
+import Switch from 'material-ui/Switch';
 
 export interface BaseComponentProps {
     actions?: any;
@@ -24,14 +24,33 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
         return this.props.options[this.props.propertyName];
     };
 
+    togglePropertyInheritance = (e: any) => {
+        this.props.actions.togglePropertyInheritance(this.props.propertyName, !e.target.checked);
+    }
+
     render() {
         if(this.props.hidden && (this.options().inherited || this.props.isBaseOption)) {
             return <div></div>;
         }
         return (
-            <ConfigPropertyRowContainer propertyName={this.props.propertyName} options={this.options()} isBaseOption={this.props.isBaseOption}>
-                {this.renderProperty()}
-            </ConfigPropertyRowContainer>
+            <div className='row'>
+                <div className={'col-sm-2 centered-column'}>
+                    <Switch
+                        onChange={this.togglePropertyInheritance}
+                        checked={!this.options().inherited}
+                        classes={{checked: 'selected-toggle', bar: !this.options().inherited ? 'selected-toggle-bar' : null}}
+                    />
+                </div>
+                <div className={'col-sm-6 centered-column'}>
+                    {
+                        this.options().inheritLevel === ConfigLevel.DISABLED && this.options().inherited
+                            ? this.props.children : this.renderProperty()
+                    }
+                </div>
+                <div className={'col-sm-4 centered-column'}>
+                    {this.options().inherited && ConfigLevelName(this.options().inheritLevel)}
+                </div>
+            </div>
         );
     }
 

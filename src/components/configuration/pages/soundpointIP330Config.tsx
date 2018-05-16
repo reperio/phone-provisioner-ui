@@ -11,7 +11,7 @@ class SoundpointIP330Config extends React.Component<PageComponentProps, {}> {
 
     render() {
         return (
-            <PassPropsToChildren options={this.props.options} organization={this.props.organization} isBaseOption={this.props.base}>
+            <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
                 <SoundpointIPConfig base={false}/>
             </PassPropsToChildren>
         );

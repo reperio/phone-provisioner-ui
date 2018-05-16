@@ -1,5 +1,5 @@
 import React from 'react';
-import {ConfigProperty, Organization} from "../../../store/store";
+import {ConfigProperty} from "../../../store/store";
 import {ConfigLevel, ConfigLevelName} from "../../../constants/configLevel";
 import Switch from 'material-ui/Switch';
 
@@ -8,9 +8,7 @@ export interface BaseComponentProps {
     propertyName?: string;
     children?: any;
     options?: {[property: string]: ConfigProperty; };
-    organization?: Organization;//Remove?
     hidden?: boolean;
-    isBaseOption?: boolean;
     defaultValue?: any;
 }
 
@@ -29,7 +27,7 @@ export abstract class BaseConfigProperty<P extends BaseComponentProps, S> extend
     }
 
     render() {
-        if(this.props.hidden && (this.options().inherited || this.props.isBaseOption)) {
+        if(this.props.hidden && this.options().inherited) {
             return <div></div>;
         }
         return (

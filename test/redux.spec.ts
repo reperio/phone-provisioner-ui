@@ -12,7 +12,9 @@ import {
     modelCurrentlyEditing,
     manufacturerLoadedAndSelected,
     initialStateWithOrganizationsLoaded,
-    initialStateWithFamilyAndOrganizationsLoaded
+    initialStateWithFamilyAndOrganizationsLoaded,
+    initialStateWithModelAndOrganizationsLoaded,
+    initialStateWithManufacturerAndOrganizationsLoaded
 } from "./reduxStores";
 import * as ConfigService from "../src/services/configService";
 import {OrganizationType} from "../src/constants/organizationType";
@@ -92,7 +94,7 @@ describe('The Redux store', () => {
     });
 
     it('opens up the correct config editor when you select the manufacturer', () => {
-        const newState:any = reducer(initialStateWithManufacturerLoaded, {
+        const newState:any = reducer(initialStateWithManufacturerAndOrganizationsLoaded, {
             type: ActionTypes.SELECT_CONFIG,
             id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7"
         });
@@ -101,7 +103,7 @@ describe('The Redux store', () => {
     });
 
     it('opens up the correct config editor when you select the family', () => {
-        const newState:any = reducer(initialStateWithFamilyLoaded, {
+        const newState:any = reducer(initialStateWithFamilyAndOrganizationsLoaded, {
             type: ActionTypes.SELECT_CONFIG,
             id: "188a8ddd-9a57-4f45-aac2-effd96933039"
         });
@@ -110,7 +112,7 @@ describe('The Redux store', () => {
     });
 
     it('opens up the correct config editor when you select the model', () => {
-        const newState:any = reducer(initialStateWithModelLoaded, {
+        const newState:any = reducer(initialStateWithModelAndOrganizationsLoaded, {
             type: ActionTypes.SELECT_CONFIG,
             id: "646e4a66-823c-48fc-80e1-547cb5f67532"
         });
@@ -254,4 +256,10 @@ describe('The Redux store', () => {
             assert.equal(newState.configurationSettings.currentlyEditing, null);
         });
     });
+
+    //TODO
+    //Base organization
+    //Global organization
+    //Values inherited from global
+    //Disabled values
 });

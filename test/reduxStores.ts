@@ -4,22 +4,34 @@ import {OrganizationType} from "../src/constants/organizationType";
 
 const currentOrganization = {
     name: 'Test',
-    id: '1',
+    id: 'x',
     type: OrganizationType.NORMAL
-}
+};
+
+const globalOrganization = {
+    name: 'Global',
+    id: '0',
+    type: OrganizationType.GLOBAL
+};
+
+const baseOrganization = {
+    name: 'Base',
+    id: '1',
+    type: OrganizationType.BASE
+};
 
 const organizations = [
     {
         name: 'Test',
-        id: '1',
+        id: 'x',
         type: OrganizationType.NORMAL
     },
     {
         name: 'Test2',
-        id: '2',
+        id: 'y',
         type: OrganizationType.NORMAL
     }
-]
+];
 
 const polycomConfig: any = {
     component_name: "polycomConfig",
@@ -101,6 +113,22 @@ export const initialStateWithManufacturerAndOrganizationsLoaded: Store = {
     configurationSettings: Object.assign({}, configurationSettings, {
         allConfigs: [polycomConfig],
         currentOrganization,
+        organizations
+    })
+}
+
+export const initialStateWithManufacturerAndGlobalOrganizationLoaded: Store = {
+    configurationSettings: Object.assign({}, configurationSettings, {
+        allConfigs: [polycomConfig],
+        currentOrganization: globalOrganization,
+        organizations
+    })
+}
+
+export const initialStateWithManufacturerAndBaseOrganizationLoaded: Store = {
+    configurationSettings: Object.assign({}, configurationSettings, {
+        allConfigs: [polycomConfig],
+        currentOrganization: baseOrganization,
         organizations
     })
 }

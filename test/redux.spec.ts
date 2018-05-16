@@ -14,10 +14,14 @@ import {
     initialStateWithOrganizationsLoaded,
     initialStateWithFamilyAndOrganizationsLoaded,
     initialStateWithModelsAndOrganizationsLoaded,
-    initialStateWithManufacturerAndOrganizationsLoaded
+    initialStateWithManufacturerAndOrganizationsLoaded,
+    initialStateWithManufacturerAndGlobalOrganizationLoaded,
+    initialStateWithManufacturerAndBaseOrganizationLoaded
 } from "./reduxStores";
 import * as ConfigService from "../src/services/configService";
 import {OrganizationType} from "../src/constants/organizationType";
+import {ConfigLevel} from "../src/constants/configLevel";
+import {ConfigProperty} from "../src/store/store";
 
 describe('The Redux store', () => {
     it('loads manufacturers into the config tree', () => {
@@ -100,6 +104,30 @@ describe('The Redux store', () => {
         });
 
         assert.deepEqual(newState.configurationSettings.currentlyEditing, manufacturerCurrentlyEditing);
+    });
+
+    it('inherits options properly when you select the manufacturer in the global organization', () => {
+        const newState:any = reducer(initialStateWithManufacturerAndGlobalOrganizationLoaded, {
+            type: ActionTypes.SELECT_CONFIG,
+            id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7"
+        });
+
+        assert(
+            Object.values(newState.configurationSettings.currentlyEditing.options)
+                .every((p:ConfigProperty) => p.inheritLevel === ConfigLevel.DISABLED)
+        );
+    });
+
+    it('inherits options properly when you select the manufacturer in the base organization', () => {
+        const newState:any = reducer(initialStateWithManufacturerAndBaseOrganizationLoaded, {
+            type: ActionTypes.SELECT_CONFIG,
+            id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7"
+        });
+
+        assert(
+            Object.values(newState.configurationSettings.currentlyEditing.options)
+                .every((p:ConfigProperty) => p.inheritLevel === ConfigLevel.DISABLED)
+        );
     });
 
     it('opens up the correct config editor when you select the family', () => {
@@ -207,7 +235,7 @@ describe('The Redux store', () => {
         it('can be toggled to when selected', () => {
             const newState:any = reducer(initialStateWithOrganizationsLoaded, {
                 type: ActionTypes.CHANGE_ORGANIZATION,
-                newOrganization: '2',
+                newOrganization: 'y',
                 manufacturers: [
                     {
                         component_name: "polycomConfig",
@@ -221,7 +249,7 @@ describe('The Redux store', () => {
 
             assert.deepEqual(newState.configurationSettings.currentOrganization, {
                 name: 'Test2',
-                id: '2',
+                id: 'y',
                 type: OrganizationType.NORMAL
             });
         });
@@ -256,10 +284,4 @@ describe('The Redux store', () => {
             assert.equal(newState.configurationSettings.currentlyEditing, null);
         });
     });
-
-    //TODO
-    //Base organization
-    //Global organization
-    //Values inherited from global
-    //Disabled values
 });

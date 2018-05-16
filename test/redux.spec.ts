@@ -5,19 +5,23 @@ import {
     initialState,
     initialStateWithManufacturerLoaded,
     initialStateWithFamilyLoaded,
-    initialStateWithModelLoaded,
+    initialStateWithModelsLoaded,
     initialStateWithFamilyLoadedButHidden,
     manufacturerCurrentlyEditing,
     familyCurrentlyEditing,
     modelCurrentlyEditing,
-    manufacturerLoadedAndSelected,
+    initialStateWithManufacturerLoadedAndSelected,
     initialStateWithOrganizationsLoaded,
     initialStateWithFamilyAndOrganizationsLoaded,
-    initialStateWithModelAndOrganizationsLoaded,
-    initialStateWithManufacturerAndOrganizationsLoaded
+    initialStateWithModelsAndOrganizationsLoaded,
+    initialStateWithManufacturerAndOrganizationsLoaded,
+    initialStateWithManufacturerAndGlobalOrganizationLoaded,
+    initialStateWithManufacturerAndBaseOrganizationLoaded
 } from "./reduxStores";
 import * as ConfigService from "../src/services/configService";
 import {OrganizationType} from "../src/constants/organizationType";
+import {ConfigLevel} from "../src/constants/configLevel";
+import {ConfigProperty} from "../src/store/store";
 
 describe('The Redux store', () => {
     it('loads manufacturers into the config tree', () => {
@@ -90,7 +94,7 @@ describe('The Redux store', () => {
             ]
         });
 
-        assert.deepEqual(newState.configurationSettings, initialStateWithModelLoaded.configurationSettings);
+        assert.deepEqual(newState.configurationSettings, initialStateWithModelsLoaded.configurationSettings);
     });
 
     it('opens up the correct config editor when you select the manufacturer', () => {
@@ -100,6 +104,30 @@ describe('The Redux store', () => {
         });
 
         assert.deepEqual(newState.configurationSettings.currentlyEditing, manufacturerCurrentlyEditing);
+    });
+
+    it('inherits options properly when you select the manufacturer in the global organization', () => {
+        const newState:any = reducer(initialStateWithManufacturerAndGlobalOrganizationLoaded, {
+            type: ActionTypes.SELECT_CONFIG,
+            id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7"
+        });
+
+        assert(
+            Object.values(newState.configurationSettings.currentlyEditing.options)
+                .every((p:ConfigProperty) => p.inheritLevel === ConfigLevel.DISABLED)
+        );
+    });
+
+    it('inherits options properly when you select the manufacturer in the base organization', () => {
+        const newState:any = reducer(initialStateWithManufacturerAndBaseOrganizationLoaded, {
+            type: ActionTypes.SELECT_CONFIG,
+            id: "fb6c87ee-5968-45f4-bf3e-0d82d812fec7"
+        });
+
+        assert(
+            Object.values(newState.configurationSettings.currentlyEditing.options)
+                .every((p:ConfigProperty) => p.inheritLevel === ConfigLevel.DISABLED)
+        );
     });
 
     it('opens up the correct config editor when you select the family', () => {
@@ -112,7 +140,7 @@ describe('The Redux store', () => {
     });
 
     it('opens up the correct config editor when you select the model', () => {
-        const newState:any = reducer(initialStateWithModelAndOrganizationsLoaded, {
+        const newState:any = reducer(initialStateWithModelsAndOrganizationsLoaded, {
             type: ActionTypes.SELECT_CONFIG,
             id: "646e4a66-823c-48fc-80e1-547cb5f67532"
         });
@@ -121,7 +149,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the edit page when you toggle the override status on a property', () => {
-        const newState:any = reducer(manufacturerLoadedAndSelected, {
+        const newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.TOGGLE_PROPERTY_INHERITANCE,
             property: "test",
             inherit: true
@@ -131,7 +159,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the config tree when you toggle the override status on a property and then save', () => {
-        let newState:any = reducer(manufacturerLoadedAndSelected, {
+        let newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.TOGGLE_PROPERTY_INHERITANCE,
             property: "test",
             inherit: true
@@ -147,7 +175,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the edit page when you change the value of a property', () => {
-        const newState:any = reducer(manufacturerLoadedAndSelected, {
+        const newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.CHANGE_PROPERTY_VALUE,
             property: "test",
             value: false
@@ -157,7 +185,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the config tree when you change the value of a property and then save', () => {
-        let newState:any = reducer(manufacturerLoadedAndSelected, {
+        let newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.CHANGE_PROPERTY_VALUE,
             property: "test",
             value: false
@@ -207,7 +235,7 @@ describe('The Redux store', () => {
         it('can be toggled to when selected', () => {
             const newState:any = reducer(initialStateWithOrganizationsLoaded, {
                 type: ActionTypes.CHANGE_ORGANIZATION,
-                newOrganization: '2',
+                newOrganization: 'y',
                 manufacturers: [
                     {
                         component_name: "polycomConfig",
@@ -221,7 +249,7 @@ describe('The Redux store', () => {
 
             assert.deepEqual(newState.configurationSettings.currentOrganization, {
                 name: 'Test2',
-                id: '2',
+                id: 'y',
                 type: OrganizationType.NORMAL
             });
         });
@@ -256,10 +284,4 @@ describe('The Redux store', () => {
             assert.equal(newState.configurationSettings.currentlyEditing, null);
         });
     });
-
-    //TODO
-    //Base organization
-    //Global organization
-    //Values inherited from global
-    //Disabled values
 });

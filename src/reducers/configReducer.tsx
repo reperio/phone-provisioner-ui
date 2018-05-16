@@ -132,7 +132,7 @@ function composeConfigOptions(models: any[], inheritsFromGlobal: boolean) : {[pr
 
     for(let i = 0; i < models.length; i++) {
         if(inheritsFromGlobal) {
-            setProp(models[i].default_config, ConfigLevel.GLOBAL, true);
+            setProp(models[i].default_config, ConfigLevel.GLOBAL_MANUFACTURER + i, true);
         }
         setProp(models[i].config, i, i < models.length - 1);
     }

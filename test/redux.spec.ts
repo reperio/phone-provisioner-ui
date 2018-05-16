@@ -5,15 +5,15 @@ import {
     initialState,
     initialStateWithManufacturerLoaded,
     initialStateWithFamilyLoaded,
-    initialStateWithModelLoaded,
+    initialStateWithModelsLoaded,
     initialStateWithFamilyLoadedButHidden,
     manufacturerCurrentlyEditing,
     familyCurrentlyEditing,
     modelCurrentlyEditing,
-    manufacturerLoadedAndSelected,
+    initialStateWithManufacturerLoadedAndSelected,
     initialStateWithOrganizationsLoaded,
     initialStateWithFamilyAndOrganizationsLoaded,
-    initialStateWithModelAndOrganizationsLoaded,
+    initialStateWithModelsAndOrganizationsLoaded,
     initialStateWithManufacturerAndOrganizationsLoaded
 } from "./reduxStores";
 import * as ConfigService from "../src/services/configService";
@@ -90,7 +90,7 @@ describe('The Redux store', () => {
             ]
         });
 
-        assert.deepEqual(newState.configurationSettings, initialStateWithModelLoaded.configurationSettings);
+        assert.deepEqual(newState.configurationSettings, initialStateWithModelsLoaded.configurationSettings);
     });
 
     it('opens up the correct config editor when you select the manufacturer', () => {
@@ -112,7 +112,7 @@ describe('The Redux store', () => {
     });
 
     it('opens up the correct config editor when you select the model', () => {
-        const newState:any = reducer(initialStateWithModelAndOrganizationsLoaded, {
+        const newState:any = reducer(initialStateWithModelsAndOrganizationsLoaded, {
             type: ActionTypes.SELECT_CONFIG,
             id: "646e4a66-823c-48fc-80e1-547cb5f67532"
         });
@@ -121,7 +121,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the edit page when you toggle the override status on a property', () => {
-        const newState:any = reducer(manufacturerLoadedAndSelected, {
+        const newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.TOGGLE_PROPERTY_INHERITANCE,
             property: "test",
             inherit: true
@@ -131,7 +131,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the config tree when you toggle the override status on a property and then save', () => {
-        let newState:any = reducer(manufacturerLoadedAndSelected, {
+        let newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.TOGGLE_PROPERTY_INHERITANCE,
             property: "test",
             inherit: true
@@ -147,7 +147,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the edit page when you change the value of a property', () => {
-        const newState:any = reducer(manufacturerLoadedAndSelected, {
+        const newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.CHANGE_PROPERTY_VALUE,
             property: "test",
             value: false
@@ -157,7 +157,7 @@ describe('The Redux store', () => {
     });
 
     it('correctly updates the config tree when you change the value of a property and then save', () => {
-        let newState:any = reducer(manufacturerLoadedAndSelected, {
+        let newState:any = reducer(initialStateWithManufacturerLoadedAndSelected, {
             type: ActionTypes.CHANGE_PROPERTY_VALUE,
             property: "test",
             value: false

@@ -5,6 +5,8 @@ import * as actions from '../../../actions/configActions';
 import {ConfigProperty, Organization} from "../../../store/store";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import {PageComponentProps} from "./pageComponentProps";
+import ConfigHeader from '../configHeader';
+import {TextPropertyContainer} from "../properties/textProperty";
 
 
 class PolycomConfig extends React.Component<PageComponentProps, {}> {
@@ -13,6 +15,8 @@ class PolycomConfig extends React.Component<PageComponentProps, {}> {
     render() {
         return (
             <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
+                <ConfigHeader base={this.props.base}/>
+                <TextPropertyContainer propertyName='firmwareVersion' defaultValue=''>Firmware</TextPropertyContainer>
             </PassPropsToChildren>
         );
     }

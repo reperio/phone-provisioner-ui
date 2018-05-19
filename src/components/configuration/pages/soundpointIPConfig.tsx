@@ -44,7 +44,7 @@ class SoundpointIPConfig extends React.Component<PageComponentProps, {}> {
                 <PolycomConfig base={false}/>
 
                 <ConfigHeader base={this.props.base}/>
-                <TextPropertyContainer propertyName='digitMap'defaultValue='*97|*0xxxx|911|9911|0T|011xxx.T|[0-1][2-9]xxxxxxxxx|[2-9]xxxxxxxxx|[2-9]xxxT|**x.T'>
+                <TextPropertyContainer propertyName='digitMap' defaultValue='*97|*0xxxx|911|9911|0T|011xxx.T|[0-1][2-9]xxxxxxxxx|[2-9]xxxxxxxxx|[2-9]xxxT|**x.T'>
                     Digit Map
                 </TextPropertyContainer>
                 <BooleanPropertyContainer propertyName='tagSerialNo' defaultValue={true}>Tag Serial Number</BooleanPropertyContainer>

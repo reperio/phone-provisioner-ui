@@ -12,6 +12,9 @@ export const initialState: Store = {
             type: OrganizationType.GLOBAL
         },
         organizations: []
+    },
+    firmwareSettings: {
+        files: []
     }
   };
   

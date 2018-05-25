@@ -80,7 +80,6 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
     }
 }
 
-
 function mapStateToProps(state: Store) : IComponentProps {
     return {
         configurationSettings: state.configurationSettings

@@ -36,7 +36,9 @@ class ConfigurationsPage extends React.Component<IComponentProps, {}> {
     }
 
     componentWillUnmount() {
-        this.saveConfigChanges();
+        if(this.props.configurationSettings.anyUnsavedChanges) {
+            this.saveConfigChanges();
+        }
         window.removeEventListener("beforeunload", this.onUnload)
     }
 

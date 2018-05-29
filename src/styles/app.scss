@@ -254,17 +254,14 @@ select.reperio-form-input {
 
 .list-item {
     width: 500px;
-    height: 64px;
     margin: 10px;
-}
-.list-body {
-    transform: translateY(-50%);
-    top: 50%;
-    position: relative;
+    padding: 10px;
 }
 .list-action {
-    transform: translateY(-50%);
-    top: 50%;
+    float: right;
+    cursor: pointer;
+}
+
+label {
     position: relative;
-    text-align: right;
 }

@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/firmwareActions';
 import {Store, FirmwareSettings} from "../../store/store";
 import {ListItemContainer} from "./listItem";
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 interface IComponentProps {
     actions?: any;
@@ -13,6 +13,7 @@ interface IComponentProps {
 
 class FirmwarePage extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
+    inputElement: HTMLInputElement;
 
     constructor(props: IComponentProps) {
         super(props);
@@ -22,7 +23,12 @@ class FirmwarePage extends React.Component<IComponentProps, {}> {
     }
 
     addFile = (e: any) => {
+        console.log(e.target.files);
+        //this.props.actions.addFirmwareFile();
+    }
 
+    clickButton = (e: any) => {
+        this.inputElement.click();
     }
 
     render() {
@@ -32,13 +38,21 @@ class FirmwarePage extends React.Component<IComponentProps, {}> {
                 <br/>
                 <br/>
                 {this.props.firmwareSettings.files.map((file: string) => <ListItemContainer name={file} key={file}/>)}
+                <input
+                    type='file'
+                    multiple
+                    accept='.ld'
+                    style={{display: 'none'}}
+                    ref={me => this.inputElement = me}
+                    onChange={this.addFile}
+                />
                 <Button
                     variant="raised"
                     color="primary"
-                    onClick={this.addFile}
+                    onClick={this.clickButton}
                     className="save-button"
                 >
-                    New File
+                    Add File
                 </Button>
             </div>
         );

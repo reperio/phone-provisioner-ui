@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/firmwareActions';
 import {Store} from "../../store/store";
-import Card from 'material-ui/Card';
+import Card from '@material-ui/core/Card';
 
 interface IComponentProps {
     actions?: any;
@@ -13,18 +13,15 @@ interface IComponentProps {
 class ListItem extends React.Component<IComponentProps, {}> {
     props: IComponentProps;
 
-    removeFile() {
+    removeFile = (e: any) => {
+        this.props.actions.deleteFirmwareFile(this.props.name);
     }
 
     render() {
         return (
             <Card className='list-item'>
-                <span className='list-body'>
-                    {this.props.name}
-                </span>
-                <span className='list-action'>
-                    X
-                </span>
+                {this.props.name}
+                <i className="list-action fa fa-times-circle x" onClick={this.removeFile}></i>
             </Card>
         );
     }

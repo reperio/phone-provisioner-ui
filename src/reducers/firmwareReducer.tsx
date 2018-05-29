@@ -10,8 +10,8 @@ export default function configReducer(state: FirmwareSettings = initialState.fir
             newState.files = action.files;
             return newState;
 
-        case ActionTypes.ADD_FIRMWARE_FILE:
-            newState.files = action.files.concat([action.filename]);
+        case ActionTypes.ADD_FIRMWARE_FILES:
+            newState.files = action.files.concat(action.files);
             return newState;
 
         case ActionTypes.DELETE_FIRMWARE_FILE:

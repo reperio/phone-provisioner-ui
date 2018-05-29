@@ -12,10 +12,10 @@ export const getFirmwareFiles = () => async (dispatch:any) => {
     });
 };
 
-export const addFirmwareFile = (filename: string) => async (dispatch:any) => {
+export const addFirmwareFiles = (files: string[]) => async (dispatch:any) => {
     dispatch({
-        type: ActionTypes.ADD_FIRMWARE_FILE,
-        filename
+        type: ActionTypes.ADD_FIRMWARE_FILES,
+        files
     });
 };
 

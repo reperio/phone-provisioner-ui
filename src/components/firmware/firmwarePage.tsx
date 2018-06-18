@@ -23,8 +23,8 @@ class FirmwarePage extends React.Component<IComponentProps, {}> {
     }
 
     addFile = (e: any) => {
-        console.log(e.target.files);
-        //this.props.actions.addFirmwareFile();
+        this.props.actions.addFirmwareFiles(e.target.files);
+        e.target.value = null;
     }
 
     clickButton = (e: any) => {
@@ -52,7 +52,7 @@ class FirmwarePage extends React.Component<IComponentProps, {}> {
                     onClick={this.clickButton}
                     className="save-button"
                 >
-                    Add File
+                    Add File(s)
                 </Button>
             </div>
         );

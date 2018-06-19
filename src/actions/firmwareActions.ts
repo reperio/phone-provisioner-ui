@@ -13,9 +13,16 @@ export const getFirmwareFiles = () => async (dispatch:any) => {
 };
 
 export const addFirmwareFiles = (files: FileList) => async (dispatch:any) => {
+    await FirmwareService.addFiles(files);
+
+    let filenames = [];
+    for(let i = 0; i < files.length; i++) {
+        filenames.push(files[i].name);
+    }
+
     dispatch({
         type: ActionTypes.ADD_FIRMWARE_FILES,
-        files
+        files: filenames
     });
 };
 

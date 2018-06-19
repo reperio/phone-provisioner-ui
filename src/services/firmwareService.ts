@@ -7,8 +7,19 @@ export async function getFiles() : Promise<string[]> {
     return files.data;
 }
 
-export async function addFiles() {
+export async function addFiles(files: FileList) {
+    let form = new FormData();
+    for(let i = 0; i < files.length; i++) {
+        form.append('files', files[i]);
+    }
 
+    console.log(form.get('files'));
+
+    axios.post(`${API_URL}/firmware/add-files`, form, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 }
 
 export async function deleteFile(filename: string) {

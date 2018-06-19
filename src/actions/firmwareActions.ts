@@ -20,6 +20,8 @@ export const addFirmwareFiles = (files: FileList) => async (dispatch:any) => {
 };
 
 export const deleteFirmwareFile = (filename: string) => async (dispatch:any) => {
+    await FirmwareService.deleteFile(filename);
+
     dispatch({
         type: ActionTypes.DELETE_FIRMWARE_FILE,
         filename

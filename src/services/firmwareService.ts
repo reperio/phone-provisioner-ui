@@ -11,6 +11,6 @@ export async function addFiles() {
 
 }
 
-export async function deleteFile() {
-
+export async function deleteFile(filename: string) {
+    await axios.post(`${API_URL}/firmware/remove-file`, {filename});
 }

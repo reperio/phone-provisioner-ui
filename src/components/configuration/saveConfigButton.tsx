@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/configActions';
 import {Store, CurrentlyEditing} from "../../store/store";
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 interface IComponentProps {
     actions?: any;

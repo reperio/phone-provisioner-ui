@@ -1,7 +1,7 @@
 import React from 'react';
 import {ConfigProperty} from "../../../store/store";
 import {ConfigLevel, ConfigLevelName} from "../../../constants/configLevel";
-import Switch from 'material-ui/Switch';
+import Switch from '@material-ui/core/Switch';
 
 export interface BaseComponentProps {
     actions?: any;

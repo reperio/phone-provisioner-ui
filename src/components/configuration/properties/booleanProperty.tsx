@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../../actions/configActions';
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 import {BaseConfigProperty, BaseComponentProps} from "./baseConfigProperty";
 
 class BooleanProperty extends BaseConfigProperty<BaseComponentProps, {}> {

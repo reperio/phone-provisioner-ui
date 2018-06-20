@@ -3,6 +3,7 @@ import {OrganizationType} from "../constants/organizationType";
 
 export class Store {
     configurationSettings: ConfigurationSettings;
+    firmwareSettings: FirmwareSettings;
 }
 
 export class ConfigurationSettings {
@@ -40,4 +41,8 @@ export class Organization {
     id: string;
     type: OrganizationType;
     name: string;
+}
+
+export class FirmwareSettings {
+    files: string[];
 }

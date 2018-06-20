@@ -13,8 +13,6 @@ export async function addFiles(files: FileList) {
         form.append('files', files[i]);
     }
 
-    console.log(form.get('files'));
-
     axios.post(`${API_URL}/firmware/add-files`, form, {
         headers: {
             'Content-Type': 'multipart/form-data'

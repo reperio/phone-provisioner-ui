@@ -24,7 +24,6 @@ class FirmwarePage extends React.Component<IComponentProps, {}> {
 
     addFile = (e: any) => {
         this.props.actions.addFirmwareFiles(e.target.files);
-        e.target.value = null;
     }
 
     clickButton = (e: any) => {

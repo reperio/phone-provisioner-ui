@@ -260,6 +260,10 @@ select.reperio-form-input {
 .list-action {
     float: right;
     cursor: pointer;
+    visibility: hidden
+}
+.list-item:hover .list-action {
+    visibility: visible;
 }
 
 label {

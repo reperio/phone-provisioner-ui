@@ -102,11 +102,13 @@ export const configurationSettings: ConfigurationSettings = {
 export const initialState = {configurationSettings};
 
 export const initialStateWithOrganizationsLoaded: Store = {
-    configurationSettings: Object.assign({}, configurationSettings, {currentOrganization, organizations})
+    configurationSettings: Object.assign({}, configurationSettings, {currentOrganization, organizations}),
+    firmwareSettings: null
 }
 
 export const initialStateWithManufacturerLoaded: Store = {
-    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfig]})
+    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfig]}),
+    firmwareSettings: null
 }
 
 export const initialStateWithManufacturerAndOrganizationsLoaded: Store = {
@@ -114,7 +116,8 @@ export const initialStateWithManufacturerAndOrganizationsLoaded: Store = {
         allConfigs: [polycomConfig],
         currentOrganization,
         organizations
-    })
+    }),
+    firmwareSettings: null
 }
 
 export const initialStateWithManufacturerAndGlobalOrganizationLoaded: Store = {
@@ -122,7 +125,8 @@ export const initialStateWithManufacturerAndGlobalOrganizationLoaded: Store = {
         allConfigs: [polycomConfig],
         currentOrganization: globalOrganization,
         organizations
-    })
+    }),
+    firmwareSettings: null
 }
 
 export const initialStateWithManufacturerAndBaseOrganizationLoaded: Store = {
@@ -130,15 +134,18 @@ export const initialStateWithManufacturerAndBaseOrganizationLoaded: Store = {
         allConfigs: [polycomConfig],
         currentOrganization: baseOrganization,
         organizations
-    })
+    }),
+    firmwareSettings: null
 }
 
 export const initialStateWithFamilyLoaded: Store = {
-    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfigWithFamily]})
+    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfigWithFamily]}),
+    firmwareSettings: null
 }
 
 export const initialStateWithFamilyLoadedButHidden: Store = {
-    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfigWithFamilyButHidden]})
+    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfigWithFamilyButHidden]}),
+    firmwareSettings: null
 }
 
 export const initialStateWithFamilyAndOrganizationsLoaded: Store = {
@@ -146,11 +153,13 @@ export const initialStateWithFamilyAndOrganizationsLoaded: Store = {
         allConfigs: [polycomConfigWithFamily],
         currentOrganization,
         organizations
-    })
+    }),
+    firmwareSettings: null
 }
 
 export const initialStateWithModelsLoaded: Store = {
-    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfigWithFamilyAndModels]})
+    configurationSettings: Object.assign({}, configurationSettings, {allConfigs: [polycomConfigWithFamilyAndModels]}),
+    firmwareSettings: null
 }
 
 export const initialStateWithModelsAndOrganizationsLoaded: Store = {
@@ -158,7 +167,8 @@ export const initialStateWithModelsAndOrganizationsLoaded: Store = {
         allConfigs: [polycomConfigWithFamilyAndModels],
         currentOrganization,
         organizations
-    })
+    }),
+    firmwareSettings: null
 }
 
 export const manufacturerCurrentlyEditing: CurrentlyEditing = {
@@ -173,7 +183,8 @@ export const initialStateWithManufacturerLoadedAndSelected: Store = {
     configurationSettings: Object.assign({}, configurationSettings, {
         allConfigs: [polycomConfig],
         currentlyEditing: manufacturerCurrentlyEditing
-    })
+    }),
+    firmwareSettings: null
 }
 
 export const familyCurrentlyEditing: CurrentlyEditing = {

@@ -3,6 +3,7 @@ exports.__esModule = true;
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -63,6 +64,7 @@ module.exports = {
         new CopyWebpackPlugin(['./src/test.json'], {debug: 'info'}),
         new webpack.DefinePlugin({
             API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000")
-        })
+        }),
+        new WebpackCleanupPlugin()
     ]
 };

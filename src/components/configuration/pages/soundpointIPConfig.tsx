@@ -6,7 +6,6 @@ import {BooleanPropertyContainer} from "../properties/booleanProperty";
 import {TextPropertyContainer} from "../properties/textProperty";
 import {SortableListPropertyContainer} from "../properties/sortableListProperty";
 import {DropdownPropertyContainer} from "../properties/dropdownProperty";
-import {ConfigProperty, Organization} from "../../../store/store";
 import {container as PolycomConfig} from "./polycomConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import {TimePropertyContainer} from "../properties/timeProperty";

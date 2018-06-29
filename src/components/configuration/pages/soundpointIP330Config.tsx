@@ -5,6 +5,7 @@ import * as actions from '../../../actions/configActions';
 import {container as SoundpointIPConfig} from "./soundpointIPConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import {PageComponentProps} from "./pageComponentProps";
+import {ProxyProps} from "../properties/proxyProps";
 
 class SoundpointIP330Config extends React.Component<PageComponentProps, {}> {
     props: PageComponentProps;
@@ -13,6 +14,9 @@ class SoundpointIP330Config extends React.Component<PageComponentProps, {}> {
         return (
             <PassPropsToChildren options={this.props.options} organization={this.props.organization}>
                 <SoundpointIPConfig base={false}/>
+                <h3>Proxy</h3>
+                <ProxyProps line={1}/>
+                <ProxyProps line={2}/>
             </PassPropsToChildren>
         );
     }

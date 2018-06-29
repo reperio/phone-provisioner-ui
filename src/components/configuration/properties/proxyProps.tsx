@@ -18,8 +18,8 @@ const possibleTransportValues = [
     'TCPOnly'
 ];
 
-const ProxyProps = (props: IComponentProps) => (
-    <PassPropsToChildren options={this.props.options}>
+export const ProxyProps = (props: IComponentProps) => (
+    <PassPropsToChildren options={props.options}>
         <h4>Line {props.line}</h4>
         <TextPropertyContainer propertyName={`reg${props.line}Address`} defaultValue=''>
             Address
@@ -34,9 +34,7 @@ const ProxyProps = (props: IComponentProps) => (
             Expires
         </TimeSpanPropertyContainer>
         <TimeSpanPropertyContainer propertyName={`reg${props.line}Overlap`} defaultValue={60} min={5} max={65535}>
-            Expiration Overlap
+            Overlap
         </TimeSpanPropertyContainer>
     </PassPropsToChildren>
 );
-
-export default ProxyProps;

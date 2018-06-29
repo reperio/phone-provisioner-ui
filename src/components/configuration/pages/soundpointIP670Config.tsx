@@ -7,6 +7,7 @@ import {container as SoundpointIPConfig} from "./soundpointIPConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import ConfigHeader from '../configHeader';
 import {PageComponentProps} from "./pageComponentProps";
+import {ProxyProps} from "../properties/proxyProps";
 
 
 class SoundpointIP670Config extends React.Component<PageComponentProps, {}> {
@@ -19,6 +20,8 @@ class SoundpointIP670Config extends React.Component<PageComponentProps, {}> {
                 <h3>670 Model Properties</h3>
                 <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='bypassInstantMessage' defaultValue={true}>Bypass Instant Message</BooleanPropertyContainer>
+                <h3>Proxy</h3>
+                {[...Array(34).keys()].map(i => <ProxyProps line={i} key={i}/>)}
             </PassPropsToChildren>
         );
     }

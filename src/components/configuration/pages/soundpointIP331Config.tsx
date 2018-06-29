@@ -7,6 +7,7 @@ import {container as SoundpointIPConfig} from "./soundpointIPConfig";
 import {PassPropsToChildren} from "../../passPropsToChildren";
 import ConfigHeader from '../configHeader';
 import {PageComponentProps} from "./pageComponentProps";
+import {ProxyProps} from "../properties/proxyProps";
 
 
 class SoundpointIP331Config extends React.Component<PageComponentProps, {}> {
@@ -19,6 +20,9 @@ class SoundpointIP331Config extends React.Component<PageComponentProps, {}> {
                 <h3>331 Model Properties</h3>
                 <ConfigHeader base={this.props.base}/>
                 <BooleanPropertyContainer propertyName='urlModeDialing' defaultValue={false}>URL Mode Dialing</BooleanPropertyContainer>
+                <h3>Proxy</h3>
+                <ProxyProps line={1}/>
+                <ProxyProps line={2}/>
             </PassPropsToChildren>
         );
     }
